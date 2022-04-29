@@ -5,7 +5,7 @@ export class DataSet {
 
   newRow!: Row;
 
-  protected data: Array<any> = [];
+  protected data: Array<Row> = [];
   protected columns: Array<Column> = [];
   protected rows: Array<Row> = [];
   protected selectedRow?: Row;
@@ -19,8 +19,13 @@ export class DataSet {
     this.createNewRow();
   }
 
-  setData(data: Array<any>) {
-    this.data = data;
+  setData(data: Array<any>, selectedRows: Array<Row> = []) {
+    const rows: Array<Row> = [...selectedRows];
+    data.map((el: any, index: number) => {
+      const row = new Row( selectedRows.length + index, el, this);
+      rows.push(row);
+    });
+    this.data = rows;
     this.createRows();
   }
 
@@ -148,7 +153,7 @@ export class DataSet {
       this.selectRow(this.rows[index]);
     } else
       // we need to deselect all rows if we got an incorrect index
-      this.deselectAll();
+    else this.deselectAll();
   }
 
   willSelectFirstRow() {
@@ -203,7 +208,7 @@ export class DataSet {
   createRows() {
     this.rows = [];
     this.data.forEach((el, index) => {
-      this.rows.push(new Row(index, el, this));
+      this.rows.push(el);
     });
   }
 }
