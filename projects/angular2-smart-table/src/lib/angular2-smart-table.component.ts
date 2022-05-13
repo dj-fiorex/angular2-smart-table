@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChange,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChange } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DataSet } from './lib/data-set/data-set';
@@ -21,8 +15,10 @@ import { IColumn, SelectModeOptions, Settings } from './lib/settings';
   templateUrl: './angular2-smart-table.component.html',
 })
 export class Angular2SmartTableComponent {
+
   @Input() source: any;
   @Input() settings: Settings = {};
+
 
   @Output() rowSelect = new EventEmitter<any>();
   @Output() rowDeselect = new EventEmitter<any>();
@@ -37,7 +33,6 @@ export class Angular2SmartTableComponent {
   @Output() rowHover: EventEmitter<any> = new EventEmitter<any>();
   @Output() afterGridInit: EventEmitter<DataSet> = new EventEmitter<DataSet>();
   @Output() pageSelect = new EventEmitter<any>();
-
   tableClass!: string;
   tableId!: string;
   perPageSelect: any;
@@ -91,7 +86,7 @@ export class Angular2SmartTableComponent {
       confirmDelete: false,
     },
     expand: {
-      expandRowButtonContent: 'Expand',
+      expandRowButtonContent: 'Expand'
     },
     attr: {
       id: '',
@@ -139,12 +134,7 @@ export class Angular2SmartTableComponent {
     this.destroyed$.next();
   }
 
-  selectRow(
-    index: number,
-    switchPageToSelectedRowPage: boolean = this.grid.getSetting(
-      'switchPageToSelectedRowPage'
-    )
-  ): void {
+  selectRow(index: number, switchPageToSelectedRowPage: boolean = this.grid.getSetting('switchPageToSelectedRowPage')): void {
     if (!this.grid) {
       return;
     }
@@ -157,7 +147,7 @@ export class Angular2SmartTableComponent {
 
     if (switchPageToSelectedRowPage) {
       const source: DataSource = this.source;
-      const paging: { page: number; perPage: number } = source.getPaging();
+      const paging: { page: number, perPage: number } = source.getPaging();
       const page: number = getPageForRowIndex(index, paging.perPage);
       index = index % paging.perPage;
       this.grid.settings.selectedRowIndex = index;
@@ -166,6 +156,7 @@ export class Angular2SmartTableComponent {
         source.setPage(page);
         return;
       }
+
     }
 
     const row: Row = this.grid.getRows()[index];
@@ -239,6 +230,7 @@ export class Angular2SmartTableComponent {
     setTimeout(() => {
       this.afterGridInit.emit(this.grid.dataSet);
     }, 10);
+
   }
 
   prepareSource(): DataSource {
@@ -256,9 +248,7 @@ export class Angular2SmartTableComponent {
   }
 
   changePage($event: any) {
-    console.log('Change page emit called');
     this.pageSelect.emit($event);
-    console.log('Event : ', $event);
     this.resetAllSelector();
   }
 
@@ -271,9 +261,7 @@ export class Angular2SmartTableComponent {
   }
 
   getNotVisibleColumns(): Array<IColumn> {
-    return (this.grid?.getColumns() ?? []).filter(
-      (column: IColumn) => column.hide
-    );
+    return (this.grid?.getColumns() ?? []).filter((column: IColumn) => column.hide);
   }
 
   toggleColumnVisibility(columnId: string) {
@@ -299,10 +287,7 @@ export class Angular2SmartTableComponent {
       data: row ? row.getData() : null,
       isSelected: row ? row.getIsSelected() : null,
       source: this.source,
-      selected:
-        selectedRows && selectedRows.length
-          ? selectedRows.map((r: Row) => r.getData())
-          : [],
+      selected: selectedRows && selectedRows.length ? selectedRows.map((r: Row) => r.getData()) : [],
       selectedItems,
     });
   }
@@ -341,8 +326,7 @@ export class Angular2SmartTableComponent {
     if (this.onSelectRowSubscription) {
       this.onSelectRowSubscription.unsubscribe();
     }
-    this.onSelectRowSubscription = this.grid
-      .onSelectRow()
+    this.onSelectRowSubscription = this.grid.onSelectRow()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((row) => {
         this.emitSelectRow(row);
@@ -353,11 +337,11 @@ export class Angular2SmartTableComponent {
     if (this.onDeselectRowSubscription) {
       this.onDeselectRowSubscription.unsubscribe();
     }
-    this.onDeselectRowSubscription = this.grid
-      .onDeselectRow()
+    this.onDeselectRowSubscription = this.grid.onDeselectRow()
       .pipe(takeUntil(this.destroyed$))
       .subscribe((row) => {
         this.emitDeselectRow(row);
       });
   }
+
 }
