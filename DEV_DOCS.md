@@ -1,4 +1,16 @@
+- [Build](#build)
+
 - [Release](#release)
+
+# Build
+This package has two main parts: the lib code in `/projects/angular2-smart-table` and the demo application that contain a live demo for the lib and the settings documentation as an angular application `/projects/demo/`.
+
+* To setup your development environment we first must ensure that you are running node version equal or greater than v12.
+* Then install the application dependencies using `npm install` command.
+* After that run the `build` script in order to build the lib and the demo application.
+
+> You can use `start` script to run the demo for debugging your changes in the library's core.
+
 
 # Release
 
