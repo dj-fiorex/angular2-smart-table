@@ -35,9 +35,11 @@ export class Angular2SmartTableComponent {
 
   tableClass!: string;
   tableId!: string;
+  tableHeight!: string;
   perPageSelect: any;
   isHideHeader!: boolean;
   isHideSubHeader!: boolean;
+  isStickyHeader!: boolean;
   isPagerDisplay!: boolean;
   rowClassFunction!: Function;
 
@@ -54,6 +56,7 @@ export class Angular2SmartTableComponent {
     switchPageToSelectedRowPage: false,
     hideHeader: false,
     hideSubHeader: false,
+    stickyHeader: false,
     resizable: false,
     hideable: false,
     actions: {
@@ -91,6 +94,7 @@ export class Angular2SmartTableComponent {
     attr: {
       id: '',
       class: '',
+      height: 'auto',
     },
     noDataMessage: 'No data found',
     columns: {},
@@ -122,8 +126,10 @@ export class Angular2SmartTableComponent {
     }
     this.tableId = this.grid.getSetting('attr.id');
     this.tableClass = this.grid.getSetting('attr.class');
+    this.tableHeight = this.grid.getSetting('attr.height');
     this.isHideHeader = this.grid.getSetting('hideHeader');
     this.isHideSubHeader = this.grid.getSetting('hideSubHeader');
+    this.isStickyHeader = this.grid.getSetting('stickyHeader');
     this.isPagerDisplay = this.grid.getSetting('pager.display');
     this.isPagerDisplay = this.grid.getSetting('pager.display');
     this.perPageSelect = this.grid.getSetting('pager.perPageSelect');

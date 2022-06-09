@@ -15,6 +15,7 @@ export interface Settings {
   mode?: 'external' | 'inline';
   hideHeader?: boolean;
   hideSubHeader?: boolean;
+  stickyHeader?: boolean;
   noDataMessage?: string;
   attr?: Attribute;
   actions?: Actions | false;
@@ -82,6 +83,7 @@ export interface IColumn {
 export interface Attribute {
   id?: string;
   class?: string;
+  height?: string;
 }
 
 export interface Actions {

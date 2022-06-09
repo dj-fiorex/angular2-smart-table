@@ -2,11 +2,12 @@
   [tags]="getNotVisibleColumns()" (close)="toggleColumnVisibility($event)"
 ></angular2-smart-table-tags-list>
 
-<div style="overflow-x: auto; -webkit-overflow-scrolling: touch">
+<div style="overflow: auto; -webkit-overflow-scrolling: touch" [style.height]="this.tableHeight">
   <table [id]="tableId" [ngClass]="tableClass">
     <thead
       angular2-st-thead
       *ngIf="!isHideHeader || !isHideSubHeader"
+      [ngClass]="{'sticky': isStickyHeader}"
       [grid]="grid"
       [isAllSelected]="isAllSelected"
       [source]="source"

@@ -34,6 +34,7 @@ import {
 import { BasicExampleCustomActionsItemComponent } from './custom-edit-view/basic-example-custom-actions-item.component';
 import { BasicExampleRowSelectionComponent } from './various/row-selection/basic-example-row-selection.component';
 import { ColumnHideExampleComponent } from './filter/column-hide-example.component';
+import {BasicExampleStickyHeaderComponent} from './various/basic-example-sticky-header.component';
 
 const EXAMPLES_COMPONENTS = [
   AdvancedExampleFiltersComponent,
@@ -47,6 +48,7 @@ const EXAMPLES_COMPONENTS = [
   BasicExampleMultiSelectComponent,
   BasicExampleSourceComponent,
   BasicExampleRowSelectionComponent,
+  BasicExampleStickyHeaderComponent,
   CustomEditorComponent,
   CustomRenderComponent,
   CustomFilterComponent,
