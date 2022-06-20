@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 2.4.1
+
+* Include Angular 14 as peer dependency
+
 ## Version 2.4.0
 
 * Adds `getFilteredAndSorted()` to the interface of `DataSource`
