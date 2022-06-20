@@ -23,12 +23,25 @@ export class ServerDataSource extends LocalDataSource {
     }
   }
 
-  count(): number {
-    return this.lastRequestCount;
+  override count(total: boolean = false): number {
+    // note: in contrast to the local data source, the data array contains the (server-side) filtered data
+    return total ? this.lastRequestCount : this.data.length;
   }
 
-  getElements(): Promise<any> {
-    return this.requestElements()
+  override getAll(): Promise<any> {
+    return this.loadData(false, false, false);
+  }
+
+  override getElements(): Promise<any> {
+    return this.loadData(true, true, true);
+  }
+
+  override getFilteredAndSorted(): Promise<any> {
+    return this.loadData(true, true, false);
+  }
+
+  protected loadData(filtered: boolean, sorted: boolean, paginated: boolean): Promise<any> {
+    return this.requestElements(filtered, sorted, paginated)
       .pipe(map(res => {
         this.lastRequestCount = this.extractTotalFromResponse(res);
         this.data = this.extractDataFromResponse(res);
@@ -69,17 +82,14 @@ export class ServerDataSource extends LocalDataSource {
     }
   }
 
-  protected requestElements(): Observable<any> {
-    let httpParams = this.createRequesParams();
-    return this.http.get(this.conf.endPoint, { params: httpParams, observe: 'response' });
-  }
-
-  protected createRequesParams(): HttpParams {
+  protected requestElements(filtered: boolean, sorted: boolean, paginated: boolean): Observable<any> {
     let httpParams = new HttpParams();
 
-    httpParams = this.addSortRequestParams(httpParams);
-    httpParams = this.addFilterRequestParams(httpParams);
-    return this.addPagerRequestParams(httpParams);
+    if (filtered) httpParams = this.addFilterRequestParams(httpParams);
+    if (sorted) httpParams = this.addSortRequestParams(httpParams);
+    if (paginated) httpParams = this.addPagerRequestParams(httpParams);
+
+    return this.http.get(this.conf.endPoint, { params: httpParams, observe: 'response' });
   }
 
   protected addSortRequestParams(httpParams: HttpParams): HttpParams {

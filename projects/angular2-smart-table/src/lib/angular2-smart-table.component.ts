@@ -43,8 +43,8 @@ export class Angular2SmartTableComponent {
 
   grid!: Grid;
   defaultSettings: Settings = {
-    mode: 'inline', // inline|external|click-to-edit
-    selectMode: SelectModeOptions.Single, // single|multi
+    mode: 'inline', // inline|external
+    selectMode: 'single', // single|multi
     /**
      * Points to an element in all data
      *

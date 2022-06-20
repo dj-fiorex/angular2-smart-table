@@ -2,6 +2,19 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 2.4.1
+
+* Include Angular 14 as peer dependency
+
+## Version 2.4.0
+
+* Adds `getFilteredAndSorted()` to the interface of `DataSource`
+* Fixes `getFilteredAndSorted()` and `getAll()` of `ServerDataSource`
+* Fixes inconsistent `DataSource.count()` implementations
+* Fixes "Expand" button not having a `margin-right`
+* Fixes multi-select column having an undefined width
+* Fixes wrong colspan for `noDataMessage` and expanded rows when the table has a multi-select column
+
 ## Version 2.3.1
 
 * Fixes regression: `filter: false` in a column setting did not work anymore

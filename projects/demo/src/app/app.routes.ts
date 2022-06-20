@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/demo/demo.module').then(m => m.DemoModule),
   },
   {
+    path: 'migration',
+    loadChildren: () => import('./pages/migration/migration.module').then(m => m.MigrationModule),
+  },
+  {
     path: 'documentation',
     loadChildren: () => import('./pages/documentation/documentation.module').then(m => m.DocumentationModule),
   },

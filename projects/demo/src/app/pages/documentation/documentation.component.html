@@ -1,9 +1,9 @@
 <header-component tagline="Documentation"></header-component>
 
 <section class="main-content">
-  <h2><a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
+  <h2>Documentation</h2>
 
-  <h3><a id="inputs" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Component Inputs</h3>
+  <h3>Component Inputs</h3>
 
   <table>
     <tr>
@@ -23,7 +23,7 @@
     </tr>
   </table>
 
-  <h3><a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table Configuration</h3>
+  <h3>Table Configuration</h3>
 
   <table>
     <tr>
@@ -41,7 +41,7 @@
     <tr>
       <td>columns</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Table column settings, by default an empty object.<br>
         Example format:<br>
@@ -135,14 +135,6 @@
       </td>
     </tr>
     <tr>
-      <td>onComponentInitFunction</td>
-      <td><span class="highlight">Function</span></td>
-      <td>null</td>
-      <td>
-        Function which will be invoked after <span class="highlight">renderComponent</span> instantiated and before ngOnInit hook. This function gets <span class="highlight">renderComponent</span> instance in first param and the <span class="highlight">ViewCell</span> as second param.
-      </td>
-    </tr>
-    <tr>
       <td>expandedRowComponent</td>
       <td><span class="highlight">any</span></td>
       <td>null</td>
@@ -157,29 +149,46 @@
       <td><span class="highlight">HTML</span></td>
       <td>'Expand'</td>
       <td>
-        Inner HTML to display in anchor tag
+        Expand row button content/title
+      </td>
+    </tr>
+    <tr>
+      <td>onComponentInitFunction</td>
+      <td><span class="highlight">Function</span></td>
+      <td>null</td>
+      <td>
+        Function which will be invoked after <span class="highlight">renderComponent</span> instantiated and before ngOnInit hook. This function gets <span class="highlight">renderComponent</span> instance in first param and the <span class="highlight">ViewCell</span> as second param.
       </td>
     </tr>
     <tr>
       <td>editor</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Editor attributes settings
       </td>
     </tr>
     <tr>
       <td><span class="nested-obj">editor</span>.type</td>
-      <td><span class="highlight">'text' | 'textarea' | 'completer' | 'list' | 'checkbox'</span></td>
+      <td><span class="highlight">'text' | 'textarea' | 'completer' | 'list' | 'checkbox' | 'custom'</span></td>
       <td>'text'</td>
       <td>
-        Editor used when new row is added or edited
+        Editor used when new row is added or edited. When <span class="highlight">custom</span> is selected, you need to specify
+        <span class="highlight">editor.component</span>.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">editor</span>.component</td>
+      <td><span class="highlight">any</span></td>
+      <td>undefined</td>
+      <td>
+        The Angular component for the editor when using type <span class="highlight">custom</span>.
       </td>
     </tr>
     <tr>
       <td><span class="nested-obj">editor</span>.config</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Editor configuration settings. Mandatory only for editor types <span class="highlight">completer</span>, <span class="highlight">list</span>
       </td>
@@ -224,7 +233,7 @@
     <tr>
       <td><span class="nested-obj">editor.config</span>.completer</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Only on <span class="highlight">completer</span> type. Example format:<br>
         Completer configuration settings
@@ -267,7 +276,7 @@
     <tr>
       <td>filter</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Column filter attributes settings. This object accepts the same properties as the <code>editor</code> object.<br>
         The available types are: <code>checkbox</code>, <code>select</code>, <code>completer</code>.<br>
@@ -280,7 +289,7 @@
       <td>valuePrepareFunction</td>
       <td><span class="highlight">Function</span></td>
       <td>
-        n/a
+        undefined
       </td>
       <td>
         Function run against a value before it gets inserted into a cell.
@@ -301,7 +310,7 @@
     <tr>
       <td>sortDirection</td>
       <td><span class="highlight">'asc'|'desc'</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Sort table by this column with this direction by default.<br>
         Applied only when <span class="highlight">sort</span> = true.
@@ -312,7 +321,7 @@
       <td>compareFunction</td>
       <td><span class="highlight">Function</span></td>
       <td>
-        n/a
+        undefined
       </td>
       <td>
         Function run against the values to sort the table
@@ -329,7 +338,7 @@
     <tr>
       <td>filterFunction</td>
       <td><span class="highlight">Function</span></td>
-      <td>n/a</td>
+      <td>undefined</td>
       <td>
         Function run against the column value when filtering is happening
         <br>
@@ -348,8 +357,36 @@
       <td>'inline'</td>
       <td>
         Determines how to react on action links (Add, Edit, Delete).<br>
-        <span class="highlight">'external'</span> - just trigger the events (LINK HERE).<br>
-        <span class="highlight">'inline'</span> - process internally, show forms/inputs/etc<br>
+        <span class="highlight">'external'</span> - just trigger events<br>
+        <span class="highlight">'inline'</span> - show forms/inputs/etc<br>
+      </td>
+    </tr>
+    <tr>
+      <td>selectMode</td>
+      <td><span class="highlight">'single'</span>|<span class="highlight">'multi'</span></td>
+      <td>'single'</td>
+      <td>
+        Determines if more than one row can be selected.<br>
+        <span class="highlight">'single'</span> - just highlight the single selected row<br>
+        <span class="highlight">'multi'</span> - show a column with checkboxes for a multi-selection<br>
+      </td>
+    </tr>
+    <tr>
+      <td>switchPageToSelectedRowPage</td>
+      <td><span class="highlight">'boolean'</span></td>
+      <td>false</td>
+      <td>
+        Determines whether the page shall be changed if necessary on programmatic row selection.
+      </td>
+    </tr>
+    <tr>
+      <td>selectedRowIndex</td>
+      <td><span class="highlight">'number'</span></td>
+      <td>0</td>
+      <td>
+        Used internally for programmatic row selection. Do not rely on this value.
+        Use the <span class="highlight">selectRow()</span> function to perform programmatic
+        row selection and react on the respective events to determine the selected row(s).
       </td>
     </tr>
     <tr>
@@ -357,7 +394,7 @@
       <td><span class="highlight">'boolean'</span></td>
       <td>false</td>
       <td>
-        Set to true to not display the table header (which includes table column titles)
+        Set to true to not display the table header (i.e. the column titles)
       </td>
     </tr>
     <tr>
@@ -365,7 +402,7 @@
       <td><span class="highlight">'boolean'</span></td>
       <td>false</td>
       <td>
-        Set to true to not display the table sub-header (which includes filters and global table actions (currently - Add action))
+        Set to true to not display the table sub-header (i.e. the filter row)
       </td>
     </tr>
     <tr>
@@ -379,7 +416,7 @@
     <tr>
       <td>attr</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Table attributes settings
       </td>
@@ -403,7 +440,7 @@
     <tr>
       <td>actions</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Settings for the table actions
       </td>
@@ -449,25 +486,9 @@
       </td>
     </tr>
     <tr>
-      <td>filter</td>
-      <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
-      <td>
-        Settings for the table filter
-      </td>
-    </tr>
-    <tr>
-      <td>filter.inputClass</td>
-      <td><span class="highlight">string</span></td>
-      <td>''</td>
-      <td>
-        Filter input class
-      </td>
-    </tr>
-    <tr>
       <td>edit</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Edit action settings
       </td>
@@ -515,7 +536,7 @@
     <tr>
       <td>add</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Add action settings
       </td>
@@ -563,7 +584,7 @@
     <tr>
       <td>delete</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Delete action settings
       </td>
@@ -585,9 +606,17 @@
       </td>
     </tr>
     <tr>
+      <td>filter.inputClass</td>
+      <td><span class="highlight">string</span></td>
+      <td>''</td>
+      <td>
+        The global input class that is applied to all filters.
+      </td>
+    </tr>
+    <tr>
       <td>pager</td>
       <td><span class="highlight">Object</span></td>
-      <td>n/a</td>
+      <td>see below</td>
       <td>
         Pager settings
       </td>
@@ -618,7 +647,7 @@
     </tr>
   </table>
 
-  <h3><a id="events" class="anchor" href="#events" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Component Outputs/Events</h3>
+  <h3>Component Outputs/Events</h3>
 
   <table>
     <tr>
@@ -751,7 +780,46 @@
     </tr>
   </table>
 
-  <h3><a id="source-method" class="anchor" href="#source-method" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Source Methods</h3>
+  <h3>Component Methods</h3>
+
+  <table>
+    <tr>
+      <th>Method</th>
+      <th>Arguments</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>selectRow</td>
+      <td>
+        <ul>
+          <li>index: <span class="highlight">number</span> - the row to select</li>
+          <li>switchPageToSelectedRowPage: <span class="highlight">boolean</span> - optional, override the respective table setting</li>
+        </ul>
+      <td>
+        Selects a row programmatically. Currently only works reliably in 'single' selection mode.
+      </td>
+    </tr>
+    <tr>
+      <td>getNotVisibleColumns</td>
+      <td>none</td>
+      <td>Returns an <span class="highlight">Array&lt;IColumn&gt;</span> of all currently hidden columns.</td>
+    </tr>
+    <tr>
+      <td>toggleColumnVisibility</td>
+      <td>
+        columnId: <span class="highlight">string</span> - the property name of the column to toggle.
+      </td>
+      <td>Inverts the <code>hide</code> flag on the specified column and reloads the table settings.</td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        The other methods of this component should not be used by the user, because they are mostly internal
+        event handlers.
+      </td>
+    </tr>
+  </table>
+
+  <h3>Data Source Methods</h3>
 
   <table>
     <tr>
@@ -833,7 +901,7 @@
     <tr>
       <td>getElements</td>
       <td>
-        n/a
+        none
       <td>
         Get elements for current sort, filter and page.
       </td>
@@ -841,15 +909,17 @@
     <tr>
       <td>getFilteredAndSorted</td>
       <td>
-        n/a
+        none
         <td>
-          Get sorted, filtered and not paginated elements.
+          Get all available elements for current sort and filter.
+          Note, that for some data source implementation (like <span class="highlight">ServerDataSource</span>)
+          this
         </td>
     </tr>
     <tr>
       <td>getAll</td>
       <td>
-        n/a
+        none
       <td>
         Get all data source elements.
       </td>
@@ -969,7 +1039,7 @@
     <tr>
       <td>refresh</td>
       <td>
-        n/a
+        none
       <td>
         Refresh data in the data source. In most cases you won't need this method.
       </td>
@@ -977,15 +1047,21 @@
     <tr>
       <td>count</td>
       <td>
-        n/a
+        <ul>
+          <li>
+            total: <span class="highlight">boolean</span>, default = false
+          </li>
+        </ul>
+      </td>
       <td>
-        Return count of element in the data source.
+          <p><code>total = false</code> - returns the number of elements with respect to the current filter</p>
+          <p><code>total = true</code> - returns the total number of elements</p>
       </td>
     </tr>
     <tr>
       <td>empty</td>
       <td>
-        n/a
+        none
       <td>
         Empty the data source.
       </td>

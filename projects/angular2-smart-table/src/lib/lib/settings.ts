@@ -1,5 +1,8 @@
 import { Cell } from "./data-set/cell";
 
+/**
+ * @deprecated just use 'single' or 'multi'
+ */
 export enum SelectModeOptions {
   Single = "single",
   Multi = "multi"
@@ -23,7 +26,7 @@ export interface Settings {
   expand?: Expand;
   pager?: Pager;
   rowClassFunction?: Function;
-  selectMode?: SelectModeOptions;
+  selectMode?: 'single' | 'multi';
   selectedRowIndex?: number;
   switchPageToSelectedRowPage?: boolean;
 }

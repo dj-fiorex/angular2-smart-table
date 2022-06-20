@@ -1,0 +1,99 @@
+<header-component tagline="Coming from ng2-smart-table"></header-component>
+<section class="main-content">
+
+  <h2>
+
+    Migration Guide
+  </h2>
+  <p>
+    This document is for people who migrate their project from ng2-smart-table to this fork.
+    It contains information about the most significant changes and gives some advice that help
+    integrating this fork into your project.
+  </p>
+  <p>
+    Please consider, that while we are trying to be as compatible as possible, we may have introduced breaking changes.
+    Thus the increase of version number from the latest ng2-smart-table 1.7.2 to 2.x. If you need help for a specific
+    problem, open an <a target="_blank" href="https://github.com/dj-fiorex/angular2-smart-table/issues">Issue</a> on
+    GitHub and we try to help.
+  </p>
+  <p>
+    The recent component documentation including compatibility attributes you can find
+    <a [routerLink]="['/documentation']">here</a>.
+  </p>
+
+  <h3>
+
+    Bring Back the Styling
+  </h3>
+  <p>
+    If you want to stick to the original styling of the smart-table, you can copy the <a href="https://github.com/akveo/nebular/blob/master/src/framework/theme/styles/global/tables/_smart-table.theme.scss" target="_blank">original SCSS file</a>
+    into your project and replace the <code>ng2-</code> prefix of the selectors with <code>angular2-</code>.
+    There is no guarantee that this results in a perfect replica of the original styling, but it may come a lot more closer.
+  </p>
+
+  <h3>
+
+    Setting Keys
+  </h3>
+  This Section describes the changes to the settings object.
+  <h4>
+
+    Deprecated
+  </h4>
+  <p>
+    The following setting keys are deprecated, but still work in the current version:
+  </p>
+  <ul>
+    <li><code>editable</code> is now named <code>isEditable</code></li>
+    <li><code>sort</code> is now named <code>isSortable</code></li>
+  </ul>
+  We advise you to change the setting keys as soon as possible. We do not plan on removing the deprecated keys anytime
+  soon, but things may change in the future.
+  <h4>
+
+    New Settings
+  </h4>
+  <p>
+    <code>isAddable</code> - This flag works like <code>isEditable</code> (formerly <code>editable</code>) but affects
+    the cell in the row that is displayed when adding a new item (inline mode only).
+    The <code>isEditable</code> flag on the other hand has no effect on the "add" row.
+    This way you can control whether an attribute shall be immutable once it has been added.
+  </p>
+  <p>
+    <code>expandedRowComponent</code> and <code>expand</code> - With these settings you can enable and configure
+    an additional action button to expand rows into full blown angular components that are displayed next to the
+    expanded row. Read the <a [routerLink]="['/documentation']">documentation</a> for details.
+  </p>
+  <p>
+    <code>editor.config.disableEnterKeySave</code> - By default, hitting ENTER in text, textarea, or select editor,
+    the row is submitted. This behavior can be disabled via this new setting.
+  </p>
+  <p>
+    <code>hideable</code> - Controls whether columns can be hidden by the user.
+  </p>
+  <p>
+    <code>resizable</code> - Controls whether columns can be resized by the user.
+    This is currently experimental and may not work smoothly in all environments.
+  </p>
+
+  <h3>
+
+    Fixed Bugs
+  </h3>
+  <p>
+    The documentation of the method <code>DataSource.count()</code> says to return the number of elements
+    in the data source. But the <code>LocalDataSource</code> returned the number of filtered elements.
+    The <code>ServerDataSource</code> on the other hand did not do that.
+    For compatibility we fixed this bug by introducing an argument for <code>count()</code> with which you can
+    decide whether you want the total count or the filtered count.
+  </p>
+  <p>
+    <span class="highlight">ServerDataSource</span> - The behavior of the methods <code>getFilteredAndSorted()</code>
+    and <code>getAll()</code> is fixed. Previously, these methods were inherited from <code>LocalDataSource</code>
+    and returned the elements based on the <code>data</code> array within the data source. But in case of the the
+    <code>ServerDataSource</code> this array is already filtered, sorted, and paginated. The new implementation
+    updates the contents of the data source with the correct data by submitting the correct request. That also means,
+    that you now have to be a bit careful when using <code>getAll()</code> with an <code>ServerDataSource</code> if
+    the server stores a lot of data, because now you <em>really</em> get all the data.
+  </p>
+</section>

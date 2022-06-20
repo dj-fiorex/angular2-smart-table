@@ -109,8 +109,9 @@ export class LocalDataSource extends DataSource {
     return super.empty();
   }
 
-  count(): number {
-    return this.filteredAndSorted.length;
+  count(total: boolean = false): number {
+    // note: we don't have to prepare the data, because we may assume that this is already done
+    return total ? this.data.length : this.filteredAndSorted.length;
   }
 
   toggleItem(row: any, isSelected: boolean): void {
@@ -129,16 +130,6 @@ export class LocalDataSource extends DataSource {
     return this.selectedItems;
   }
 
-  /**
-   *
-   * Array of conf objects
-   * [
-   *  {field: string, direction: asc|desc|null, compare: Function|null},
-   * ]
-   * @param conf
-   * @param doEmit
-   * @returns {LocalDataSource}
-   */
   setSort(conf: Array<any>, doEmit = true): LocalDataSource {
     if (conf !== null) {
 

@@ -95,8 +95,9 @@ export class NgxSmartTableTbodyComponent implements AfterViewInit, OnDestroy {
   noDataMessage!: boolean;
 
   get tableColumnsCount() {
-    const actionColumns = this.isActionAdd || this.isActionEdit || this.isActionDelete ? 1 : 0;
-    return this.grid.getColumns().length + actionColumns;
+    const actionColumn = this.isActionAdd || this.isActionEdit || this.isActionDelete ? 1 : 0;
+    const selectColumn = this.isMultiSelectVisible ? 1 : 0;
+    return this.grid.getColumns().length + actionColumn + selectColumn;
   }
 
   ngOnChanges() {

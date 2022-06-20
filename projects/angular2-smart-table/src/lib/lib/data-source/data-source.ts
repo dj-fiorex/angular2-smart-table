@@ -1,6 +1,8 @@
 import { Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 
+
+
 export abstract class DataSource {
 
   protected onChangedSource = new Subject<any>();
@@ -10,10 +12,11 @@ export abstract class DataSource {
 
   abstract getAll(): Promise<any>;
   abstract getElements(): Promise<any>;
+  abstract getFilteredAndSorted(): Promise<any>;
   abstract getSort(): any;
   abstract getFilter(): any;
   abstract getPaging(): any;
-  abstract count(): number;
+  abstract count(total?: boolean): number;
   abstract toggleItem(row: any, isSelected: boolean): void;
   abstract selectAllItems(checked: boolean): Promise<void>;
   abstract getSelectedItems(): Array<any>;
@@ -78,6 +81,16 @@ export abstract class DataSource {
     return Promise.resolve();
   }
 
+  /**
+   *
+   * Array of conf objects
+   * [
+   *  {field: string, direction: asc|desc|null, compare: Function|null},
+   * ]
+   * @param conf the configuration to add
+   * @param doEmit indicates whether a sort event shall be emitted
+   * @returns this data source
+   */
   setSort(conf: Array<any>, doEmit?: boolean) {
     if (doEmit) {
       this.emitOnChanged('sort');
