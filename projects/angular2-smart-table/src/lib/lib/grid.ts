@@ -197,10 +197,14 @@ export class Grid {
 
   processDataChange(changes: any) {
     if (this.shouldProcessChange(changes)) {
-       this.dataSet.setData(changes['elements'], this.getSelectedItems());
+      this.dataSet.setData(changes['elements'], this.getSelectedItems());
       if (this.getSetting('selectMode') !== 'multi') {
-        const row = this.determineRowToSelect(changes);
-        this.onSelectRowSource.next(row);
+        if (this.dataSet.getRows().length > 0) {
+          const row = this.determineRowToSelect(changes);
+          this.onSelectRowSource.next(row);
+        } else {
+          this.onSelectRowSource.next(null);
+        }
       }
     }
   }
@@ -307,12 +311,12 @@ export class Grid {
   private getSelectionInfo(): { perPage: number, page: number, selectedRowIndex: number, switchPageToSelectedRowPage: boolean } {
     const switchPageToSelectedRowPage: boolean = this.getSetting('switchPageToSelectedRowPage');
     const selectedRowIndex: number = Number(this.getSetting('selectedRowIndex', 0)) || 0;
-    const { perPage, page }: { perPage: number, page: number } = this.getSetting('pager');
-    return { perPage, page, selectedRowIndex, switchPageToSelectedRowPage };
+    const {perPage, page}: { perPage: number, page: number } = this.getSetting('pager');
+    return {perPage, page, selectedRowIndex, switchPageToSelectedRowPage};
   }
 
   private getRowIndexToSelect(): number {
-    const { switchPageToSelectedRowPage, selectedRowIndex, perPage } = this.getSelectionInfo();
+    const {switchPageToSelectedRowPage, selectedRowIndex, perPage} = this.getSelectionInfo();
     const dataAmount: number = this.source.count();
     /**
      * source - contains all table data
@@ -336,7 +340,7 @@ export class Grid {
   }
 
   private getPageToSelect(source: DataSource): number {
-    const { switchPageToSelectedRowPage, selectedRowIndex, perPage, page } = this.getSelectionInfo();
+    const {switchPageToSelectedRowPage, selectedRowIndex, perPage, page} = this.getSelectionInfo();
     let pageToSelect: number = Math.max(1, page);
     if (switchPageToSelectedRowPage && selectedRowIndex >= 0) {
       pageToSelect = getPageForRowIndex(selectedRowIndex, perPage);

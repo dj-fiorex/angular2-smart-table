@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 2.7.1
+
+* Fixes surprising exception when table is empty.
+
 ## Version 2.7.0
 
 * Revert commit baffdd5591761e967957ad71cbe22a4196b32615 because of
