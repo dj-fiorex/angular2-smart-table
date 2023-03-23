@@ -7,7 +7,7 @@ import {DataSource, DataSourceChangeEvent} from './lib/data-source/data-source';
 import {LocalDataSource} from './lib/data-source/local/local.data-source';
 import {Grid} from './lib/grid';
 import {deepExtend, getPageForRowIndex} from './lib/helpers';
-import {IColumn, Settings} from './lib/settings';
+import {IColumn, Settings, VirtualScroll} from './lib/settings';
 import {
   CreateCancelEvent,
   CreateConfirmEvent,
@@ -54,6 +54,8 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
   isHideHeader!: boolean;
   isHideSubHeader!: boolean;
   isPagerDisplay!: boolean;
+  virtualScroll: VirtualScroll | undefined;
+  virtualScrollEnabled: boolean = false;
   rowClassFunction!: Function;
 
   grid!: Grid;
@@ -140,9 +142,10 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     this.isHideHeader = this.grid.getSetting('hideHeader');
     this.isHideSubHeader = this.grid.getSetting('hideSubHeader');
     this.isPagerDisplay = this.grid.getSetting('pager.display');
-    this.isPagerDisplay = this.grid.getSetting('pager.display');
     this.perPageSelect = this.grid.getSetting('pager.perPageSelect', this.perPageSelect);
     this.perPageSelectLabel = this.grid.getSetting('pager.perPageSelectLabel', this.perPageSelectLabel);
+    this.virtualScroll = this.grid.getSetting('virtualScroll');
+    this.virtualScrollEnabled = !!(this.virtualScroll && this.virtualScroll.itemSize && this.virtualScroll.viewportHeight);
     this.rowClassFunction = this.grid.getSetting('rowClassFunction');
   }
 

@@ -16,6 +16,7 @@
     "@angular/core": "13 - 15",
     "@angular/common": "13 - 15",
     "@angular/forms": "13 - 15",
+    "@angular/cdk": "13 - 15",
     "angular2-multiselect-dropdown": "^5.0.4",
     "lodash-es": "^4.17.21",
     "ng2-completer": "^9.0.1"

@@ -8,6 +8,7 @@ import {PagerModule} from './components/pager/pager.module';
 import {TabsModule} from './components/tags/tags.module';
 import {TBodyModule} from './components/tbody/tbody.module';
 import {THeadModule} from './components/thead/thead.module';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {THeadModule} from './components/thead/thead.module';
     PagerModule,
     TBodyModule,
     THeadModule,
-    TabsModule
+    TabsModule,
+    ScrollingModule
   ],
   exports: [
     Angular2SmartTableComponent

@@ -33,6 +33,7 @@ export interface Settings {
   selectMode?: 'single' | 'multi' | 'multi_filtered';
   selectedRowIndex?: number;
   switchPageToSelectedRowPage?: boolean;
+  virtualScroll?: VirtualScroll
 }
 
 export interface Filter {
@@ -168,4 +169,12 @@ export interface CustomAction {
   name: string;
   title: string;
   renderComponent?: any;
+}
+
+export interface VirtualScroll {
+  viewportHeight: string;
+  itemSize: number;
+  templateCacheSize?: number;
+  maxBufferPx?: number;
+  minBufferPx?: number;
 }

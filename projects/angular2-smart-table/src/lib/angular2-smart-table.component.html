@@ -1,45 +1,73 @@
-<angular2-smart-table-tags-list
-  [tags]="getNotVisibleColumns()" (close)="onShowHeader($event)"
-></angular2-smart-table-tags-list>
+<ng-template #tableTemplate let-virtualRowsProjectedTemplate>
+  <angular2-smart-table-tags-list
+    [tags]="getNotVisibleColumns()" (close)="onShowHeader($event)"
+  ></angular2-smart-table-tags-list>
 
-<div style="overflow-x: auto; -webkit-overflow-scrolling: touch">
-  <table [id]="tableId" [ngClass]="tableClass">
-    <thead
-      angular2-st-thead
-      *ngIf="!isHideHeader || !isHideSubHeader"
-      [grid]="grid"
-      [isAllSelected]="isAllSelected"
-      [source]="source"
-      [createConfirm]="createConfirm"
-      [createCancel]="createCancel"
-      (create)="create.emit($event)"
-      (selectAllRows)="onSelectAllRows()"
-      (hide)="onHideHeader($event)"
-    ></thead>
+  <div style="overflow-x: auto; -webkit-overflow-scrolling: touch">
+    <table [id]="tableId" [ngClass]="tableClass">
+      <thead
+        angular2-st-thead
+        *ngIf="!isHideHeader || !isHideSubHeader"
+        [grid]="grid"
+        [isAllSelected]="isAllSelected"
+        [source]="source"
+        [createConfirm]="createConfirm"
+        [createCancel]="createCancel"
+        (create)="create.emit($event)"
+        (selectAllRows)="onSelectAllRows()"
+        (hide)="onHideHeader($event)"
+      ></thead>
 
-    <tbody
-      angular2-st-tbody
-      [grid]="grid"
-      [source]="source"
-      [deleteConfirm]="deleteConfirm"
-      [editConfirm]="editConfirm"
-      [editCancel]="editCancel"
-      [rowClassFunction]="rowClassFunction"
-      (edit)="edit.emit($event)"
-      (delete)="delete.emit($event)"
-      (custom)="custom.emit($event)"
-      (userSelectRow)="onUserSelectRow($event)"
-      (editRowSelect)="onEditRowSelect($event)"
-      (multipleSelectRow)="onMultipleSelectRow($event)"
-      (onExpandRow)="onExpandRow($event)"
-      (rowHover)="onRowHover($event)"
-    ></tbody>
-  </table>
-</div>
-<angular2-smart-table-pager
-  *ngIf="isPagerDisplay"
-  [source]="source"
-  [perPageSelect]="perPageSelect"
-  [perPageSelectLabel]="perPageSelectLabel"
->
-</angular2-smart-table-pager>
+      <tbody
+        angular2-st-tbody
+        [grid]="grid"
+        [source]="source"
+        [virtualScrollEnabled]="virtualScrollEnabled"
+        [deleteConfirm]="deleteConfirm"
+        [editConfirm]="editConfirm"
+        [editCancel]="editCancel"
+        [rowClassFunction]="rowClassFunction"
+        (edit)="edit.emit($event)"
+        (delete)="delete.emit($event)"
+        (custom)="custom.emit($event)"
+        (userSelectRow)="onUserSelectRow($event)"
+        (editRowSelect)="onEditRowSelect($event)"
+        (multipleSelectRow)="onMultipleSelectRow($event)"
+        (onExpandRow)="onExpandRow($event)"
+        (rowHover)="onRowHover($event)"
+      >
+      <ng-template #virtualRowsTemplate let-rowTemplate>
+        <ng-container [ngTemplateOutlet]="virtualRowsProjectedTemplate" [ngTemplateOutletContext]="{ $implicit: rowTemplate}"></ng-container>
+      </ng-template>
+      </tbody>
+    </table>
+  </div>
+
+  <angular2-smart-table-pager
+    *ngIf="isPagerDisplay"
+    [source]="source"
+    [perPageSelect]="perPageSelect"
+    [perPageSelectLabel]="perPageSelectLabel"
+  >
+  </angular2-smart-table-pager>
+</ng-template>
+
+
+<ng-container *ngIf="virtualScrollEnabled && virtualScroll; else tableTemplate;">
+  <cdk-virtual-scroll-viewport
+    [ngStyle]="{height: virtualScroll.viewportHeight}"
+    [minBufferPx]="virtualScroll.minBufferPx"
+    [maxBufferPx]="virtualScroll.maxBufferPx"
+    [itemSize]="virtualScroll.itemSize">
+
+    <ng-template #virtualRowsTemplate let-rowTemplate>
+      <ng-container *cdkVirtualFor="let row of grid.getRows(); templateCacheSize: virtualScroll.templateCacheSize;">
+        <ng-container [ngTemplateOutlet]="rowTemplate" [ngTemplateOutletContext]="{ $implicit: row }"></ng-container>
+      </ng-container>
+    </ng-template>
+
+    <ng-container [ngTemplateOutlet]="tableTemplate" [ngTemplateOutletContext]="{ $implicit: virtualRowsTemplate }"></ng-container>
+
+  </cdk-virtual-scroll-viewport>
+</ng-container>
+

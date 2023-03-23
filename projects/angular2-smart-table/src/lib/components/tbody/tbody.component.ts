@@ -1,11 +1,13 @@
 import {
   AfterViewInit,
   Component,
+  ContentChild,
   EventEmitter,
   Input,
   OnDestroy,
   Output,
   QueryList,
+  TemplateRef,
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
@@ -33,6 +35,7 @@ export class NgxSmartTableTbodyComponent implements AfterViewInit, OnDestroy {
 
   @Input() grid!: Grid;
   @Input() source!: DataSource;
+  @Input() virtualScrollEnabled!: boolean;
   @Input() deleteConfirm!: EventEmitter<DeleteConfirmEvent>;
   @Input() editConfirm!: EventEmitter<EditConfirmEvent>;
   @Input() editCancel!: EventEmitter<EditCancelEvent>;
@@ -47,6 +50,8 @@ export class NgxSmartTableTbodyComponent implements AfterViewInit, OnDestroy {
   @Output() multipleSelectRow = new EventEmitter<Row>();
   @Output() rowHover = new EventEmitter<Row>();
   @Output() onExpandRow = new EventEmitter<Row>();
+
+  @ContentChild('virtualRowsTemplate', {static: true}) virtualRowsProjectedTemplate?: TemplateRef<any>
 
   @ViewChildren('expandedRowChild', { read: ViewContainerRef }) expandedRowChild!: QueryList<ViewContainerRef>;
 
