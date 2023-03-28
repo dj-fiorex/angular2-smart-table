@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChange} from '@angular/core';
-import {Subject, Subscription} from 'rxjs';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChange, ViewChild} from '@angular/core';
+import {mergeMap, Subject, Subscription, tap} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {DataSet} from './lib/data-set/data-set';
 import {Row} from './lib/data-set/row';
@@ -20,6 +20,7 @@ import {
   EditEvent,
   RowSelectionEvent,
 } from './lib/events';
+import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'angular2-smart-table',
@@ -27,6 +28,7 @@ import {
   templateUrl: './angular2-smart-table.component.html',
 })
 export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
+  @ViewChild(CdkVirtualScrollViewport) virtualScrollViewport?: CdkVirtualScrollViewport;
 
   @Input() source: any;
   @Input() settings: Settings = {};
@@ -123,6 +125,10 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
 
   private onSelectRowSubscription!: Subscription;
   private onDeselectRowSubscription!: Subscription;
+  private onOffsetSubscription?: Subscription;
+  private isOffsetEnd: boolean = false;
+  private isOffsetLocked: boolean = false;
+  private offset$ = new Subject<number>();
   private destroyed$: Subject<void> = new Subject<void>();
 
   ngOnChanges(changes: { [propertyName: string]: SimpleChange }) {
@@ -147,6 +153,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     this.virtualScroll = this.grid.getSetting('virtualScroll');
     this.virtualScrollEnabled = !!(this.virtualScroll && this.virtualScroll.itemSize && this.virtualScroll.viewportHeight);
     this.rowClassFunction = this.grid.getSetting('rowClassFunction');
+    this.subscribeToOffset();
   }
 
   ngOnDestroy(): void {
@@ -275,6 +282,20 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     this.grid.setSettings(this.prepareSettings());
   }
 
+  onVirtualScrollIndexChange(_index: number) {
+    if (this.isOffsetEnd || this.isOffsetLocked || !this.virtualScrollViewport) return;
+
+    const lastVisibleRowIndex: number = this.virtualScrollViewport.getRenderedRange().end;
+    const totalRows: number = this.virtualScrollViewport.getDataLength();
+    const threshold: number = this.virtualScroll?.infiniteScroll?.threshold ?? 0;
+
+    if(totalRows === 0) return;
+    console.log(`${(lastVisibleRowIndex + threshold)} >= ${totalRows}`);
+    if ((lastVisibleRowIndex + threshold) >= totalRows) {
+      this.offset$.next(totalRows);
+    }
+  }
+
   private createRowSelectionEvent(row: Row | null): RowSelectionEvent {
     return {
       row: row,
@@ -309,5 +330,31 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
       .subscribe((row) => {
         this.emitSelectRow(row);
       });
+  }
+
+  private subscribeToOffset(): void {
+    if (this.onOffsetSubscription) {
+      this.onOffsetSubscription.unsubscribe();
+    }
+
+    if (!this.virtualScrollEnabled || !this.virtualScroll?.infiniteScroll?.getNextFunction) return;
+
+    const getNextFunction = this.virtualScroll.infiniteScroll.getNextFunction;
+
+    this.onOffsetSubscription = this.offset$.pipe(
+      takeUntil(this.destroyed$),
+      tap((_: number) => this.isOffsetLocked = true),
+      mergeMap((offset: number) => getNextFunction(offset)),
+    ).subscribe({
+      next: (data: any[]) => {
+        console.log('data', data);
+        data.forEach((item: any) => this.source.append(item));
+        this.isOffsetEnd = !data?.length;
+        this.isOffsetLocked = false;
+      },
+      error: (_error: any) => {
+        this.isOffsetLocked = false;
+      },
+    });
   }
 }

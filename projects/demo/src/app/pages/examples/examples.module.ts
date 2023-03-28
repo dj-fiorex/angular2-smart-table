@@ -35,6 +35,7 @@ import { BasicExampleCustomActionsItemComponent } from './custom-edit-view/basic
 import { BasicExampleRowSelectionComponent } from './various/row-selection/basic-example-row-selection.component';
 import { ColumnHideExampleComponent } from './filter/column-hide-example.component';
 import {BasicExampleVirtualScrollComponent} from './various/virtual-scroll/basic-example-virtual-scroll.component';
+import {AdvancedExampleVirtualScrollComponent} from './various/virtual-scroll/advanced-example-virtual-scroll.component';
 
 const EXAMPLES_COMPONENTS = [
   AdvancedExampleFiltersComponent,
@@ -60,7 +61,8 @@ const EXAMPLES_COMPONENTS = [
   BasicExampleCustomActionsItemComponent,
   ButtonViewComponent,
   RowExpandComponent,
-  BasicExampleVirtualScrollComponent
+  BasicExampleVirtualScrollComponent,
+  AdvancedExampleVirtualScrollComponent,
 ];
 
 @NgModule({

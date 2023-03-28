@@ -55,6 +55,7 @@
 
 <ng-container *ngIf="virtualScrollEnabled && virtualScroll; else tableTemplate;">
   <cdk-virtual-scroll-viewport
+    (scrolledIndexChange)="onVirtualScrollIndexChange($event)"
     [ngStyle]="{height: virtualScroll.viewportHeight}"
     [minBufferPx]="virtualScroll.minBufferPx"
     [maxBufferPx]="virtualScroll.maxBufferPx"
