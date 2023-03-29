@@ -36,8 +36,13 @@
         (onExpandRow)="onExpandRow($event)"
         (rowHover)="onRowHover($event)"
       >
-      <ng-template #virtualRowsTemplate let-rowTemplate>
+      <ng-template #virtualRowsTemplate let-rowTemplate="rowTemplate" let-tableColumnsCount="tableColumnsCount">
         <ng-container [ngTemplateOutlet]="virtualRowsProjectedTemplate" [ngTemplateOutletContext]="{ $implicit: rowTemplate}"></ng-container>
+        <tr *ngFor="let p of infiniteScrollLoadingPlaceholders | numberToArray" class="angular2-smart-row angular2-smart-row-detail">
+          <td *ngFor="let d of tableColumnsCount | numberToArray" class="angular2-smart-column-infiniteLoadingPlaceholder">
+            <div>Loading...</div>
+          </td>
+        </tr>
       </ng-template>
       </tbody>
     </table>
@@ -52,6 +57,7 @@
   </angular2-smart-table-pager>
 </ng-template>
 
+<ng-content></ng-content>
 
 <ng-container *ngIf="virtualScrollEnabled && virtualScroll; else tableTemplate;">
   <cdk-virtual-scroll-viewport

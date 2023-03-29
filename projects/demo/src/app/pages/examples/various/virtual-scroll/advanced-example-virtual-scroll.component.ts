@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ServerDataSource, Settings} from 'angular2-smart-table';
-import {Observable, of} from 'rxjs';
+import {Observable, of, tap} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
@@ -84,6 +84,7 @@ export class AdvancedExampleVirtualScrollComponent {
       email: 'Rey.Padberg@karina.biz',
     },
   ];
+  public loadingPlaceholdersLocal: any[] = [];
   public readonly data: any[];
   public readonly settingsLocal: Settings = {
     virtualScroll: {
@@ -94,6 +95,7 @@ export class AdvancedExampleVirtualScrollComponent {
       infiniteScroll: {
         getNextFunction: (offset: number) => this.getNextBatch(offset),
         threshold: 2,
+        loadingPlaceholder: 1,
       }
     },
     pager: {
@@ -245,6 +247,7 @@ export class AdvancedExampleVirtualScrollComponent {
   private getNextBatch(offset: number,): Observable<any[]> {
     const nextData = [];
     const nextLimit = Math.min(this.fakeNextLimit, this.fakeNextDataLength - offset);
+    this.loadingPlaceholdersLocal = new Array(nextLimit);
 
     for (let i = 0; i < nextLimit; i++) {
       nextData.push({
@@ -255,7 +258,10 @@ export class AdvancedExampleVirtualScrollComponent {
       });
     }
 
-    return of(nextData).pipe(delay(this.fakeDelay));
+    return of(nextData).pipe(
+      delay(this.fakeDelay),
+      tap(() => this.loadingPlaceholdersLocal = []),
+    );
   }
 
   private getNextBatchServer(offset: number): Observable<any[]> {

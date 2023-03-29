@@ -223,9 +223,15 @@ export interface InfiniteScroll {
    */
   threshold?: number;
   /**
+   * Placeholders that will be shown while loading the next data.
+   * If the loadingPlaceholder is set to 0 (default), no loading placeholders will be shown.
+   * Example: 5
+   */
+  loadingPlaceholder?: number;
+  /**
    * Function that returns next page of data.
    * @param offset
    */
-  getNextFunction?: (offset: number) => Observable<any[]>;
+  getNextFunction: (offset: number) => Observable<any[]>;
 
 }

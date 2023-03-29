@@ -58,6 +58,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
   isPagerDisplay!: boolean;
   virtualScroll: VirtualScroll | undefined;
   virtualScrollEnabled: boolean = false;
+  infiniteScrollLoadingPlaceholders: number = 0;
   rowClassFunction!: Function;
 
   grid!: Grid;
@@ -289,8 +290,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     const totalRows: number = this.virtualScrollViewport.getDataLength();
     const threshold: number = this.virtualScroll?.infiniteScroll?.threshold ?? 0;
 
-    if(totalRows === 0) return;
-    console.log(`${(lastVisibleRowIndex + threshold)} >= ${totalRows}`);
+    if (totalRows === 0) return;
     if ((lastVisibleRowIndex + threshold) >= totalRows) {
       this.offset$.next(totalRows);
     }
@@ -340,19 +340,25 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     if (!this.virtualScrollEnabled || !this.virtualScroll?.infiniteScroll?.getNextFunction) return;
 
     const getNextFunction = this.virtualScroll.infiniteScroll.getNextFunction;
+    const loadingPlaceholder = this.virtualScroll.infiniteScroll.loadingPlaceholder || 0;
 
     this.onOffsetSubscription = this.offset$.pipe(
       takeUntil(this.destroyed$),
-      tap((_: number) => this.isOffsetLocked = true),
+      tap((_: number) => {
+        this.isOffsetLocked = true;
+        this.infiniteScrollLoadingPlaceholders = loadingPlaceholder;
+      }),
       mergeMap((offset: number) => getNextFunction(offset)),
     ).subscribe({
       next: (data: any[]) => {
-        console.log('data', data);
+        this.infiniteScrollLoadingPlaceholders = 0;
         data.forEach((item: any) => this.source.append(item));
         this.isOffsetEnd = !data?.length;
         this.isOffsetLocked = false;
       },
       error: (_error: any) => {
+        console.warn('Error while loading next page:', _error);
+        this.infiniteScrollLoadingPlaceholders = 0;
         this.isOffsetLocked = false;
       },
     });

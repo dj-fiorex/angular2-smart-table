@@ -82,7 +82,9 @@
 </ng-template>
 
 <ng-container *ngIf="virtualScrollEnabled && virtualRowsProjectedTemplate; else defaultRowsTemplate;">
-  <ng-container [ngTemplateOutlet]="virtualRowsProjectedTemplate" [ngTemplateOutletContext]="{ $implicit: rowTemplate }"></ng-container>
+  <ng-container [ngTemplateOutlet]="virtualRowsProjectedTemplate"
+                [ngTemplateOutletContext]="{ rowTemplate: rowTemplate, tableColumnsCount: tableColumnsCount }">
+  </ng-container>
 </ng-container>
 
 <tr *ngIf="grid.getRows().length == 0">
