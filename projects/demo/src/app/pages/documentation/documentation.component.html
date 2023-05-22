@@ -575,12 +575,20 @@
       </td>
     </tr>
     <tr>
-      <td><span class="nested-obj">actions.custom[i].</span>title</td>
+      <td><span class="nested-obj">actions.custom[i].</span>customButtonContent</td>
       <td><span class="highlight">string</span></td>
       <td>undefined</td>
       <td>
         If no <span class="highlight">renderComponent</span> is defined, this text is displayed.
         Otherwise, the component can access this title via the <span class="highlight">action</span> input parameter.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">actions.custom[i].</span>title</td>
+      <td><span class="highlight">string</span></td>
+      <td>undefined</td>
+      <td>
+        Deprecated attribute for <span class="highlight">customButtonContent</span>.
       </td>
     </tr>
     <tr>
@@ -591,6 +599,34 @@
         Any angular component that shall be used for rendering.
         This component will receive <span class="highlight">action</span> and <span class="highlight">rowData</span>
         as input parameters.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">actions.custom[i].</span>.sanitizer.bypassHtml</td>
+      <td><span class="highlight">boolean</span></td>
+      <td>false</td>
+      <td>
+        Disables sanitizer. This allows inlining svg content.
+        <em>Security Note:</em> Never use this feature, if the content can be controlled by a user.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">actions.custom[i].</span>.hiddenWhen</td>
+      <td><span class="highlight">Function</span></td>
+      <td>undefined</td>
+      <td>
+        Takes a <span class="highlight">Row</span> object as input and produces a <span class="highlight">boolean</span>.<br>
+        When true, the button will not be rendered.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">actions.custom[i].</span>.disabledWhen</td>
+      <td><span class="highlight">Function</span></td>
+      <td>undefined</td>
+      <td>
+        Takes a <span class="highlight">Row</span> object as input and produces a <span class="highlight">boolean</span>.<br>
+        When true, the button will not be clickable and receive the CSS class "not-allowed"
+        which by default applies the <span class="highlight">cursor: not-allowed</span> style.
       </td>
     </tr>
     <tr>

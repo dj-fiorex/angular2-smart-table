@@ -2,6 +2,11 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 2.10.0
+
+* Add `sanitizer`, `hiddenWhen`, and `disabledWhen` to `CustomAction` settings
+* The `title` attribute in `CustomAction` is now deprecated in favor of `customButtonContent`
+
 ## Version 2.9.0
 
 * Add `resizedWidth` property to `Column` which will contain the new declared width of a resized column

@@ -166,6 +166,14 @@ export interface Pager {
 
 export interface CustomAction {
   name: string;
-  title: string;
+  /**
+   * Historical name of the customButtonContent attribute.
+   * @deprecated will be removed in 3.0.0
+   */
+  title?: string;
+  customButtonContent?: string;
+  sanitizer?: SanitizerSettings;
+  hiddenWhen?: (row: Row) => boolean;
+  disabledWhen?: (row: Row) => boolean;
   renderComponent?: any;
 }
