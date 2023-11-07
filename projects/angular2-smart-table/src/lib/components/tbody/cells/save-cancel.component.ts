@@ -10,9 +10,9 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
   selector: 'angular2-st-tbody-create-cancel',
   template: `
     <a href="#" class="angular2-smart-action angular2-smart-action-edit-save"
-        [innerHTML]="saveButtonContent" (click)="onSave($event)"></a>
+        [innerHTML]="saveButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onSave($event)"></a>
     <a href="#" class="angular2-smart-action angular2-smart-action-edit-cancel"
-        [innerHTML]="cancelButtonContent" (click)="onCancelEdit($event)"></a>
+        [innerHTML]="cancelButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onCancelEdit($event)"></a>
   `,
 })
 export class TbodySaveCancelComponent implements OnChanges {
