@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.1.1
+
+* Fix security bypass not applied to save and cancel button contents when configured
+
 ## Version 3.1.0
 
 * Add new setting `valueCreateFunction`
