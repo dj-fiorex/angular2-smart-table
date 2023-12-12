@@ -1,5 +1,5 @@
 <ng-container *ngIf="grid !== undefined">
-<angular2-smart-table-tags-list
+<angular2-smart-table-tags-list *ngIf="isTagListShown"
   [tags]="notVisibleColumnTagsList" (close)="onShowColumn($event)"
 ></angular2-smart-table-tags-list>
 

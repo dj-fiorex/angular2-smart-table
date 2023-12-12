@@ -5,6 +5,7 @@ export interface Settings {
   columns: IColumns;
   resizable?: boolean;
   hideable?: boolean;
+  hideTagList?: boolean;
   mode?: 'external' | 'inline';
   hideHeader?: boolean;
   hideSubHeader?: boolean;

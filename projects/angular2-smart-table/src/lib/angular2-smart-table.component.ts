@@ -56,6 +56,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
   isHideHeader!: boolean;
   isHideSubHeader!: boolean;
   isPagerDisplay!: boolean;
+  isTagListShown: boolean = true;
   rowClassFunction!: RowClassFunction;
 
   grid!: Grid; // initially undefined, but will never be set to undefined, so we do not add undefined type here
@@ -68,6 +69,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     hideSubHeader: false,
     resizable: false,
     hideable: false,
+    hideTagList: false,
     actions: {
       columnTitle: 'Actions',
       add: true,
@@ -153,6 +155,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
       this.tableClass = this.grid.settings.attr!.class!;
       this.isHideHeader = this.grid.settings.hideHeader!;
       this.isHideSubHeader = this.grid.settings.hideSubHeader!;
+      this.isTagListShown = !(this.grid.settings.hideTagList ?? false);
       this.isPagerDisplay = this.grid.settings.pager!.display!;
       this.perPageSelect = this.grid.settings.pager!.perPageSelect!;
       this.perPageSelectLabel = this.grid.settings.pager!.perPageSelectLabel!;

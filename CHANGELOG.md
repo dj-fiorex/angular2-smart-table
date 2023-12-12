@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 3.2.0
 
 * Add Angular 17 support
+* Add `hideTagList` setting to hide the tag list when columns are hidden
 
 ## Version 3.1.1
 
