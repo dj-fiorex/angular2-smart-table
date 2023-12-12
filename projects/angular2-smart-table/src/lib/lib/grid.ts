@@ -258,27 +258,21 @@ export class Grid {
   }
 
   prepareSource(source: DataSource): DataSource {
-    const initialSource = this.getInitialSort();
-    if (initialSource && initialSource['field'] && initialSource['direction']) {
-      source.setSort([initialSource], false);
+    let sortConf: Array<ISortConfig> = [];
+    for (const column of this.getColumns()) {
+      if (column.isSortable && column.defaultSortDirection !== null) {
+        sortConf.push({
+          field: column.id,
+          direction: column.defaultSortDirection,
+          compare: column.compareFunction,
+        });
+      }
     }
+    source.setSort(sortConf, false);
     source.setPaging(this.getPageToSelect(source), this.settings.pager?.perPage ?? 10, false);
 
     source.refresh();
     return source;
-  }
-
-  getInitialSort(): ISortConfig | null {
-    for (const column of this.getColumns()) {
-      if (column.isSortable && column.defaultSortDirection !== null) {
-        return {
-          field: column.id,
-          direction: column.defaultSortDirection,
-          compare: column.compareFunction,
-        };
-      }
-    }
-    return null;
   }
 
   getSelectedItems(): Array<any> {

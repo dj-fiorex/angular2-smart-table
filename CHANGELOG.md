@@ -6,6 +6,7 @@ This document lists the changes introduced by this fork.
 
 * Add Angular 17 support
 * Add `hideTagList` setting to hide the tag list when columns are hidden
+* The `sortDirection` column setting can now be applied to more than one column
 
 ## Version 3.1.1
 
