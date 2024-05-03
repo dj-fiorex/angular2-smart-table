@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 2.10.1
+
+* Hotfix: `DataSet.select()` no longer throws an error when using a negative index to deselect all rows
+
 ## Version 2.10.0
 
 * Add `sanitizer`, `hiddenWhen`, and `disabledWhen` to `CustomAction` settings

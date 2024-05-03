@@ -159,7 +159,7 @@ export class DataSet {
     this.willSelect = 'last';
   }
 
-  select(selectedRowIndex?: number): Row {
+  select(selectedRowIndex?: number): Row | null {
     if (this.getRows().length === 0) {
       throw new Error('There are no rows inside the data table');
     }
@@ -175,7 +175,7 @@ export class DataSet {
       this.selectRowByIndex(selectedRowIndex);
     }
 
-    return this.getSelectedRow();
+    return this.selectedRow ?? null;
   }
 
   createNewRow() {
