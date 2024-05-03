@@ -44,6 +44,10 @@ plus we cannot guarantee anymore, that the software is working with Angular 15 a
 have a hard cut by introducing a new major release that is only compatible with Angular 16 onwards.
 If you want to stick with Angular 14 or Angular 15, please use version 2.10.0.
 
+## Version 2.10.1
+
+* Hotfix: `DataSet.select()` no longer throws an error when using a negative index to deselect all rows
+
 ## Version 2.10.0
 
 * Add `sanitizer`, `hiddenWhen`, and `disabledWhen` to `CustomAction` settings
