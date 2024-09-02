@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 3.3.0
 
 * Add Angular 18 support
+* Add information about the new custom renderer initialization to the migration guide
 
 ## Version 3.2.0
 

@@ -73,6 +73,24 @@
     new <code>updateSort()</code> method to adjust sorting parameters.
   </p>
 
+  <h3>New Custom Renderer Initialization</h3>
+  <p>
+    Custom renderers were previously initialized by patching the renderer object with a <code>value</code> and a
+    <code>rowData</code> attribute. Those attributes were defined in a <code>ViewCell</code> interface and the custom
+    renderer should implement this interface.
+    However, the interface is too restrictive and does not allow complex types (for which custom renderers are usually
+    needed). See issue <a href="https://github.com/dj-fiorex/angular2-smart-table/issues/65" target="_blank">#65</a>
+    for more information.
+  </p>
+  <p>
+    Since version 3.0.0, the new way of initializing a custom renderer, is to specify a
+    <code>componentInitFunction</code> in the <code>settings</code> of the column where the <code>renderComponent</code>
+    is specified. You can find an example in the
+    <a class="source"
+       href="https://github.com/dj-fiorex/angular2-smart-table/blob/master/projects/demo/src/app/pages/examples/custom-edit-view/basic-example-button-view.component.ts"
+       target="_blank">Demo Source</a>.
+  </p>
+
   <h3>Fixed Bugs</h3>
   <p>
     The documentation of the method <code>DataSource.count()</code> claimed to return the number of elements
