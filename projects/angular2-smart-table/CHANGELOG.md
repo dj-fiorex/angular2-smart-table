@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.3.0
+
+* Add Angular 18 support
+
 ## Version 3.2.0
 
 * Add Angular 17 support
