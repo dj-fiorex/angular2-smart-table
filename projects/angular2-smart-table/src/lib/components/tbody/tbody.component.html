@@ -31,18 +31,34 @@
     <td *ngIf="row.isInEditing && showActionColumnLeft"  class="angular2-smart-actions">
       <angular2-st-tbody-create-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-create-cancel>
     </td>
-    <td *ngFor="let cell of getVisibleCells(row.cells)">
-      <angular2-smart-table-cell [cell]="cell"
-                            [grid]="grid"
-                            [row]="row"
-                            [isNew]="false"
-                            [mode]="mode"
-                            [editConfirm]="editConfirm"
-                            [editCancel]="editCancel"
-                            [inputClass]="editInputClass"
-                            [isInEditing]="row.isInEditing">
-      </angular2-smart-table-cell>
-    </td>
+    <ng-container *ngFor="let cell of getVisibleCells(row.cells)">
+      <td *ngIf="!cell.getColumn().isRowHeading">
+        <angular2-smart-table-cell
+          [cell]="cell"
+          [grid]="grid"
+          [row]="row"
+          [isNew]="false"
+          [mode]="mode"
+          [editConfirm]="editConfirm"
+          [editCancel]="editCancel"
+          [inputClass]="editInputClass"
+          [isInEditing]="row.isInEditing"
+        ></angular2-smart-table-cell>
+      </td>
+      <th *ngIf="cell.getColumn().isRowHeading" scope="row">
+        <angular2-smart-table-cell
+          [cell]="cell"
+          [grid]="grid"
+          [row]="row"
+          [isNew]="false"
+          [mode]="mode"
+          [editConfirm]="editConfirm"
+          [editCancel]="editCancel"
+          [inputClass]="editInputClass"
+          [isInEditing]="row.isInEditing"
+        ></angular2-smart-table-cell>
+      </th>
+    </ng-container>
 
     <td *ngIf="row.isInEditing && showActionColumnRight"  class="angular2-smart-actions">
       <angular2-st-tbody-create-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-create-cancel>

@@ -2,6 +2,11 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.4.0
+
+* Add new column setting `isRowHeading`
+* Add `scope` attribute to column and row headings to support screen readers
+
 ## Version 3.3.0
 
 * Add Angular 18 support

@@ -36,7 +36,8 @@ export class Column {
   isSortable: boolean;
   isEditable: boolean;
   isAddable: boolean;
-  isFilterable?: boolean = false;
+  isRowHeading: boolean;
+  isFilterable: boolean;
   defaultSortDirection: ISortDirection;
   editor: EditorSettings;
   filter: FilterSettings;
@@ -64,6 +65,7 @@ export class Column {
     this.isSortable = this.settings.isSortable ?? true;
     this.isEditable = this.settings.isEditable ?? true;
     this.isAddable = this.settings.isAddable ?? true;
+    this.isRowHeading = this.settings.isRowHeading ?? false;
 
     this.defaultSortDirection = this.settings.sortDirection ?? null;
 

@@ -136,6 +136,7 @@ export interface IColumn {
   isEditable?: boolean;
   isAddable?: boolean;
   isFilterable?: boolean;
+  isRowHeading?: boolean;
 }
 
 export interface Attribute {

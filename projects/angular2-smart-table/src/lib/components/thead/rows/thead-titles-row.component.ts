@@ -9,14 +9,16 @@ import {Column} from "../../../lib/data-set/column";
   template: `
     <th *ngIf="isMultiSelectVisible"
         [style.width]="multiSelectWidth"
+        scope="col"
     >
       <input type="checkbox" [ngModel]="isAllSelected" (click)="selectAllRows.emit()">
     </th>
-    <th angular2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid"></th>
+    <th angular2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid" scope="col"></th>
     <th *ngFor="let column of visibleColumns; index as i; last as isLast"
         class="angular2-smart-th {{ column.id }}"
         [ngClass]="column.classHeader"
         [style.width]="column.width"
+        scope="col"
     >
       <angular2-st-column-title
         [source]="source"
@@ -29,7 +31,7 @@ import {Column} from "../../../lib/data-set/column";
            class="angular2-resizer-block"
       ></div>
     </th>
-    <th angular2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid"></th>
+    <th angular2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid" scope="col"></th>
   `,
 })
 export class TheadTitlesRowComponent implements OnChanges {

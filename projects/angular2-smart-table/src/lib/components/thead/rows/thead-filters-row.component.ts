@@ -8,21 +8,30 @@ import {CreateEvent} from '../../../lib/events';
 @Component({
   selector: '[angular2-st-thead-filters-row]',
   template: `
-    <th *ngIf="isMultiSelectVisible"></th>
-    <th angular2-st-add-button *ngIf="showActionColumnLeft"
-                          [grid]="grid"
-                          (create)="create.emit($event)">
+    <th *ngIf="isMultiSelectVisible" scope="col"></th>
+    <th angular2-st-add-button
+        *ngIf="showActionColumnLeft"
+        [grid]="grid"
+        (create)="create.emit($event)"
+        scope="col"
+    >
     </th>
-    <th *ngFor="let column of getVisibleColumns(grid.getColumns())" class="angular2-smart-th {{ column.id }}">
+    <th *ngFor="let column of getVisibleColumns(grid.getColumns())"
+        class="angular2-smart-th {{ column.id }}"
+        scope="col"
+    >
       <angular2-smart-table-filter [source]="source"
                               [column]="column"
                               [inputClass]="filterInputClass"
       ></angular2-smart-table-filter>
     </th>
-    <th angular2-st-add-button *ngIf="showActionColumnRight"
-                          [grid]="grid"
-                          [source]="source"
-                          (create)="create.emit($event)">
+    <th angular2-st-add-button
+        *ngIf="showActionColumnRight"
+        [grid]="grid"
+        [source]="source"
+        (create)="create.emit($event)"
+        scope="col"
+    >
     </th>
   `,
 })
