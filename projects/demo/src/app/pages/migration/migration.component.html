@@ -91,6 +91,41 @@
        target="_blank">Demo Source</a>.
   </p>
 
+  <h3>Avoidance of Type Confusion</h3>
+  <p>
+    In the previous implementation of cells editors, type confusion could happen when the value provided by the data
+    source was not <code>string</code>.
+    Since a web formula can <em>only</em> work with strings, the effect was usually the following:
+  </p>
+  <ul>
+    <li>a value of a different type (e.g. <code>number</code>) was loaded in the form an internally stringified</li>
+    <li>when a cell was edited, the new value is stored and always has type <code>string</code></li>
+    <li>when the row was saved, all edited values were saved as <code>string</code> and untouched values were kept</li>
+  </ul>
+  <p>
+    That means, after saving a row, it was never obvious which type a value in a cell has, leading to all sorts of errors.
+    To address this issue, since version 3.0.0 the visual representation of the data in a cell is always supposed to be
+    of type <code>string</code>. You are encouraged to use the <code>valuePrepareFunction</code> in the column settings
+    to convert a value of a different type to a value of type <code>string</code>, and use the new
+    <code>valueStoreFunction</code> to have the user input of type <code>string</code> converted back to the a value of
+    the correct type in your data source.
+    The following example shows this with columns of type <code>number|null</code>:
+  </p>
+  <pre>
+    <code highlight class="typescript">
+      &#123;
+        title: 'Age',
+        isEditable: true,
+        valuePrepareFunction: (x) => x?.toString() ?? '',
+        valueStoreFunction: (x: string) => &#123;
+          const s = x.trim();
+          if (s === '') return null;
+          return Number(s);
+        &#125;,
+      &#125;
+    </code>
+  </pre>
+
   <h3>Fixed Bugs</h3>
   <p>
     The documentation of the method <code>DataSource.count()</code> claimed to return the number of elements
