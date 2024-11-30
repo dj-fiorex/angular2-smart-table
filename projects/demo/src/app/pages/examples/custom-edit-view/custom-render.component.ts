@@ -3,9 +3,10 @@ import {Component} from '@angular/core';
 import {Cell} from 'angular2-smart-table';
 
 @Component({
-  template: `
+    template: `
     {{renderValue}}
   `,
+    standalone: false
 })
 export class CustomRenderComponent {
 

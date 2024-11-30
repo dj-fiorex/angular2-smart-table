@@ -6,8 +6,8 @@ import {Row} from '../../lib/data-set/row';
 import {CreateCancelEvent, CreateConfirmEvent, EditCancelEvent, EditConfirmEvent} from '../../lib/events';
 
 @Component({
-  selector: 'angular2-smart-table-cell',
-  template: `
+    selector: 'angular2-smart-table-cell',
+    template: `
     <table-cell-view-mode *ngIf="!isInEditing" [cell]="cell"></table-cell-view-mode>
     <table-cell-edit-mode *ngIf="isInEditing" [cell]="cell"
                           [inputClass]="inputClass"
@@ -15,6 +15,7 @@ import {CreateCancelEvent, CreateConfirmEvent, EditCancelEvent, EditConfirmEvent
                           (stopEditing)="onStopEditing()"
     ></table-cell-edit-mode>
   `,
+    standalone: false
 })
 export class CellComponent {
 

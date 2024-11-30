@@ -3,9 +3,9 @@ import {FilterDefault} from './filter-default';
 import {Subscription} from 'rxjs';
 
 @Component({
-  selector: 'angular2-smart-table-filter',
-  styleUrls: ['./filter.component.scss'],
-  template: `
+    selector: 'angular2-smart-table-filter',
+    styleUrls: ['./filter.component.scss'],
+    template: `
       <div class="angular2-smart-filter" *ngIf="column.isFilterable" [ngSwitch]="column.filter.type">
         <custom-table-filter *ngSwitchCase="'custom'"
                              [query]="query"
@@ -21,6 +21,7 @@ import {Subscription} from 'rxjs';
         ></default-table-filter>
       </div>
     `,
+    standalone: false
 })
 export class FilterComponent extends FilterDefault implements OnChanges {
   query: string = '';

@@ -5,8 +5,8 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {DefaultFilter} from './default-filter';
 
 @Component({
-  selector: 'input-filter',
-  template: `
+    selector: 'input-filter',
+    template: `
     <input
       [ngClass]="inputClass"
       [formControl]="inputControl"
@@ -14,6 +14,7 @@ import {DefaultFilter} from './default-filter';
       type="text"
       placeholder="{{ column.placeholder || column.title }}"/>
   `,
+    standalone: false
 })
 export class InputFilterComponent extends DefaultFilter implements OnInit, OnChanges {
 

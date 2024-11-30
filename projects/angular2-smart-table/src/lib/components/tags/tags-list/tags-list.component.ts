@@ -4,6 +4,7 @@ import {TagsListEntry} from "../tag/tag.component";
 @Component({
     selector: 'angular2-smart-table-tags-list',
     templateUrl: './tags-list.component.html',
+    standalone: false
 })
 export class TagsListComponent {
 

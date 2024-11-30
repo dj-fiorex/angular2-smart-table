@@ -6,8 +6,8 @@ import {DefaultFilter} from './default-filter';
 import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
 
 @Component({
-  selector: 'select-filter',
-  template: `
+    selector: 'select-filter',
+    template: `
     <select [ngClass]="inputClass"
             class="form-control"
             #inputControl
@@ -19,6 +19,7 @@ import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
         </option>
     </select>
   `,
+    standalone: false
 })
 export class SelectFilterComponent extends DefaultFilter implements OnInit {
 

@@ -11,7 +11,8 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
          [ngClass]="{'not-allowed': disabled}"
          [innerHTML]="buttonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onExpand($event)"></a>
     `,
-  })
+    standalone: false
+})
   export class TbodyExpandRowComponent implements OnChanges {
 
     @Input() grid!: Grid;

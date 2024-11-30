@@ -3,10 +3,11 @@ import {Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef,} from 
 import {Cell} from '../../../lib/data-set/cell';
 
 @Component({
-  selector: 'custom-view-component',
-  template: `
+    selector: 'custom-view-component',
+    template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    standalone: false
 })
 export class CustomViewComponent implements OnInit, OnDestroy {
 

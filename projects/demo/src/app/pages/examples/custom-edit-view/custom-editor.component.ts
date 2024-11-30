@@ -2,7 +2,7 @@ import {AfterViewInit, Component} from '@angular/core';
 import {DefaultEditor} from 'angular2-smart-table';
 
 @Component({
-  template: `
+    template: `
     Name: <input [ngClass]="inputClass"
             [value]="name"
             [disabled]="!cell.isEditable()"
@@ -20,6 +20,7 @@ import {DefaultEditor} from 'angular2-smart-table';
             (keydown.enter)="onEdited.emit()"
             (keydown.esc)="onStopEditing.emit()">
   `,
+    standalone: false
 })
 export class CustomEditorComponent extends DefaultEditor implements AfterViewInit {
 

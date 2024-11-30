@@ -6,10 +6,11 @@ import {CustomFilterComponent} from './custom-filter.component';
 import {Settings} from "angular2-smart-table";
 
 @Component({
-  selector: 'advanced-example-custom-editor',
-  template: `
+    selector: 'advanced-example-custom-editor',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class AdvancedExamplesCustomEditorComponent {
 

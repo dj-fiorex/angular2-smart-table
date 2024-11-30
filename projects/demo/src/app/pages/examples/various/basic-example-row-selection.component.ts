@@ -2,10 +2,11 @@ import {Component} from '@angular/core';
 import {DataSet, Settings} from 'angular2-smart-table';
 
 @Component({
-  selector: 'basic-example-row-selection',
-  template: `
+    selector: 'basic-example-row-selection',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data" (afterGridInit)="onGridInit($event)"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class BasicExampleRowSelectionComponent {
 

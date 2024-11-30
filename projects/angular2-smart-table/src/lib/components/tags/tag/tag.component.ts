@@ -8,6 +8,7 @@ export interface TagsListEntry {
 @Component({
     selector: 'angular2-smart-table-tag',
     templateUrl: './tag.component.html',
+    standalone: false
 })
 export class TagComponent {
 

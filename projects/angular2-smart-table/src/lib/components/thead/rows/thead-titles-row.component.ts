@@ -5,8 +5,8 @@ import {DataSource} from '../../../lib/data-source/data-source';
 import {Column} from "../../../lib/data-set/column";
 
 @Component({
-  selector: '[angular2-st-thead-titles-row]',
-  template: `
+    selector: '[angular2-st-thead-titles-row]',
+    template: `
     <th *ngIf="isMultiSelectVisible"
         [style.width]="multiSelectWidth"
         scope="col"
@@ -33,6 +33,7 @@ import {Column} from "../../../lib/data-set/column";
     </th>
     <th angular2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid" scope="col"></th>
   `,
+    standalone: false
 })
 export class TheadTitlesRowComponent implements OnChanges {
 

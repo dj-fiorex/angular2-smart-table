@@ -3,9 +3,9 @@ import {Component} from '@angular/core';
 import {DefaultEditor} from './default-editor';
 
 @Component({
-  selector: 'textarea-editor',
-  styleUrls: ['./editor.component.scss'],
-  template: `
+    selector: 'textarea-editor',
+    styleUrls: ['./editor.component.scss'],
+    template: `
     <textarea [ngClass]="inputClass"
               [value]="cell.getValue()"
               [name]="cell.getId()"
@@ -17,6 +17,7 @@ import {DefaultEditor} from './default-editor';
               (keydown.esc)="onStopEditing.emit()">
     </textarea>
     `,
+    standalone: false
 })
 export class TextareaEditorComponent extends DefaultEditor {
 

@@ -3,10 +3,11 @@ import {BasicExampleCustomActionsItemComponent} from './basic-example-custom-act
 import {Settings} from "angular2-smart-table";
 
 @Component({
-  selector: 'basic-example-custom-actions',
-  template: `
+    selector: 'basic-example-custom-actions',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data" (custom)="onCustom($event)"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class BasicExampleCustomActionsComponent {
 

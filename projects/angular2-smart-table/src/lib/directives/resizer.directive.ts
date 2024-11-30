@@ -6,7 +6,8 @@ import {TableService} from '../services/table.service';
 import {Column} from "../lib/data-set/column";
 
 @Directive({
-  selector: '[angular2SmartTableResizer]'
+    selector: '[angular2SmartTableResizer]',
+    standalone: false
 })
 export class NgxResizerDirective implements OnInit, OnDestroy {
   @Input() angular2SmartTableResizer!: {column: Column, siblingColumn: Column | undefined};

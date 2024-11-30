@@ -5,7 +5,7 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {DefaultFilter} from 'angular2-smart-table';
 
 @Component({
-  template: `
+    template: `
     <input
       #number
       [ngClass]="inputClass"
@@ -14,6 +14,7 @@ import {DefaultFilter} from 'angular2-smart-table';
       [placeholder]="column.title"
       type="number">
   `,
+    standalone: false
 })
 export class CustomFilterComponent extends DefaultFilter implements OnInit, OnChanges {
   inputControl = new FormControl();

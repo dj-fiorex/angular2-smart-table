@@ -5,9 +5,9 @@ import {DataSource} from '../../../../lib/data-source/data-source';
 import {Column} from '../../../../lib/data-set/column';
 
 @Component({
-  selector: 'angular2-smart-table-title',
-  styleUrls: ['./title.component.scss'],
-  template: `
+    selector: 'angular2-smart-table-title',
+    styleUrls: ['./title.component.scss'],
+    template: `
     <a href="#" *ngIf="column.isSortable"
        (click)="_sort($event)"
        class="angular2-smart-sort-link sort"
@@ -19,6 +19,7 @@ import {Column} from '../../../../lib/data-set/column';
             (click)="_hideColumnClicked($event)">X
     </button>
   `,
+    standalone: false
 })
 export class TitleComponent implements OnChanges {
 

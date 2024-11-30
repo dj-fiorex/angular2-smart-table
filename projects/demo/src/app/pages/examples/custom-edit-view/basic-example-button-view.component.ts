@@ -2,10 +2,11 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Cell, Settings} from 'angular2-smart-table';
 
 @Component({
-  selector: 'button-view',
-  template: `
+    selector: 'button-view',
+    template: `
     <button (click)="onClick()">{{ renderValue }}</button>
   `,
+    standalone: false
 })
 export class ButtonViewComponent {
   renderValue!: string;
@@ -29,10 +30,11 @@ export class ButtonViewComponent {
 
 
 @Component({
-  selector: 'basic-example-button-view',
-  template: `
+    selector: 'basic-example-button-view',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class BasicExampleButtonViewComponent implements OnInit {
 
