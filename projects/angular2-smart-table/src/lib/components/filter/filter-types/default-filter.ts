@@ -9,11 +9,11 @@ import {Column} from '../../../lib/data-set/column';
 })
 export class DefaultFilter implements Filter, OnDestroy {
 
-  delay: number = 300;
   changesSubscription!: Subscription;
   changesSubscription2!: Subscription;
   @Input() query: string = '';
   @Input() inputClass!: string;
+  @Input() debounceTime: number = 300;
   @Input() column!: Column;
   @Output() filter = new EventEmitter<string>();
 
@@ -33,7 +33,7 @@ export class DefaultFilter implements Filter, OnDestroy {
 
 export interface Filter {
 
-  delay?: number;
+  debounceTime: number;
   changesSubscription?: Subscription;
   query: string;
   inputClass: string;

@@ -9,18 +9,21 @@ import {FilterDefault} from "./filter-default";
       <select-filter *ngSwitchCase="'list'"
                      [query]="query"
                      [ngClass]="inputClass"
+                     [debounceTime]="debounceTime"
                      [column]="column"
                      (filter)="onFilter($event)">
       </select-filter>
       <checkbox-filter *ngSwitchCase="'checkbox'"
                        [query]="query"
                        [ngClass]="inputClass"
+                       [debounceTime]="debounceTime"
                        [column]="column"
                        (filter)="onFilter($event)">
       </checkbox-filter>
       <input-filter *ngSwitchDefault
                     [query]="query"
                     [ngClass]="inputClass"
+                    [debounceTime]="debounceTime"
                     [column]="column"
                     (filter)="onFilter($event)">
       </input-filter>

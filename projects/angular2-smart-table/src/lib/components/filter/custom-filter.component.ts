@@ -24,6 +24,7 @@ export class CustomFilterComponent extends FilterDefault implements OnChanges, O
       this.customComponent.instance.column = this.column;
       this.customComponent.instance.source = this.source;
       this.customComponent.instance.inputClass = this.inputClass;
+      this.customComponent.instance.debounceTime = this.debounceTime;
       this.customComponent.instance.filter.subscribe((event: any) => { this.onFilter(event)});
     }
     if (this.customComponent) {

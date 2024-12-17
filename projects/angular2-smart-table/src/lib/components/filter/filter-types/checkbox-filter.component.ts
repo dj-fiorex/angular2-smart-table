@@ -35,7 +35,7 @@ export class CheckboxFilterComponent extends DefaultFilter implements OnInit {
     }
 
     this.changesSubscription = this.inputControl.valueChanges
-      .pipe(debounceTime(this.delay))
+      .pipe(debounceTime(this.debounceTime))
       .subscribe((checked: boolean) => {
         this.filterActive = true;
         this.query = checked ? this.trueVal : this.falseVal;

@@ -12,12 +12,14 @@ import {Subscription} from 'rxjs';
                              [column]="column"
                              [source]="source"
                              [inputClass]="inputClass"
+                             [debounceTime]="debounceTime"
         ></custom-table-filter>
         <default-table-filter *ngSwitchDefault
                               [query]="query"
                               [column]="column"
                               [source]="source"
                               [inputClass]="inputClass"
+                              [debounceTime]="debounceTime"
         ></default-table-filter>
       </div>
     `,

@@ -26,6 +26,7 @@ export interface Settings {
 
 export interface Filter {
   inputClass?: string;
+  debounceTime?: number;
 }
 
 export interface Expand {

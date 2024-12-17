@@ -26,6 +26,11 @@ export class AdvancedExampleServerComponent {
         title: 'Url',
       },
     },
+    filter: {
+      // illustrate how increasing the debounce time may help
+      // to reduce server requests for audiences with slower typing speed
+      debounceTime: 800,
+    }
   };
 
   source: ServerDataSource;

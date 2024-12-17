@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 3.5.0
 
 * Upgrade to Angular 19
+* Add new `filter.debounceTime` setting
 * Fix broken backwards compatibility with rxjs ^6.5.3
 
 ## Version 3.4.0

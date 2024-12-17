@@ -27,7 +27,7 @@ export class CustomFilterComponent extends DefaultFilter implements OnInit, OnCh
     this.inputControl.valueChanges
       .pipe(
         distinctUntilChanged(),
-        debounceTime(this.delay),
+        debounceTime(this.debounceTime),
       )
       .subscribe(value => {
         this.query = value;

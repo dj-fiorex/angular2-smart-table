@@ -12,6 +12,7 @@ export class FilterDefault {
   @Input() column!: Column;
   @Input() source!: DataSource;
   @Input() inputClass: string = '';
+  @Input() debounceTime: number = 300;
   @Input() query: string = '';
 
   onFilter(query: string) {

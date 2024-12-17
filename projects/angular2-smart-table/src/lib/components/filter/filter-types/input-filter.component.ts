@@ -31,7 +31,7 @@ export class InputFilterComponent extends DefaultFilter implements OnInit, OnCha
     this.inputControl.valueChanges
       .pipe(
         distinctUntilChanged(),
-        debounceTime(this.delay),
+        debounceTime(this.debounceTime),
       )
       .subscribe((value: string) => {
         this.query = this.inputControl.value;

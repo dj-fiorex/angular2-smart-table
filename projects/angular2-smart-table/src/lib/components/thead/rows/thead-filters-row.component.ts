@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 
 import {Grid} from '../../../lib/grid';
 import {DataSource} from '../../../lib/data-source/data-source';
@@ -20,9 +20,11 @@ import {CreateEvent} from '../../../lib/events';
         class="angular2-smart-th {{ column.id }}"
         scope="col"
     >
-      <angular2-smart-table-filter [source]="source"
-                              [column]="column"
-                              [inputClass]="filterInputClass"
+      <angular2-smart-table-filter
+        [source]="source"
+        [column]="column"
+        [inputClass]="filterInputClass"
+        [debounceTime]="filterDebounceTime"
       ></angular2-smart-table-filter>
     </th>
     <th angular2-st-add-button
@@ -47,12 +49,16 @@ export class TheadFitlersRowComponent implements OnChanges {
   showActionColumnLeft!: boolean;
   showActionColumnRight!: boolean;
   filterInputClass!: string;
+  filterDebounceTime: number = 300;
 
-  ngOnChanges() {
-    this.isMultiSelectVisible = this.grid.isMultiSelectVisible();
-    this.showActionColumnLeft = this.grid.showActionColumn('left');
-    this.showActionColumnRight = this.grid.showActionColumn('right');
-    this.filterInputClass = this.grid.settings.filter?.inputClass ?? '';
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['grid'] !== undefined) {
+      this.isMultiSelectVisible = this.grid.isMultiSelectVisible();
+      this.showActionColumnLeft = this.grid.showActionColumn('left');
+      this.showActionColumnRight = this.grid.showActionColumn('right');
+      this.filterInputClass = this.grid.settings.filter?.inputClass ?? '';
+      this.filterDebounceTime = this.grid.settings.filter?.debounceTime ?? 300;
+    }
   }
 
   getVisibleColumns(columns: Array<Column>): Array<Column> {

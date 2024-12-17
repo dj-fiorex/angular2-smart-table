@@ -81,6 +81,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
     },
     filter: {
       inputClass: '',
+      debounceTime: 300,
     },
     edit: {
       inputClass: '',
