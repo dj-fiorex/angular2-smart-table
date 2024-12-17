@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.5.0
+
+* Upgrade to Angular 19
+
 ## Version 3.4.0
 
 * Add new column setting `isRowHeading`
