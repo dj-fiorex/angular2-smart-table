@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {Settings} from "angular2-smart-table";
 
 @Component({
-  selector: 'basic-example-data',
-  template: `
+    selector: 'basic-example-data',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class BasicExampleDataComponent {
 

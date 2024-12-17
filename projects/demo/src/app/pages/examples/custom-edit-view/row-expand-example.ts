@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Settings} from "angular2-smart-table";
 
 @Component({
-  selector: 'div-view',
-  template: `
+    selector: 'div-view',
+    template: `
     <div >
       <table>
         <thead>
@@ -28,6 +28,7 @@ import {Settings} from "angular2-smart-table";
       </table>
     </div>
   `,
+    standalone: false
 })
 export class DivViewComponent {
 
@@ -40,10 +41,11 @@ export class DivViewComponent {
 }
 
 @Component({
-  selector: 'row-expand-view',
-  template: `
+    selector: 'row-expand-view',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class RowExpandComponent implements OnInit {
 

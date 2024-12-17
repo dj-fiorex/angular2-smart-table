@@ -4,7 +4,8 @@ import {DomSanitizer, SafeHtml, SafeResourceUrl, SafeScript, SafeStyle, SafeUrl}
 export type SecurityTrustType = 'html'|'style'|'script'|'url'|'resourceUrl'|'none';
 
 @Pipe({
-  name: 'bypassSecurityTrust'
+    name: 'bypassSecurityTrust',
+    standalone: false
 })
 export class BypassSecurityTrustPipe implements PipeTransform {
 

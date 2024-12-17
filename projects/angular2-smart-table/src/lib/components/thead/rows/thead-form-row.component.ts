@@ -6,8 +6,8 @@ import {Cell} from '../../../lib/data-set/cell';
 import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
 
 @Component({
-  selector: '[angular2-st-thead-form-row]',
-  template: `
+    selector: '[angular2-st-thead-form-row]',
+    template: `
     <td *ngIf="isMultiSelectVisible"></td>
     <td *ngIf="showActionColumnLeft" class="angular2-smart-actions">
       <angular2-st-actions [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-actions>
@@ -27,6 +27,7 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
       <angular2-st-actions [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-actions>
     </td>
   `,
+    standalone: false
 })
 export class TheadFormRowComponent implements OnChanges {
 

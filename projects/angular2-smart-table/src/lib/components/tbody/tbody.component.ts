@@ -26,9 +26,10 @@ import {
 import {RowClassFunction} from "../../lib/settings";
 
 @Component({
-  selector: '[angular2-st-tbody]',
-  styleUrls: ['./tbody.component.scss'],
-  templateUrl: './tbody.component.html',
+    selector: '[angular2-st-tbody]',
+    styleUrls: ['./tbody.component.scss'],
+    templateUrl: './tbody.component.html',
+    standalone: false
 })
 export class NgxSmartTableTbodyComponent implements AfterViewInit, OnDestroy {
 

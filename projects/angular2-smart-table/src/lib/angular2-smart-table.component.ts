@@ -27,6 +27,7 @@ import {TagsListEntry} from "./components/tags/tag/tag.component";
   selector: 'angular2-smart-table',
   styleUrls: ['./angular2-smart-table.component.scss'],
   templateUrl: './angular2-smart-table.component.html',
+  standalone: false,
 })
 export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
 

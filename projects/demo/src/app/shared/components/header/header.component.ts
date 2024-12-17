@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'header-component',
-  styles: [`
+    selector: 'header-component',
+    styles: [`
     li::marker {
       content: '';
     }
@@ -10,7 +10,8 @@ import { Component, Input } from '@angular/core';
       padding: 0;
     }
   `],
-  templateUrl: './header.component.html',
+    templateUrl: './header.component.html',
+    standalone: false
 })
 export class HeaderComponent {
 

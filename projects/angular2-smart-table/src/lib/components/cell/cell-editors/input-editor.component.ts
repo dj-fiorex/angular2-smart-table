@@ -3,9 +3,9 @@ import {Component} from '@angular/core';
 import {DefaultEditor} from './default-editor';
 
 @Component({
-  selector: 'input-editor',
-  styleUrls: ['./editor.component.scss'],
-  template: `
+    selector: 'input-editor',
+    styleUrls: ['./editor.component.scss'],
+    template: `
     <input [ngClass]="inputClass"
            [value]="cell.getValue()"
            [name]="cell.getId()"
@@ -16,6 +16,7 @@ import {DefaultEditor} from './default-editor';
            (keydown.enter)="disableEnterKeySave || onEdited.emit()"
            (keydown.esc)="onStopEditing.emit()">
     `,
+    standalone: false
 })
 export class InputEditorComponent extends DefaultEditor {
 

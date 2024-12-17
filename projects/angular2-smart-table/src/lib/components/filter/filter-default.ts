@@ -4,7 +4,8 @@ import {Column} from '../../lib/data-set/column';
 import {DataSource} from '../../lib/data-source/data-source';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class FilterDefault {
 

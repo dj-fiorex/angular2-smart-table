@@ -3,10 +3,11 @@ import {Row} from '../../../lib/data-set/row';
 import {CustomAction} from '../../../lib/settings';
 
 @Component({
-  selector: 'angular2-st-tbody-custom-item',
-  template: `
+    selector: 'angular2-st-tbody-custom-item',
+    template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    standalone: false
 })
 export class TbodyCustomItemComponent implements OnInit, OnDestroy {
 

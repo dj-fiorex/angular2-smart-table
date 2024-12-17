@@ -7,9 +7,9 @@ import {CustomActionEvent} from '../../../lib/events';
 import {SecurityTrustType} from "../../../pipes/bypass-security-trust.pipe";
 
 @Component({
-  selector: 'angular2-st-tbody-custom',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
+    selector: 'angular2-st-tbody-custom',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
       <ng-container *ngFor="let action of customActions">
           <a href="#" class="angular2-smart-action angular2-smart-action-custom-custom"
              *ngIf="!action.renderComponent && showAction(action)"
@@ -30,6 +30,7 @@ import {SecurityTrustType} from "../../../pipes/bypass-security-trust.pipe";
           </a>
       </ng-container>
   `,
+    standalone: false
 })
 export class TbodyCustomComponent {
 

@@ -6,9 +6,10 @@ import {TableService} from '../../services/table.service';
 import {CreateCancelEvent, CreateConfirmEvent, CreateEvent} from '../../lib/events';
 
 @Component({
-  selector: '[angular2-st-thead]',
-  styleUrls: ['./thead.component.scss'],
-  templateUrl: './thead.component.html',
+    selector: '[angular2-st-thead]',
+    styleUrls: ['./thead.component.scss'],
+    templateUrl: './thead.component.html',
+    standalone: false
 })
 export class NgxSmartTableTheadComponent implements OnChanges {
 

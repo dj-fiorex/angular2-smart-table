@@ -4,9 +4,9 @@ import {Subscription} from 'rxjs';
 import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-source';
 
 @Component({
-  selector: 'angular2-smart-table-pager',
-  styleUrls: ['./pager.component.scss'],
-  template: `
+    selector: 'angular2-smart-table-pager',
+    styleUrls: ['./pager.component.scss'],
+    template: `
     <nav *ngIf="shouldShow()" class="angular2-smart-pagination-nav">
       <ul class="angular2-smart-pagination pagination">
         <li class="angular2-smart-page-item page-item" [ngClass]="{disabled: getPage() == 1}">
@@ -59,6 +59,7 @@ import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-sour
       </select>
     </nav>
   `,
+    standalone: false
 })
 export class PagerComponent implements OnChanges {
 

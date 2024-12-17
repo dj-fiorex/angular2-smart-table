@@ -3,8 +3,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Cell} from '../../../lib/data-set/cell';
 
 @Component({
-  selector: 'table-cell-edit-mode',
-  template: `
+    selector: 'table-cell-edit-mode',
+    template: `
       <div [ngSwitch]="getEditorType()">
         <table-cell-custom-editor *ngSwitchCase="'custom'"
                                   [cell]="cell"
@@ -20,6 +20,7 @@ import {Cell} from '../../../lib/data-set/cell';
         ></table-cell-default-editor>
       </div>
     `,
+    standalone: false
 })
 export class EditCellComponent implements OnInit {
 

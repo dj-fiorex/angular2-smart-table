@@ -6,12 +6,13 @@ import {CreateEvent} from '../../../lib/events';
 import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
 
 @Component({
-  selector: '[angular2-st-add-button]',
-  template: `
+    selector: '[angular2-st-add-button]',
+    template: `
     <a *ngIf="visible" href="#" class="angular2-smart-action angular2-smart-action-add-add"
         [ngClass]="{'not-allowed': disabled}"
         [innerHTML]="addNewButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onAdd($event)"></a>
   `,
+    standalone: false
 })
 export class AddButtonComponent implements AfterViewInit, OnChanges {
 

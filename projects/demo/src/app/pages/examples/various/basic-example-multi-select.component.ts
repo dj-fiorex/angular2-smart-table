@@ -2,10 +2,11 @@ import {Component} from '@angular/core';
 import {Settings} from 'angular2-smart-table';
 
 @Component({
-  selector: 'basic-example-multi-select',
-  template: `
+    selector: 'basic-example-multi-select',
+    template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class BasicExampleMultiSelectComponent {
 

@@ -6,11 +6,12 @@ import {debounceTime} from 'rxjs/operators';
 import {CheckboxFilterSettings} from "../../../lib/settings";
 
 @Component({
-  selector: 'checkbox-filter',
-  template: `
+    selector: 'checkbox-filter',
+    template: `
     <input type="checkbox" [formControl]="inputControl" [ngClass]="inputClass" class="form-control">
     <a href="#" *ngIf="filterActive" (click)="resetFilter($event)">{{resetText}}</a>
   `,
+    standalone: false
 })
 export class CheckboxFilterComponent extends DefaultFilter implements OnInit {
 

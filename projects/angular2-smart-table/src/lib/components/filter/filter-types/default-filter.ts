@@ -4,7 +4,8 @@ import {Subscription} from 'rxjs';
 import {Column} from '../../../lib/data-set/column';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class DefaultFilter implements Filter, OnDestroy {
 

@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {Settings} from "angular2-smart-table";
 
 @Component({
-  selector: 'advanced-example-types',
-  template: `
+    selector: 'advanced-example-types',
+    template: `
     <style>
       ::ng-deep .with-ellipsis {
         max-width: 10rem;
@@ -14,6 +14,7 @@ import {Settings} from "angular2-smart-table";
     </style>
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class AdvancedExamplesTypesComponent {
 

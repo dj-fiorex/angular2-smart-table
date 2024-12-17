@@ -3,8 +3,8 @@ import {Component} from '@angular/core';
 import {LocalDataSource, Settings} from 'angular2-smart-table';
 
 @Component({
-  selector: 'advance-example-comfirm',
-  template: `
+    selector: 'advance-example-comfirm',
+    template: `
     <angular2-smart-table
       [settings]="settings"
       [source]="source"
@@ -12,6 +12,7 @@ import {LocalDataSource, Settings} from 'angular2-smart-table';
       (editConfirm)="onSaveConfirm($event)"
       (createConfirm)="onCreateConfirm($event)"></angular2-smart-table>
   `,
+    standalone: false
 })
 export class AdvancedExampleConfirmComponent {
 

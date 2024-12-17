@@ -6,8 +6,8 @@ import {Column} from "../../../lib/data-set/column";
 import {CreateEvent} from '../../../lib/events';
 
 @Component({
-  selector: '[angular2-st-thead-filters-row]',
-  template: `
+    selector: '[angular2-st-thead-filters-row]',
+    template: `
     <th *ngIf="isMultiSelectVisible" scope="col"></th>
     <th angular2-st-add-button
         *ngIf="showActionColumnLeft"
@@ -34,6 +34,7 @@ import {CreateEvent} from '../../../lib/events';
     >
     </th>
   `,
+    standalone: false
 })
 export class TheadFitlersRowComponent implements OnChanges {
 

@@ -4,8 +4,8 @@ import {DefaultEditor} from './default-editor';
 import {ListEditorSettings} from "../../../lib/settings";
 
 @Component({
-  selector: 'select-editor',
-  template: `
+    selector: 'select-editor',
+    template: `
     <select [ngClass]="inputClass"
             class="form-control"
             (change)="onSelectionChanged($any($event.target).value)"
@@ -21,6 +21,7 @@ import {ListEditorSettings} from "../../../lib/settings";
         </option>
     </select>
     `,
+    standalone: false
 })
 export class SelectEditorComponent extends DefaultEditor {
 

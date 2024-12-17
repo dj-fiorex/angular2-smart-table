@@ -3,10 +3,11 @@ import {Component, OnChanges, OnDestroy, SimpleChanges, ViewChild, ViewContainer
 import {EditCellDefault} from './edit-cell-default';
 
 @Component({
-  selector: 'table-cell-custom-editor',
-  template: `
+    selector: 'table-cell-custom-editor',
+    template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    standalone: false
 })
 export class CustomEditComponent extends EditCellDefault implements OnChanges, OnDestroy {
 

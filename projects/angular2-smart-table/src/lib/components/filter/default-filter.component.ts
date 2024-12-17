@@ -3,8 +3,8 @@ import {Component} from '@angular/core';
 import {FilterDefault} from "./filter-default";
 
 @Component({
-  selector: 'default-table-filter',
-  template: `
+    selector: 'default-table-filter',
+    template: `
     <ng-container [ngSwitch]="column.filter.type">
       <select-filter *ngSwitchCase="'list'"
                      [query]="query"
@@ -26,6 +26,7 @@ import {FilterDefault} from "./filter-default";
       </input-filter>
     </ng-container>
   `,
+    standalone: false
 })
 export class DefaultFilterComponent extends FilterDefault {
 }
