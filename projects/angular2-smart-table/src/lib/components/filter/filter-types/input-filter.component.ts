@@ -1,6 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {Component} from '@angular/core';
 
 import {DefaultFilter} from './default-filter';
 
@@ -9,39 +7,13 @@ import {DefaultFilter} from './default-filter';
     template: `
     <input
       [ngClass]="inputClass"
-      [formControl]="inputControl"
-      class="form-control"
       type="text"
+      [value]="query"
+      (change)="onValueChanged($any($event.target).value)"
+      (keyup)="onValueChanged($any($event.target).value)"
       placeholder="{{ column.placeholder || column.title }}"/>
   `,
     standalone: false
 })
-export class InputFilterComponent extends DefaultFilter implements OnInit, OnChanges {
-
-  inputControl = new FormControl();
-
-  constructor() {
-    super();
-  }
-
-  ngOnInit() {
-    if (this.query) {
-      this.inputControl.setValue(this.query);
-    }
-    this.inputControl.valueChanges
-      .pipe(
-        distinctUntilChanged(),
-        debounceTime(this.debounceTime),
-      )
-      .subscribe((value: string) => {
-        this.query = this.inputControl.value;
-        this.setFilter();
-      });
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.query) {
-      this.inputControl.setValue(this.query);
-    }
-  }
+export class InputFilterComponent extends DefaultFilter {
 }

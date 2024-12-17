@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 
 import {CellComponent} from './cell.component';
 import {CustomEditComponent} from './cell-edit-mode/custom-edit.component';
@@ -34,7 +33,6 @@ const CELL_COMPONENTS = [
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         PipesModule,
     ],
   declarations: [

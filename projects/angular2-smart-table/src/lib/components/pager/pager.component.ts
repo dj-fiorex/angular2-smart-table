@@ -54,7 +54,7 @@ import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-sour
 
     <nav *ngIf="perPageSelect && perPageSelect.length > 0" class="angular2-smart-pagination-per-page">
       <label for="per-page" *ngIf="perPageSelectLabel">{{perPageSelectLabel}}</label>
-      <select (change)="onChangePerPage($event)" [(ngModel)]="currentPerPage" id="per-page">
+      <select (change)="onChangePerPage($event)" [value]="currentPerPage" id="per-page">
         <option *ngFor="let item of perPageSelect" [value]="item">{{ item }}</option>
       </select>
     </nav>

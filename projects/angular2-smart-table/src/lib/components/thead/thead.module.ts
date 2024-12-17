@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 
 import {FilterModule} from '../filter/filter.module';
 import {CellModule} from '../cell/cell.module';
@@ -32,7 +31,6 @@ const THEAD_COMPONENTS = [
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         FilterModule,
         CellModule,
         DirectivesModule,

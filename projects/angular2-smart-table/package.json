@@ -15,7 +15,6 @@
   "peerDependencies": {
     "@angular/core": "16 - 19",
     "@angular/common": "16 - 19",
-    "@angular/forms": "16 - 19",
     "lodash-es": "^4.17.21"
   },
   "dependencies": {

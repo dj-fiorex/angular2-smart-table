@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 
 import {CellModule} from '../cell/cell.module';
 
@@ -24,7 +23,6 @@ const TBODY_COMPONENTS = [
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule,
         CellModule,
         PipesModule,
     ],

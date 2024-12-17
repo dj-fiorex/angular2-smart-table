@@ -1,7 +1,7 @@
 <ng-container  *ngFor="let row of grid.getRows()">
   <tr (click)="userSelectRow.emit(row)" (mouseover)="rowHover.emit(row)" class="angular2-smart-row" [className]="rowClassFunction(row)" [ngClass]="{selected: row.isSelected}">
     <td *ngIf="isMultiSelectVisible" class="angular2-smart-actions angular2-smart-action-multiple-select" (click)="multipleSelectRow.emit(row)">
-      <input type="checkbox" class="form-check-input" [ngModel]="row.isSelected">
+      <input type="checkbox" [checked]="row.isSelected">
     </td>
     <td *ngIf="!row.isInEditing && showActionColumnLeft" class="angular2-smart-actions">
 

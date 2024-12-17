@@ -11,7 +11,7 @@ import {Column} from "../../../lib/data-set/column";
         [style.width]="multiSelectWidth"
         scope="col"
     >
-      <input type="checkbox" [ngModel]="isAllSelected" (click)="selectAllRows.emit()">
+      <input type="checkbox" [checked]="isAllSelected" (click)="selectAllRows.emit()">
     </th>
     <th angular2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid" scope="col"></th>
     <th *ngFor="let column of visibleColumns; index as i; last as isLast"

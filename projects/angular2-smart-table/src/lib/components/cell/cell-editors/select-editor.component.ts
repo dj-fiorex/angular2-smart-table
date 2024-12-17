@@ -7,7 +7,6 @@ import {ListEditorSettings} from "../../../lib/settings";
     selector: 'select-editor',
     template: `
     <select [ngClass]="inputClass"
-            class="form-control"
             (change)="onSelectionChanged($any($event.target).value)"
             [name]="cell.getId()"
             [disabled]="!cell.isEditable()"

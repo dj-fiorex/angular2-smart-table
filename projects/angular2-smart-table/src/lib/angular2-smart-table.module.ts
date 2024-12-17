@@ -1,6 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Angular2SmartTableComponent} from './angular2-smart-table.component';
 import {CellModule} from './components/cell/cell.module';
 import {FilterModule} from './components/filter/filter.module';
@@ -16,8 +15,6 @@ import {THeadModule} from './components/thead/thead.module';
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     CellModule,
     FilterModule,
     PagerModule,

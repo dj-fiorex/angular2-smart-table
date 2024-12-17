@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, skip} from 'rxjs/operators';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {DefaultFilter} from './default-filter';
 import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
@@ -9,10 +7,8 @@ import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
     selector: 'select-filter',
     template: `
     <select [ngClass]="inputClass"
-            class="form-control"
-            #inputControl
-            [(ngModel)]="query">
-
+            [value]="query"
+            (change)="onValueChanged($any($event.target).value)">
         <option value="">{{ config.selectText ?? 'Select...' }}</option>
         <option *ngFor="let option of config.list" [value]="option.value">
           {{ option.title }}
@@ -21,9 +17,7 @@ import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
   `,
     standalone: false
 })
-export class SelectFilterComponent extends DefaultFilter implements OnInit {
-
-  @ViewChild('inputControl', { read: NgControl, static: true }) inputControl!: NgControl;
+export class SelectFilterComponent extends DefaultFilter implements OnInit, OnDestroy {
 
   config!: ListFilterSettings;
 
@@ -34,17 +28,6 @@ export class SelectFilterComponent extends DefaultFilter implements OnInit {
     if (this.column.filterFunction === undefined && strict) {
       this.column.filterFunction = (v, f) => v?.toString() === f;
     }
-
-    const exist = this.inputControl.valueChanges;
-    if (!exist) {
-      return;
-    }
-    exist
-      .pipe(
-        skip(1),
-        distinctUntilChanged(),
-        debounceTime(this.debounceTime)
-      )
-      .subscribe((value: string) => this.setFilter());
+    super.ngOnInit();
   }
 }

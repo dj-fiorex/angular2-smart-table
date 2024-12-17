@@ -1,29 +1,39 @@
-import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Subject, Subscription} from 'rxjs';
 
 import {Column} from '../../../lib/data-set/column';
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
     template: '',
     standalone: false
 })
-export class DefaultFilter implements Filter, OnDestroy {
+export class DefaultFilter implements Filter, OnInit, OnDestroy {
 
-  changesSubscription!: Subscription;
-  changesSubscription2!: Subscription;
+  subject = new Subject<string>();
+  changesSubscription?: Subscription;
   @Input() query: string = '';
   @Input() inputClass!: string;
   @Input() debounceTime: number = 300;
   @Input() column!: Column;
   @Output() filter = new EventEmitter<string>();
 
+  ngOnInit() {
+    this.changesSubscription = this.subject
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(this.debounceTime),
+      )
+      .subscribe(value => this.setFilter());
+  }
+
   ngOnDestroy() {
-    if (this.changesSubscription) {
-      this.changesSubscription.unsubscribe();
-    }
-    if (this.changesSubscription2) {
-      this.changesSubscription2.unsubscribe();
-    }
+    this.changesSubscription?.unsubscribe();
+  }
+
+  onValueChanged(value: string) {
+    this.query = value;
+    this.subject.next(value);
   }
 
   setFilter() {
@@ -32,7 +42,6 @@ export class DefaultFilter implements Filter, OnDestroy {
 }
 
 export interface Filter {
-
   debounceTime: number;
   changesSubscription?: Subscription;
   query: string;

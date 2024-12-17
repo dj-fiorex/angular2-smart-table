@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
 
 import {DefaultFilter} from './default-filter';
-import {debounceTime} from 'rxjs/operators';
 import {CheckboxFilterSettings} from "../../../lib/settings";
 
 @Component({
     selector: 'checkbox-filter',
     template: `
-    <input type="checkbox" [formControl]="inputControl" [ngClass]="inputClass" class="form-control">
+    <input type="checkbox" (change)="onChecked($any($event.target).checked)" [checked]="checked" [ngClass]="inputClass">
     <a href="#" *ngIf="filterActive" (click)="resetFilter($event)">{{resetText}}</a>
   `,
     standalone: false
@@ -16,37 +14,32 @@ import {CheckboxFilterSettings} from "../../../lib/settings";
 export class CheckboxFilterComponent extends DefaultFilter implements OnInit {
 
   filterActive: boolean = false;
-  inputControl = new FormControl();
+  checked: boolean = false;
 
   trueVal = 'true';
   falseVal = 'false';
   resetText = 'reset';
 
-  constructor() {
-    super();
-  }
-
   ngOnInit() {
-    if (typeof this.column.filter !== "boolean" && typeof this.column.filter.config !== "undefined") {
+    if (this.column.filter.config !== undefined) {
       const config = this.column.filter.config as CheckboxFilterSettings;
       this.trueVal = config?.true ?? 'true';
       this.falseVal = config?.false ?? 'false';
       this.resetText = config?.resetText ?? 'reset';
     }
+    super.ngOnInit();
+  }
 
-    this.changesSubscription = this.inputControl.valueChanges
-      .pipe(debounceTime(this.debounceTime))
-      .subscribe((checked: boolean) => {
-        this.filterActive = true;
-        this.query = checked ? this.trueVal : this.falseVal;
-        this.setFilter();
-      });
+  onChecked(checked: boolean) {
+    this.filterActive = true;
+    this.checked = checked;
+    this.onValueChanged(checked ? this.trueVal : this.falseVal);
   }
 
   resetFilter(event: any) {
     event.preventDefault();
     this.query = '';
-    this.inputControl.setValue(false, { emitEvent: false });
+    this.checked = false;
     this.filterActive = false;
     this.setFilter();
   }

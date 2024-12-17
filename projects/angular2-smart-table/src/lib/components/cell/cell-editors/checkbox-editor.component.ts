@@ -9,7 +9,6 @@ import {CheckboxEditorSettings} from "../../../lib/settings";
     template: `
     <input [ngClass]="inputClass"
            type="checkbox"
-           class="form-control"
            [name]="cell.getId()"
            [disabled]="!cell.isEditable()"
            [checked]="cell.getValue() === trueVal"
