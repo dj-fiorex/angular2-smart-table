@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   Output,
   QueryList,
@@ -31,7 +32,7 @@ import {RowClassFunction} from "../../lib/settings";
     templateUrl: './tbody.component.html',
     standalone: false
 })
-export class NgxSmartTableTbodyComponent implements AfterViewInit, OnDestroy {
+export class NgxSmartTableTbodyComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input() grid!: Grid;
   @Input() source!: DataSource;
