@@ -1,5 +1,5 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {lastValueFrom, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 
 import {LocalDataSource} from '../local/local.data-source';
 import {ServerSourceConf} from './server-source.conf';
@@ -40,7 +40,7 @@ export class ServerDataSource extends LocalDataSource {
   }
 
   protected loadData(filtered: boolean, sorted: boolean, paginated: boolean): Promise<any> {
-    return lastValueFrom(this.requestElements(filtered, sorted, paginated)
+    return this.requestElements(filtered, sorted, paginated)
       .pipe(map(res => {
         this.lastRequestCount = this.extractTotalFromResponse(res);
         // TODO: the following two lines are obviously incorrect
@@ -48,7 +48,7 @@ export class ServerDataSource extends LocalDataSource {
         this.data = this.extractDataFromResponse(res);
         this.filteredAndSorted = this.data;
         return this.data;
-      })));
+      })).toPromise();
   }
 
   /**
