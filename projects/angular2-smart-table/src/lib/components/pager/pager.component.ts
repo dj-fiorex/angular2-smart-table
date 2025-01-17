@@ -1,7 +1,7 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-source';
+import {DataSource} from '../../lib/data-source/data-source';
 
 @Component({
     selector: 'angular2-smart-table-pager',
@@ -61,7 +61,7 @@ import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-sour
   `,
     standalone: false
 })
-export class PagerComponent implements OnChanges {
+export class PagerComponent implements OnChanges, OnDestroy {
 
   @Input() source!: DataSource;
   @Input() perPageSelect!: number[];
@@ -72,44 +72,41 @@ export class PagerComponent implements OnChanges {
   protected count: number = 0;
   protected perPage!: number;
 
-  protected dataChangedSub!: Subscription;
+  protected dataChangedSub: Subscription | null = null;
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.source) {
-      if (!changes.source.firstChange) {
+      if (this.dataChangedSub !== null) {
         this.dataChangedSub.unsubscribe();
       }
       this.dataChangedSub = this.source.onChanged().subscribe((dataChanges) => {
         this.page = this.source.getPaging().page;
         this.perPage = this.source.getPaging().perPage;
         this.count = this.source.count();
-        // check, if we are still on a valid page
         const lastPage = this.getLast();
-        if (this.page > lastPage) {
+        if (dataChanges.action === 'prepend') {
+          this.source.setPage(1);
+        } else if (dataChanges.action === 'append') {
           this.source.setPage(lastPage);
+        } else if (this.page > lastPage) {
+          this.source.setPage(lastPage);
+        } else if (this.page < 1) {
+          // for whatever reason...
+          this.source.setPage(1);
         } else {
           // do not execute the following function when we needed to adjust the page!
           // another event will be emitted and as a reaction we will end up here again
           // (in previous versions, this code was executed unnecessarily often)
-          this.processPageChange(dataChanges);
           this.initPages();
         }
       });
     }
   }
 
-  /**
-   * We change the page here depending on the action performed against data source
-   * if a new element was added to the end of the table - then change the page to the last
-   * if a new element was added to the beginning of the table - then to the first page
-   * @param changes
-   */
-  processPageChange(changes: DataSourceChangeEvent) {
-    if (changes.action === 'prepend') {
-      this.source.setPage(1);
-    }
-    if (changes.action === 'append') {
-      this.source.setPage(this.getLast());
+  ngOnDestroy() {
+    if (this.dataChangedSub !== null) {
+      this.dataChangedSub.unsubscribe();
+      this.dataChangedSub = null;
     }
   }
 
@@ -140,7 +137,8 @@ export class PagerComponent implements OnChanges {
   }
 
   getLast(): number {
-    return Math.ceil(this.count / this.perPage);
+    const last = Math.ceil(this.count / this.perPage);
+    return last === 0 ? 1 : last;
   }
 
   initPages() {

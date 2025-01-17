@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.5.2
+
+* Fix that after removing the unnecessary paging events, the first page was not selected anymore when data was lazy loaded
+
 ## Version 3.5.1
 
 * Fix regression: "pages per page" selector broken in version 3.5.0
