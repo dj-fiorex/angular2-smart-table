@@ -2,6 +2,11 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.5.1
+
+* Fix regression: "pages per page" selector broken in version 3.5.0
+* Fix that automatically switching to the last page after increasing the "pages per page" when already being on the last page caused unnecessarily many paging events  
+
 ## Version 3.5.0
 
 * Upgrade to Angular 19

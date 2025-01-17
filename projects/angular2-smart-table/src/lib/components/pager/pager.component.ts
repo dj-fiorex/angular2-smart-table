@@ -54,7 +54,7 @@ import {DataSource, DataSourceChangeEvent} from '../../lib/data-source/data-sour
 
     <nav *ngIf="perPageSelect && perPageSelect.length > 0" class="angular2-smart-pagination-per-page">
       <label for="per-page" *ngIf="perPageSelectLabel">{{perPageSelectLabel}}</label>
-      <select (change)="onChangePerPage($event)" [value]="currentPerPage" id="per-page">
+      <select (change)="onChangePerPage($any($event.target).value)" [value]="perPage" id="per-page">
         <option *ngFor="let item of perPageSelect" [value]="item">{{ item }}</option>
       </select>
     </nav>
@@ -66,8 +66,6 @@ export class PagerComponent implements OnChanges {
   @Input() source!: DataSource;
   @Input() perPageSelect!: number[];
   @Input() perPageSelectLabel!: string;
-
-  currentPerPage!: any;
 
   protected pages!: Array<any>;
   protected page!: number;
@@ -84,14 +82,18 @@ export class PagerComponent implements OnChanges {
       this.dataChangedSub = this.source.onChanged().subscribe((dataChanges) => {
         this.page = this.source.getPaging().page;
         this.perPage = this.source.getPaging().perPage;
-        this.currentPerPage = this.perPage;
         this.count = this.source.count();
-        if (this.isPageOutOfBounds()) {
-          this.source.setPage(--this.page);
+        // check, if we are still on a valid page
+        const lastPage = this.getLast();
+        if (this.page > lastPage) {
+          this.source.setPage(lastPage);
+        } else {
+          // do not execute the following function when we needed to adjust the page!
+          // another event will be emitted and as a reaction we will end up here again
+          // (in previous versions, this code was executed unnecessarily often)
+          this.processPageChange(dataChanges);
+          this.initPages();
         }
-
-        this.processPageChange(dataChanges);
-        this.initPages();
       });
     }
   }
@@ -141,10 +143,6 @@ export class PagerComponent implements OnChanges {
     return Math.ceil(this.count / this.perPage);
   }
 
-  isPageOutOfBounds(): boolean {
-    return (this.page * this.perPage) >= (this.count + this.perPage) && this.page > 1;
-  }
-
   initPages() {
     const pagesCount = this.getLast();
     let showPagesCount = 4;
@@ -167,12 +165,10 @@ export class PagerComponent implements OnChanges {
     }
   }
 
-  onChangePerPage(event: any) {
-    if (this.currentPerPage) {
-      this.source.getPaging().perPage = this.currentPerPage * 1;
-      this.source.refresh();
-      this.initPages();
-    }
+  onChangePerPage(newPerPage: number) {
+    this.source.getPaging().perPage = newPerPage;
+    this.source.refresh();
+    this.initPages();
   }
 
 }
