@@ -24,6 +24,7 @@ import {Column} from "../../../lib/data-set/column";
         [source]="source"
         [column]="column"
         [isHideable]="isHideable"
+        [multiSort]="grid.isMultiSortEnabled()"
         (hide)="hide.emit($event)"
       ></angular2-st-column-title>
       <div *ngIf="isResizable && (showActionColumnRight || !isLast)"

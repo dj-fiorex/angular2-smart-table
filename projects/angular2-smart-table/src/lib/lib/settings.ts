@@ -21,6 +21,7 @@ export interface Settings {
   rowClassFunction?: RowClassFunction;
   valueCreateFunction?: ValueCreateFunction;
   selectMode?: 'single' | 'multi' | 'multi_filtered';
+  sortMode?: 'single' | 'multi';
   switchPageToSelectedRowPage?: boolean;
 }
 

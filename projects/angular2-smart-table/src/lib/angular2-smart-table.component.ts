@@ -65,6 +65,7 @@ export class Angular2SmartTableComponent implements OnChanges, OnDestroy {
   defaultSettings: Settings = {
     mode: 'inline',
     selectMode: 'single',
+    sortMode: 'multi',
     switchPageToSelectedRowPage: false,
     hideHeader: false,
     hideSubHeader: false,

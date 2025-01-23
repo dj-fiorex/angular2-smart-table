@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
 
 import {Column} from '../../../lib/data-set/column';
-import {DataSource} from '../../../lib/data-source/data-source';
+import {DataSource, ISortConfig} from '../../../lib/data-source/data-source';
 import {Subscription} from "rxjs";
 
 @Component({
@@ -33,13 +33,15 @@ import {Subscription} from "rxjs";
     </a>
     <span class="angular2-smart-sort" *ngIf="!column.isSortable">{{ column.title }}</span>
     <button style="position: absolute; top:0; right:0; border:none" *ngIf="isHideable"
-            (click)="_hideColumnClicked($event)">🗙</button>
+            (click)="_hideColumnClicked($event)">🗙
+    </button>
   `,
   standalone: false
 })
 export class ColumnTitleComponent implements OnChanges, OnDestroy {
 
   currentDirection: 'asc' | 'desc' | null = null;
+  @Input() multiSort = true;
   @Input() column!: Column;
   @Input() source!: DataSource;
   @Input() isHideable!: boolean;
@@ -76,13 +78,16 @@ export class ColumnTitleComponent implements OnChanges, OnDestroy {
   _sort(event: any) {
     event.preventDefault();
     this.changeSortDirection();
-    this.source.updateSort([
-      {
-        field: this.column.id,
-        direction: this.currentDirection,
-        compare: this.column.compareFunction,
-      },
-    ]);
+    const conf: ISortConfig = {
+      field: this.column.id,
+      direction: this.currentDirection,
+      compare: this.column.compareFunction,
+    };
+    if (this.multiSort) {
+      this.source.updateSort([conf]);
+    } else {
+      this.source.setSort([conf]);
+    }
   }
 
 

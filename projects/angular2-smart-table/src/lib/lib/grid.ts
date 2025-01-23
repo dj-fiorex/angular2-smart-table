@@ -64,6 +64,10 @@ export class Grid {
     return this.settings.selectMode === 'multi' || this.settings.selectMode === 'multi_filtered';
   }
 
+  isMultiSortEnabled(): boolean {
+    return this.settings.sortMode !== 'single';
+  }
+
   getExpandedRowComponentClass(): Type<any> | undefined {
     return this.settings.expand?.component;
   }

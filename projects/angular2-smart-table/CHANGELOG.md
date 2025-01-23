@@ -4,6 +4,7 @@ This document lists the changes introduced by this fork.
 
 ## Version 3.6.0
 
+* Add setting `sortMode` with the options `single` or `multi` (default is `multi`)
 * Improve rendering of the column title header
 
 ## Version 3.5.2
