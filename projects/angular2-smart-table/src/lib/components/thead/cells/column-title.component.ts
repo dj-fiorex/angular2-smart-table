@@ -18,6 +18,6 @@ export class ColumnTitleComponent {
   @Input() source!: DataSource;
   @Input() isHideable!: boolean;
 
-  @Output() hide = new EventEmitter<any>();
+  @Output() hide = new EventEmitter<string>();
 
 }

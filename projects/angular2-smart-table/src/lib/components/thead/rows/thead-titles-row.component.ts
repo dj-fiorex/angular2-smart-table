@@ -41,7 +41,7 @@ export class TheadTitlesRowComponent implements OnChanges {
   @Input() isAllSelected!: boolean;
   @Input() source!: DataSource;
 
-  @Output() hide = new EventEmitter<any>();
+  @Output() hide = new EventEmitter<string>();
   @Output() selectAllRows = new EventEmitter<void>();
 
   multiSelectWidth: string = '3rem';

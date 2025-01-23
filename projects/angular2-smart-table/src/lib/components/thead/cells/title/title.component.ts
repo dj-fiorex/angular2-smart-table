@@ -27,7 +27,7 @@ export class TitleComponent implements OnChanges {
   @Input() column!: Column;
   @Input() source!: DataSource;
   @Input() isHideable!: boolean;
-  @Output() hide = new EventEmitter<any>();
+  @Output() hide = new EventEmitter<string>();
 
   protected dataChangedSub!: Subscription;
 
