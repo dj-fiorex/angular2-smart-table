@@ -2,6 +2,8 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.6.0
+
 ## Version 3.5.2
 
 * Fix that after removing the unnecessary paging events, the first page was not selected anymore when data was lazy loaded
