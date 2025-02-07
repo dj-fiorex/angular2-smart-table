@@ -110,7 +110,7 @@ export interface EditorSettings {
 
 export interface FilterSettings {
   type: 'text' | 'list' | 'checkbox' | 'custom';
-  config?: ListFilterSettings | CheckboxFilterSettings;
+  config?: ListFilterSettings | CheckboxFilterSettings | unknown;
   component?: any;
 }
 

@@ -2,6 +2,11 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.6.1
+
+* Fix `filter.config` not accepting custom config objects
+* Fix missing documentation for `filter.component`
+
 ## Version 3.6.0
 
 * Add setting `sortMode` with the options `single` or `multi` (default is `multi`)
