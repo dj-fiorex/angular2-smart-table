@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.6.2
+
+* Fix that custom filter implementation were forced to implement `ngOnChanges`
+
 ## Version 3.6.1
 
 * Fix `filter.config` not accepting custom config objects
