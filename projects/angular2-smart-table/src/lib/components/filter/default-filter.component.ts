@@ -8,21 +8,21 @@ import {FilterDefault} from "./filter-default";
     <ng-container [ngSwitch]="column.filter.type">
       <select-filter *ngSwitchCase="'list'"
                      [query]="query"
-                     [ngClass]="inputClass"
+                     [inputClass]="inputClass"
                      [debounceTime]="debounceTime"
                      [column]="column"
                      (filter)="onFilter($event)">
       </select-filter>
       <checkbox-filter *ngSwitchCase="'checkbox'"
                        [query]="query"
-                       [ngClass]="inputClass"
+                       [inputClass]="inputClass"
                        [debounceTime]="debounceTime"
                        [column]="column"
                        (filter)="onFilter($event)">
       </checkbox-filter>
       <input-filter *ngSwitchDefault
                     [query]="query"
-                    [ngClass]="inputClass"
+                    [inputClass]="inputClass"
                     [debounceTime]="debounceTime"
                     [column]="column"
                     (filter)="onFilter($event)">
