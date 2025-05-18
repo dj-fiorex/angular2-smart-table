@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 3.6.2
 
 * Fix that custom filter implementation were forced to implement `ngOnChanges`
+* Fix that `filter.inputClass` setting was not correctly applied to the actual filter input when using default filters
 
 ## Version 3.6.1
 
