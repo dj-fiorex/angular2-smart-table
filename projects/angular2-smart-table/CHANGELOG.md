@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.7.0
+
+* Add Angular 20 support
+
 ## Version 3.6.2
 
 * Fix that custom filter implementation were forced to implement `ngOnChanges`

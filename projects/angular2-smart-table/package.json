@@ -1,6 +1,6 @@
 {
   "name": "angular2-smart-table",
-  "version": "3.6.2",
+  "version": "3.7.0",
   "description": "Angular 2 Smart Table",
   "repository": {
     "type": "git",
@@ -13,11 +13,11 @@
   },
   "homepage": "https://github.com/dj-fiorex/angular2-smart-table#readme",
   "peerDependencies": {
-    "@angular/core": "16 - 19",
-    "@angular/common": "16 - 19",
+    "@angular/core": "16 - 20",
+    "@angular/common": "16 - 20",
     "lodash-es": "^4.17.21"
   },
   "dependencies": {
-    "tslib": "~2.7.0"
+    "tslib": "^2.7.0"
   }
 }
