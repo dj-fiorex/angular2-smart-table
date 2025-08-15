@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 3.7.1
+
+* Fix styling for `select-editor` to fit other input editors
+
 ## Version 3.7.0
 
 * Add Angular 20 support
