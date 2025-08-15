@@ -5,6 +5,7 @@ import {ListEditorSettings} from "../../../lib/settings";
 
 @Component({
     selector: 'select-editor',
+    styleUrls: ['./editor.component.scss'],
     template: `
     <select [ngClass]="inputClass"
             (change)="onSelectionChanged($any($event.target).value)"
