@@ -164,6 +164,7 @@ Installation, customization and other useful articles: https://github.com/dj-fio
 [<img alt="maixuanhan" src="https://avatars.githubusercontent.com/u/12881054?v=3&s=60" width="60">](https://github.com/maixuanhan)
 [<img alt="stephanrauh" src="https://avatars.githubusercontent.com/u/3045767?v=3&s=60" width="60">](https://github.com/stephanrauh)
 [<img alt="tawfiek" src="https://avatars.githubusercontent.com/u/27981868?v=3&s=60" width="60">](https://github.com/tawfiek)
+[<img alt="jupmorenor" src="https://avatars.githubusercontent.com/u/11802554?v=3&s=60" width="60">](https://github.com/jupmorenor)
 
 ## Special thanks to our awesome maintainers!
 [<img alt="hexdecimal16" src="https://avatars.githubusercontent.com/u/47829719?v=3&s=60" width="60">](https://github.com/hexdecimal16)

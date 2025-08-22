@@ -2,8 +2,9 @@
 
 This document lists the changes introduced by this fork.
 
-## Version 3.7.1
+## Version 3.8.0
 
+* Fix missing property `selectText` on `editor.config` for `select-editor` default non-value option
 * Fix styling for `select-editor` to fit other input editors
 
 ## Version 3.7.0

@@ -6,7 +6,6 @@
 I'm a self-employed developer so any help is welcome, open a pull request and help me improve this library
 
 
-
 ## NEW Features
 
 * 🚀 Added hide/show row  
@@ -152,17 +151,23 @@ Now you have some data in the table. -->
 ## Further Documentation
 Installation, customization and other useful articles: https://github.com/dj-fiorex/angular2-smart-table
 
+## License
+[MIT](LICENSE.txt) license.
+
 ## How can I support developers?
 - Star our GitHub repo :star:
 - Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
 
-
-## License
-[MIT](LICENSE.txt) license.
-
-## Special thanks to  our CURRENT awesome mantainers and contributors!
-[<img alt="hexdecimal16" src="https://avatars.githubusercontent.com/u/47829719?v=3&s=60" width="60">](https://github.com/hexdecimal16)
+## Thanks to our contributors!
+[<img alt="igorkosteski" src="https://avatars.githubusercontent.com/u/9559960?v=3&s=60" width="60">](https://github.com/igorkosteski)
+[<img alt="EphraimHaber" src="https://avatars.githubusercontent.com/u/61934858?v=3&s=60" width="60">](https://github.com/EphraimHaber)
+[<img alt="maixuanhan" src="https://avatars.githubusercontent.com/u/12881054?v=3&s=60" width="60">](https://github.com/maixuanhan)
+[<img alt="stephanrauh" src="https://avatars.githubusercontent.com/u/3045767?v=3&s=60" width="60">](https://github.com/stephanrauh)
 [<img alt="tawfiek" src="https://avatars.githubusercontent.com/u/27981868?v=3&s=60" width="60">](https://github.com/tawfiek)
+[<img alt="jupmorenor" src="https://avatars.githubusercontent.com/u/11802554?v=3&s=60" width="60">](https://github.com/jupmorenor)
+
+## Special thanks to our awesome maintainers!
+[<img alt="hexdecimal16" src="https://avatars.githubusercontent.com/u/47829719?v=3&s=60" width="60">](https://github.com/hexdecimal16)
 [<img alt="uap-universe" src="https://avatars.githubusercontent.com/u/733505?v=3&s=60" width="60">](https://github.com/uap-universe)
 
 ## Special thanks to AKVEO team for starting this project!
