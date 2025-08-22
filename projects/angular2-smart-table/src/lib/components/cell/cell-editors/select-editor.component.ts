@@ -12,10 +12,10 @@ import {ListEditorSettings} from "../../../lib/settings";
             [name]="cell.getId()"
             [disabled]="!cell.isEditable()"
             (click)="onClick.emit($event)"
+            (keydown.enter)="disableEnterKeySave || onEdited.emit()"
+            (keydown.esc)="onStopEditing.emit()"
     >
-            (keydown.enter)="disableEnterKeySave || onEdited.emit($event)"
-            (keydown.esc)="onStopEditing.emit()">
-
+        <option value="">{{ editorConfig.selectText ?? 'Select...' }}</option>
         <option *ngFor="let option of editorConfig.list" [value]="option.value"
                 [selected]="option.value === cell.getRawValue()">{{ option.title }}
         </option>

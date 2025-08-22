@@ -82,6 +82,7 @@ export interface TextEditorSettings {
 
 export interface ListEditorSettings {
   disableEnterKeySave?: boolean;
+  selectText?: string;
   list: { title: string; value: string; }[];
 }
 
