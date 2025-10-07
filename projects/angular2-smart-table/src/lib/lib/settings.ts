@@ -92,10 +92,11 @@ export interface CheckboxEditorSettings {
 }
 
 export interface ListFilterSettings {
-  list: { title: string; value: string; }[];
   selectText?: string;
+  list: Array<{value: string, title: string}>;
   strict?: boolean;
-}
+  multiSelect?: boolean;  // Add this new property
+}``
 
 export interface CheckboxFilterSettings {
   "true": string;

@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import {FilterComponent} from './filter.component';
 import {DefaultFilterComponent} from "./default-filter.component";
@@ -24,6 +25,7 @@ const FILTER_COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
   ],
   declarations: [
     ...FILTER_COMPONENTS,

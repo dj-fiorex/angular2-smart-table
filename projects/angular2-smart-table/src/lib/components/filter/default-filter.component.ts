@@ -6,6 +6,7 @@ import {FilterDefault} from "./filter-default";
     selector: 'default-table-filter',
     template: `
     <ng-container [ngSwitch]="column.filter.type">
+      {{ logFilterType() }}
       <select-filter *ngSwitchCase="'list'"
                      [query]="query"
                      [inputClass]="inputClass"
@@ -32,4 +33,9 @@ import {FilterDefault} from "./filter-default";
     standalone: false
 })
 export class DefaultFilterComponent extends FilterDefault {
+  logFilterType() {
+    console.log('Filter type:', this.column?.filter?.type);
+    console.log('Filter config:', this.column?.filter?.config);
+    return '';
+  }
 }
