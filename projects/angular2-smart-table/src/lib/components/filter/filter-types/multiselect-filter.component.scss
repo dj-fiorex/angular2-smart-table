@@ -1,0 +1,152 @@
+// Multi-select filter styles - balanced approach
+:host {
+  .filter-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .multi-select-trigger {
+    width: 100%;
+    padding: .375em .75em;
+    padding-right: 1.5em;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #ccc;
+    background: white;
+    
+    &:hover {
+      border-color: #999;
+    }
+  }
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7em;
+    pointer-events: none;
+  }
+
+  .multi-select-dropdown {
+    position: fixed;
+    min-width: 280px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+  }
+
+  .dropdown-header {
+    padding: 0.5em;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+
+    .search-input {
+      width: 100%;
+      padding: 0.375em;
+      margin-bottom: 0.5em;
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+  .action-buttons {
+    display: flex;
+    gap: 0.5em;
+
+      button {
+        flex: 1;
+        padding: 0.25em 0.5em;
+        font-size: 0.875em;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        background: #f5f5f5;
+        
+        &:hover {
+          background: #e0e0e0;
+        }
+      }
+    }
+  }
+
+  .options-list {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 100px;
+    padding: 0.25em 0;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+
+    input[type="checkbox"] {
+      margin: 0;
+      margin-right: 0.5em;
+      flex-shrink: 0;
+      width: 1em;
+      height: 1em;
+    }
+
+    span {
+      font-size: 0.875em;
+      flex: 1;
+    }
+  }
+
+  .dropdown-footer {
+    padding: 0.5em;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 0.5em;
+    flex-shrink: 0;
+
+    button {
+      flex: 1;
+      padding: 0.375em 0.75em;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+    
+    .apply-btn {
+      background: #4CAF50;
+      color: white;
+      border-color: #4CAF50;
+      
+      &:hover {
+        background: #45a049;
+      }
+    }
+    
+    .clear-btn {
+      background: #f5f5f5;
+      
+      &:hover {
+        background: #e0e0e0;
+      }
+    }
+  }
+
+  .apply-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+}

@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 
 import {FilterComponent} from './filter.component';
 import {DefaultFilterComponent} from "./default-filter.component";
@@ -10,6 +9,7 @@ import {InputFilterComponent} from './filter-types/input-filter.component';
 import {SelectFilterComponent} from './filter-types/select-filter.component';
 import {DefaultFilter} from './filter-types/default-filter';
 import {FilterDefault} from './filter-default';
+import {MultiSelectFilterComponent} from './filter-types/multiselect-filter.component';
 
 const FILTER_COMPONENTS = [
   FilterDefault,
@@ -20,12 +20,13 @@ const FILTER_COMPONENTS = [
   CheckboxFilterComponent,
   InputFilterComponent,
   SelectFilterComponent,
+  MultiSelectFilterComponent,
 ];
+
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
   ],
   declarations: [
     ...FILTER_COMPONENTS,
