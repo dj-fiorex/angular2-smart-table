@@ -92,11 +92,34 @@ export interface CheckboxEditorSettings {
 }
 
 export interface ListFilterSettings {
-  list: { title: string; value: string; }[];
+  list: Array<{ value: string; title: string }>;
   selectText?: string;
-
   strict?: boolean;
 }
+
+
+export interface MultiSelectFilterSettings {
+  // Required
+  list: Array<{ value: string; title: string }>;
+
+  // Optional - basic configuration
+  selectText?: string;           // Default: 'Select...' - Text shown when nothing selected
+  strict?: boolean;               // Default: true - Use strict equality for filtering
+  separator?: string;             // Default: ',' - Separator for multiple values
+
+  // Optional - button labels
+  applyButtonText?: string;      // Default: 'Apply Filter'
+  clearButtonText?: string;      // Default: 'Clear Filter'
+  selectAllButtonText?: string;  // Default: 'Select All'
+  clearAllButtonText?: string;   // Default: 'Clear All'
+  searchPlaceholder?: string;    // Default: 'Search...'
+
+  // Optional - display configuration
+  maxDisplayedSelections?: number;  // Default: 2 - Max items shown before count format
+  allSelectedText?: string;         // Default: 'All' - Text when all options are selected
+  selectedCountText?: string;       // Default: 'Selected: '
+}
+
 
 export interface CheckboxFilterSettings {
   "true": string;
@@ -203,26 +226,4 @@ export interface CustomAction {
   hiddenWhen?: (row: Row) => boolean;
   disabledWhen?: (row: Row) => boolean;
   renderComponent?: any;
-}
-
-export interface MultiSelectFilterSettings {
-  // Required
-  list: Array<{ value: string; title: string }>;
-  
-  // Optional - basic configuration
-  selectText?: string;           // Default: 'Select...' - Text shown when nothing selected
-  strict?: boolean;               // Default: true - Use strict equality for filtering
-  separator?: string;             // Default: ',' - Separator for multiple values
-  
-  // Optional - button labels
-  applyButtonText?: string;      // Default: 'Apply Filter'
-  clearButtonText?: string;      // Default: 'Clear Filter'
-  selectAllButtonText?: string;  // Default: 'Select All'
-  clearAllButtonText?: string;   // Default: 'Clear All'
-  searchPlaceholder?: string;    // Default: 'Search...'
-  
-  // Optional - display configuration
-  maxDisplayedSelections?: number;  // Default: 2 - Max items shown before count format
-  allSelectedText?: string;         // Default: 'All' - Text when all options are selected
-  selectedCountText?: string;       // Default: 'Selected: '
 }

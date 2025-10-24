@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { DefaultFilter } from './default-filter';
-import { FilterSettings, MultiSelectFilterSettings } from "../../../lib/settings";
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {DefaultFilter} from './default-filter';
+import {FilterSettings, MultiSelectFilterSettings} from "../../../lib/settings";
 
 interface SelectOption {
   value: string;
@@ -20,7 +20,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   searchText = '';
   filteredOptions: SelectOption[] = [];
   separator = ','; // Default separator
-  
+
   // Button labels with defaults
   applyButtonText = 'Apply Filter';
   clearButtonText = 'Clear Filter';
@@ -30,35 +30,35 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   selectText = 'Select...'; // Default text when nothing selected
   maxDisplayedSelections = 2; // Default max items to show before count format
   allSelectedText = 'All'; // Text when all options are selected
-  selectedCountText = 'Selected: '; // Format for "Selected: 3"
-  
+  selectedCountText = 'Selected: %n'; // With %n as placeholder - format for "Selected: 3"
+
   ngOnInit() {
     this.config = (this.column.filter as FilterSettings).config as MultiSelectFilterSettings;
     this.filteredOptions = [...this.config.list];
-    
+
     // Set separator (default to comma if not specified)
-    this.separator = this.config.separator ?? ',';
-    
+    this.separator = this.config.separator ?? this.separator;
+
     // Set max displayed selections (default to 2 if not specified)
-    this.maxDisplayedSelections = this.config.maxDisplayedSelections ?? 2;
-    
+    this.maxDisplayedSelections = this.config.maxDisplayedSelections ?? this.maxDisplayedSelections;
+
     // Set custom button labels if provided
-    this.applyButtonText = this.config.applyButtonText ?? 'Apply Filter';
-    this.clearButtonText = this.config.clearButtonText ?? 'Clear Filter';
-    this.selectAllButtonText = this.config.selectAllButtonText ?? 'Select All';
-    this.clearAllButtonText = this.config.clearAllButtonText ?? 'Clear All';
-    this.searchPlaceholder = this.config.searchPlaceholder ?? 'Search...';
-    
+    this.applyButtonText = this.config.applyButtonText ?? this.applyButtonText;
+    this.clearButtonText = this.config.clearButtonText ?? this.clearAllButtonText;
+    this.selectAllButtonText = this.config.selectAllButtonText ?? this.selectAllButtonText;
+    this.clearAllButtonText = this.config.clearAllButtonText ?? this.clearAllButtonText;
+    this.searchPlaceholder = this.config.searchPlaceholder ?? this.searchPlaceholder;
+
     // Set selection display text
-    this.allSelectedText = this.config.allSelectedText ?? 'All';
-    this.selectedCountText = this.config.selectedCountText ?? 'Selected: ';
-    
+    this.allSelectedText = this.config.allSelectedText ?? this.allSelectedText;
+    this.selectedCountText = this.config.selectedCountText ?? this.selectedCountText;
+
     // Initialize selected values from query using configurable separator
     if (this.query) {
       const values = this.query.split(this.separator).map(v => v.trim());
       this.selectedValues = new Set(values);
     }
-    
+
     // Setup filter function for multi-select
     this.column.filterFunction = (cellValue, filterValue) => {
       if (!filterValue) return true;
@@ -73,7 +73,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
         }
       });
     };
-    
+
     super.ngOnInit();
 
     // Close dropdown when clicking outside
@@ -94,16 +94,16 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
       }
     }
   }
-  
+
   ngOnDestroy() {
     document.removeEventListener('click', this.closeDropdown);
     super.ngOnDestroy();
   }
-  
+
   closeDropdown = () => {
     this.dropdownOpen = false;
   };
-  
+
   toggleDropdown(event: Event) {
     event.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
@@ -124,30 +124,34 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
       });
     }
   }
-  
+
   getSelectedText(): string {
     if (this.selectedValues.size === 0) {
       return this.selectText;
     }
-    
+
     if (this.selectedValues.size === this.config.list.length) {
       return this.allSelectedText;
     }
     const selectedTitles = this.config.list
       .filter(opt => this.selectedValues.has(opt.value))
       .map(opt => opt.title);
-    
+
     if (selectedTitles.length <= this.maxDisplayedSelections) {
       return selectedTitles.join(', ');
     }
-    
-    return `${this.selectedCountText}${selectedTitles.length}`;
+
+    if (this.selectedCountText.includes('%n')) {
+      return this.selectedCountText.replace('%n', selectedTitles.length.toString());
+    } else {
+      return `${this.selectedCountText}${selectedTitles.length}`;
+    }
   }
-  
+
   isSelected(value: string): boolean {
     return this.selectedValues.has(value);
   }
-  
+
   toggleOption(value: string) {
     if (this.selectedValues.has(value)) {
       this.selectedValues.delete(value);
@@ -155,33 +159,33 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
       this.selectedValues.add(value);
     }
   }
-  
+
   selectAll(event: Event) {
     event.stopPropagation();
     this.filteredOptions.forEach(opt => this.selectedValues.add(opt.value));
   }
-  
+
   clearAll(event: Event) {
     event.stopPropagation();
     this.selectedValues.clear();
   }
-  
+
   onSearchChange(event?: Event) {
     if (event) {
       this.searchText = (event.target as HTMLInputElement).value;
     }
     const search = this.searchText.toLowerCase();
-    
+
     // Only search by the visible title text
-    this.filteredOptions = this.config.list.filter(opt => 
+    this.filteredOptions = this.config.list.filter(opt =>
       opt.title.toLowerCase().includes(search)
     );
   }
-  
+
   onDropdownWheel(event: WheelEvent) {
     event.stopPropagation();
   }
-  
+
   applyFilter(event: Event) {
     event.stopPropagation();
     if (this.selectedValues.size === 0) {
@@ -193,7 +197,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.setFilter();
     this.dropdownOpen = false;
   }
-  
+
   clearFilter(event: Event) {
     event.stopPropagation();
     this.selectedValues.clear();

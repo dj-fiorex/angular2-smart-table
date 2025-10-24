@@ -317,7 +317,7 @@
     </tr>
     <tr>
       <td><span class="nested-obj">filter</span>.type</td>
-      <td><span class="highlight">'text' | 'list' | 'checkbox' | 'custom'</span></td>
+      <td><span class="highlight">'text' | 'list' | 'multiselect' | 'checkbox' | 'custom'</span></td>
       <td>'text'</td>
       <td>
         The type of filter displayed. When <span class="highlight">custom</span> is selected, you need to specify
@@ -339,7 +339,7 @@
       <td><span class="highlight">Object</span></td>
       <td>undefined</td>
       <td>
-        Filter configuration settings. Mandatory only for filter type <span class="highlight">list</span>
+        Filter configuration settings. Mandatory only for filter types <span class="highlight">list</span> and <span class="highlight">multiselect</span>.
       </td>
     </tr>
     <tr>
@@ -374,7 +374,7 @@
       <td><span class="highlight">Array</span></td>
       <td>[ ]</td>
       <td>
-        Only on <span class="highlight">list</span> type. Example format:<br>
+        Only on <span class="highlight">list</span> and <span class="highlight">multiselect</span> types. Example format:<br>
         <code>{{ '{' }} value: 'Element Value', title: 'Element Title' {{ '}' }}</code><br>
         Html is supported if column type is <span class="highlight">'html'</span>
       </td>
@@ -384,10 +384,105 @@
       <td><span class="highlight">string</span></td>
       <td>'Select...'</td>
       <td>
-        Only on <span class="highlight">list</span> type. The text shown in the first select option that
-        denotes the "empty" selection (no filter).
+        Only on <span class="highlight">list</span> and <span class="highlight">multiselect</span> types.
+        The text shown in the first select option that denotes the "empty" selection (no filter).
       </td>
     </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.strict</td>
+      <td><span class="highlight">boolean</span></td>
+      <td>true</td>
+      <td>
+        Only on <span class="highlight">list</span> and <span class="highlight">multiselect</span> types.
+        When <code>false</code>, this filter only tests for string inclusion like a normal text filter.
+      </td>
+    </tr>
+
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.separator</td>
+      <td><span class="highlight">string</span></td>
+      <td>','</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the separator for the selected values in the filter query.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.applyButtonText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Apply Filter'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the text of the apply button.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.clearButtonText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Clear Filter'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the text of the clear filter button.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.selectAllButtonText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Select All'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the text of the button that selects all items.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.clearAllButtonText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Clear All'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the text of the button that unselects all items.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.searchPlaceholder</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Search...'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        Optionally changes the placeholder text of the search input.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.maxDisplayedSelections</td>
+      <td><span class="highlight">number</span></td>
+      <td>2</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        The maximum number of selected items that will be previewed in the filter cell,
+        before the entire text is replaced with a summary of the number of selected items.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.allSelectedText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'All'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        The text that shall be displayed in the filter cell when all items are selected.
+      </td>
+    </tr>
+    <tr>
+      <td><span class="nested-obj">filter.config</span>.selectedCountText</td>
+      <td><span class="highlight">string</span></td>
+      <td>'Selected: %n'</td>
+      <td>
+        Only on <span class="highlight">multiselect</span> type.
+        The text that shall be displayed in the filter cell when more items are selected than can be previewed.
+        Use <span class="highlight">%n</span> as a placeholder for the number of selected items.
+        If you do not use this placeholder, the number of selected items will be appended to the text.
+      </td>
+    </tr>
+
     <tr>
       <td>valuePrepareFunction</td>
       <td><span class="highlight">Function</span></td>
