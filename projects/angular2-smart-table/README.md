@@ -8,7 +8,7 @@ I'm a self-employed developer so any help is welcome, open a pull request and he
 
 ## NEW Features
 
-* 🚀 Added hide/show row  
+* 🚀 Added hide/show row
 * 🚀 Added Expandable Row (thanks [Samir](https://github.com/mominsamir))
 * 🚀 Added Column resizing (thanks [dreswgfuse](https://github.com/dreswgfuse))
 * 🚀 Added Multi Select for a column (thanks [thangluu93](https://github.com/thangluu93))
@@ -71,7 +71,7 @@ Then register it by adding to the list of directives of your module:
 
 Now, we need to configure the table and add it into the template. The only <strong>required</strong> setting for the component to start working is a columns configuration.
 Let's register <i>settings</i> property inside of the component where we want to have the table and configure some columns [Settings documentation](https://github.com/dj-fiorex/angular2-smart-table):
-    
+
 ```
 settings: Settings = {
   columns: {
@@ -104,7 +104,7 @@ Finally let's put the angular2-smart-table component inside of the template:
 // ...
 ```
 At this step you will have a minimal configured table. All functions are available by default and you don't need to configure them anyhow, so now you can add/edit/delete rows, sort or filter the table, etc.
- 
+
 Still it seems like something is missing... Right, there is no data in the table by default. To add some, let's create an array property with a list of objects in the component. Please note that object keys are the same as in the columns configuration.
 
 ```
@@ -147,7 +147,7 @@ And pass the data to the table:
 ```
 
 Now you have some data in the table. -->
- 
+
 ## Further Documentation
 Installation, customization and other useful articles: https://github.com/dj-fiorex/angular2-smart-table
 
@@ -165,6 +165,7 @@ Installation, customization and other useful articles: https://github.com/dj-fio
 [<img alt="stephanrauh" src="https://avatars.githubusercontent.com/u/3045767?v=3&s=60" width="60">](https://github.com/stephanrauh)
 [<img alt="tawfiek" src="https://avatars.githubusercontent.com/u/27981868?v=3&s=60" width="60">](https://github.com/tawfiek)
 [<img alt="jupmorenor" src="https://avatars.githubusercontent.com/u/11802554?v=3&s=60" width="60">](https://github.com/jupmorenor)
+[<img alt="NightRain" src="https://avatars.githubusercontent.com/u/4459434?v=3&s=60" width="60">](https://github.com/ovidiubarbu)
 
 ## Special thanks to our awesome maintainers!
 [<img alt="hexdecimal16" src="https://avatars.githubusercontent.com/u/47829719?v=3&s=60" width="60">](https://github.com/hexdecimal16)

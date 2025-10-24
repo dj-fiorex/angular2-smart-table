@@ -165,6 +165,7 @@ Installation, customization and other useful articles: https://github.com/dj-fio
 [<img alt="stephanrauh" src="https://avatars.githubusercontent.com/u/3045767?v=3&s=60" width="60">](https://github.com/stephanrauh)
 [<img alt="tawfiek" src="https://avatars.githubusercontent.com/u/27981868?v=3&s=60" width="60">](https://github.com/tawfiek)
 [<img alt="jupmorenor" src="https://avatars.githubusercontent.com/u/11802554?v=3&s=60" width="60">](https://github.com/jupmorenor)
+[<img alt="NightRain" src="https://avatars.githubusercontent.com/u/4459434?v=3&s=60" width="60">](https://github.com/ovidiubarbu)
 
 ## Special thanks to our awesome maintainers!
 [<img alt="hexdecimal16" src="https://avatars.githubusercontent.com/u/47829719?v=3&s=60" width="60">](https://github.com/hexdecimal16)
