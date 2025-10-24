@@ -112,8 +112,7 @@ export interface MultiSelectFilterSettings {
   clearButtonText?: string;      // Default: 'Clear Filter'
   selectAllButtonText?: string;  // Default: 'Select All'
   clearAllButtonText?: string;   // Default: 'Clear All'
-  searchTitle?: string;          // Default: 'Search'
-  searchPlaceholder?: string;    // Default: 'Search...'
+   searchPlaceholder?: string;    // Default: 'Search...'
 
   // Optional - display configuration
   maxDisplayedSelections?: number;  // Default: 2 - Max items shown before count format
