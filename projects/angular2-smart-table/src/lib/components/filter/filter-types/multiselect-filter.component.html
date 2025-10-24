@@ -10,16 +10,15 @@
 
     @if (dropdownOpen) {
       <div class="multi-select-dropdown" (scroll)="$event.stopPropagation()" (wheel)="onDropdownWheel($event)">
-        <div class="dropdown-header">
-          <label for="search-input">{{searchTitle}}</label>
-          <input type="text"
-                id="search-input"
-                class="search-input"
-                [placeholder]="searchPlaceholder"
-                [value]="searchText"
-                (input)="onSearchChange($event)"
-                (click)="$event.stopPropagation()"
-                aria-label="Search">
+       <div class="dropdown-header">
+        <input type="text"
+              id="search-input"
+              class="search-input"
+              [placeholder]="searchPlaceholder"
+              [value]="searchText"
+              (input)="onSearchChange($event)"
+              (click)="$event.stopPropagation()"
+              aria-label="Search">
           <div class="action-buttons">
             <button type="button" (click)="selectAll($event)">{{ selectAllButtonText }}</button>
             <button type="button" (click)="clearAll($event)">{{ clearAllButtonText }}</button>

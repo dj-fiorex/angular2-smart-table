@@ -26,7 +26,6 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   clearButtonText = 'Clear Filter';
   selectAllButtonText = 'Select All';
   clearAllButtonText = 'Clear All';
-  searchTitle = 'Search';
   searchPlaceholder = 'Search...';
   selectText = 'Select...'; // Default text when nothing selected
   maxDisplayedSelections = 2; // Default max items to show before count format
@@ -48,7 +47,6 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.clearButtonText = this.config.clearButtonText ?? this.clearAllButtonText;
     this.selectAllButtonText = this.config.selectAllButtonText ?? this.selectAllButtonText;
     this.clearAllButtonText = this.config.clearAllButtonText ?? this.clearAllButtonText;
-    this.searchTitle = this.config.searchTitle ?? this.searchTitle;
     this.searchPlaceholder = this.config.searchPlaceholder ?? this.searchPlaceholder;
 
     // Set selection display text
