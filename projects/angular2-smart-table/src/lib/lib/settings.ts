@@ -94,6 +94,7 @@ export interface CheckboxEditorSettings {
 export interface ListFilterSettings {
   list: { title: string; value: string; }[];
   selectText?: string;
+
   strict?: boolean;
 }
 
@@ -110,8 +111,8 @@ export interface EditorSettings {
 }
 
 export interface FilterSettings {
-  type: 'text' | 'list' | 'checkbox' | 'custom';
-  config?: ListFilterSettings | CheckboxFilterSettings | unknown;
+  type: 'text' | 'list' | 'checkbox' | 'multiselect' | 'custom';
+  config?: ListFilterSettings | CheckboxFilterSettings | MultiSelectFilterSettings | unknown;
   component?: any;
 }
 
@@ -202,4 +203,26 @@ export interface CustomAction {
   hiddenWhen?: (row: Row) => boolean;
   disabledWhen?: (row: Row) => boolean;
   renderComponent?: any;
+}
+
+export interface MultiSelectFilterSettings {
+  // Required
+  list: Array<{ value: string; title: string }>;
+  
+  // Optional - basic configuration
+  selectText?: string;           // Default: 'Select...' - Text shown when nothing selected
+  strict?: boolean;               // Default: true - Use strict equality for filtering
+  separator?: string;             // Default: ',' - Separator for multiple values
+  
+  // Optional - button labels
+  applyButtonText?: string;      // Default: 'Apply Filter'
+  clearButtonText?: string;      // Default: 'Clear Filter'
+  selectAllButtonText?: string;  // Default: 'Select All'
+  clearAllButtonText?: string;   // Default: 'Clear All'
+  searchPlaceholder?: string;    // Default: 'Search...'
+  
+  // Optional - display configuration
+  maxDisplayedSelections?: number;  // Default: 2 - Max items shown before count format
+  allSelectedText?: string;         // Default: 'All' - Text when all options are selected
+  selectedCountText?: string;       // Default: 'Selected: '
 }

@@ -13,6 +13,13 @@ import {FilterDefault} from "./filter-default";
                      [column]="column"
                      (filter)="onFilter($event)">
       </select-filter>
+      <multiselect-filter *ngSwitchCase="'multiselect'"
+                          [query]="query"
+                          [inputClass]="inputClass"
+                          [debounceTime]="debounceTime"
+                          [column]="column"
+                          (filter)="onFilter($event)">
+      </multiselect-filter>
       <checkbox-filter *ngSwitchCase="'checkbox'"
                        [query]="query"
                        [inputClass]="inputClass"
