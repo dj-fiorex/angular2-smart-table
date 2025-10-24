@@ -26,6 +26,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   clearButtonText = 'Clear Filter';
   selectAllButtonText = 'Select All';
   clearAllButtonText = 'Clear All';
+  searchTitle = 'Search';
   searchPlaceholder = 'Search...';
   selectText = 'Select...'; // Default text when nothing selected
   maxDisplayedSelections = 2; // Default max items to show before count format
@@ -47,6 +48,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.clearButtonText = this.config.clearButtonText ?? this.clearAllButtonText;
     this.selectAllButtonText = this.config.selectAllButtonText ?? this.selectAllButtonText;
     this.clearAllButtonText = this.config.clearAllButtonText ?? this.clearAllButtonText;
+    this.searchTitle = this.config.searchTitle ?? this.searchTitle;
     this.searchPlaceholder = this.config.searchPlaceholder ?? this.searchPlaceholder;
 
     // Set selection display text
@@ -54,10 +56,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.selectedCountText = this.config.selectedCountText ?? this.selectedCountText;
 
     // Initialize selected values from query using configurable separator
-    if (this.query) {
-      const values = this.query.split(this.separator).map(v => v.trim());
-      this.selectedValues = new Set(values);
-    }
+    this.selectValuesBasedOnQuery();
 
     // Setup filter function for multi-select
     this.column.filterFunction = (cellValue, filterValue) => {
@@ -83,14 +82,8 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   ngOnChanges(changes: SimpleChanges) {
     // Sync selectedValues with query when it changes externally (e.g., when filters are cleared)
     if (changes['query'] && !changes['query'].firstChange) {
-      if (this.config) {
-        if (this.query) {
-          const values = this.query.split(this.separator).map((v: string) => v.trim());
-          this.selectedValues = new Set(values);
-        } else {
-          // Query is empty - clear selections
-          this.selectedValues.clear();
-        }
+      if (this.config) { // <- this protects us from doing things before ngOnInit() ran
+        this.selectValuesBasedOnQuery();
       }
     }
   }
@@ -101,8 +94,20 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   }
 
   closeDropdown = () => {
+    // when we do not apply the filter, reset the selection
+    this.selectValuesBasedOnQuery();
     this.dropdownOpen = false;
   };
+
+  selectValuesBasedOnQuery() {
+    if (this.query) {
+      const values = this.query.split(this.separator).map((v: string) => v.trim());
+      this.selectedValues = new Set(values);
+    } else {
+      // Query is empty - clear selections
+      this.selectedValues.clear();
+    }
+  }
 
   toggleDropdown(event: Event) {
     event.stopPropagation();
