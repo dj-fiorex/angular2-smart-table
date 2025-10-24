@@ -7,8 +7,7 @@
 
   .multi-select-trigger {
     width: 100%;
-    padding: .375em .75em;
-    padding-right: 1.5em;
+    padding: .2em 1.5em .2em .75em;
     text-align: left;
     cursor: pointer;
     position: relative;
@@ -17,7 +16,7 @@
     text-overflow: ellipsis;
     border: 1px solid #ccc;
     background: white;
-    
+
     &:hover {
       border-color: #999;
     }
@@ -68,7 +67,7 @@
         cursor: pointer;
         border: 1px solid #ccc;
         background: #f5f5f5;
-        
+
         &:hover {
           background: #e0e0e0;
         }
@@ -124,20 +123,20 @@
       cursor: pointer;
       border: 1px solid #ccc;
     }
-    
+
     .apply-btn {
       background: #4CAF50;
       color: white;
       border-color: #4CAF50;
-      
+
       &:hover {
         background: #45a049;
       }
     }
-    
+
     .clear-btn {
       background: #f5f5f5;
-      
+
       &:hover {
         background: #e0e0e0;
       }
