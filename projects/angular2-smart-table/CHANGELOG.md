@@ -2,6 +2,11 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 4.0.0
+
+* Add multiselect filter component
+* Remove Angular 16 and Angular 17 support
+
 ## Version 3.8.0
 
 * Fix missing property `selectText` on `editor.config` for `select-editor` default non-value option
