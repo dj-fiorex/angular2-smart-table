@@ -6,6 +6,9 @@ This document lists the changes introduced by this fork.
 
 * Add multiselect filter component
 * Remove Angular 16 and Angular 17 support
+* Fix wrong name of selector `angular2-st-tbody-create-cancel` (it is now `angular2-st-tbody-save-cancel`)
+* Fix wrong name of selector `angular2-st-actions` (it is now `angular2-st-thead-create-cancel`)
+* You might need to adjust your stylesheet overrides according to the new selector names
 
 ## Version 3.8.0
 

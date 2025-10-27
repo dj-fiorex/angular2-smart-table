@@ -6,8 +6,7 @@ import {EditCancelEvent, EditConfirmEvent} from '../../../lib/events';
 import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
 
 @Component({
-    // TODO: @breaking-change rename the selector to angular2-st-tbody-save-cancel in the next major version
-    selector: 'angular2-st-tbody-create-cancel',
+    selector: 'angular2-st-tbody-save-cancel',
     template: `
     <a href="#" class="angular2-smart-action angular2-smart-action-edit-save"
         [innerHTML]="saveButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onSave($event)"></a>

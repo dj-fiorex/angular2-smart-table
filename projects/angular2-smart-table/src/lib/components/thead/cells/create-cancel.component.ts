@@ -5,8 +5,7 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
 import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
 
 @Component({
-    // TODO: @breaking-change rename the selector to angular2-st-thead-create-cancel in the next major version
-    selector: 'angular2-st-actions',
+    selector: 'angular2-st-thead-create-cancel',
     template: `
     <a href="#" class="angular2-smart-action angular2-smart-action-add-create"
         [innerHTML]="createButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onCreate($event)"></a>

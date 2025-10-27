@@ -29,7 +29,7 @@
       </angular2-st-tbody-edit-delete>
     </td>
     <td *ngIf="row.isInEditing && showActionColumnLeft"  class="angular2-smart-actions">
-      <angular2-st-tbody-create-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-create-cancel>
+      <angular2-st-tbody-save-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-save-cancel>
     </td>
     <ng-container *ngFor="let cell of getVisibleCells(row.cells)">
       <td *ngIf="!cell.getColumn().isRowHeading">
@@ -61,7 +61,7 @@
     </ng-container>
 
     <td *ngIf="row.isInEditing && showActionColumnRight"  class="angular2-smart-actions">
-      <angular2-st-tbody-create-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-create-cancel>
+      <angular2-st-tbody-save-cancel [grid]="grid" [row]="row" [editConfirm]="editConfirm" [editCancel]="editCancel"></angular2-st-tbody-save-cancel>
     </td>
 
     <td *ngIf="!row.isInEditing && showActionColumnRight" class="angular2-smart-actions">

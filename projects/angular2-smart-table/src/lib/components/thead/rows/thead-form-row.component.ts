@@ -10,7 +10,7 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
     template: `
     <td *ngIf="isMultiSelectVisible"></td>
     <td *ngIf="showActionColumnLeft" class="angular2-smart-actions">
-      <angular2-st-actions [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-actions>
+      <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
     </td>
     <td *ngFor="let cell of getVisibleCells(row.getCells())">
       <angular2-smart-table-cell
@@ -24,7 +24,7 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
       ></angular2-smart-table-cell>
     </td>
     <td *ngIf="showActionColumnRight" class="angular2-smart-actions">
-      <angular2-st-actions [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-actions>
+      <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
     </td>
   `,
     standalone: false
