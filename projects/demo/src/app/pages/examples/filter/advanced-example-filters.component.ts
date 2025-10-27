@@ -110,7 +110,6 @@ export class AdvancedExampleFiltersComponent {
             clearButtonText: 'Clear Filter',
             selectAllButtonText: 'Select All',
             clearAllButtonText: 'Clear All',
-            searchTitle: 'Search',
             searchPlaceholder: 'Search...',
             maxDisplayedSelections: 1,
             allSelectedText: 'Show All',
