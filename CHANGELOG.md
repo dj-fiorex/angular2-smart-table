@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 4.0.1
+
+* Fix accidental removal of `sr-only` CSS class in the pager component
+
 ## Version 4.0.0
 
 * Add multiselect filter component
