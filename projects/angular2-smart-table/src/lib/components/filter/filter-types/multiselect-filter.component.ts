@@ -44,7 +44,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
 
     // Set custom button labels if provided
     this.applyButtonText = this.config.applyButtonText ?? this.applyButtonText;
-    this.clearButtonText = this.config.clearButtonText ?? this.clearAllButtonText;
+    this.clearButtonText = this.config.clearButtonText ?? this.clearButtonText;
     this.selectAllButtonText = this.config.selectAllButtonText ?? this.selectAllButtonText;
     this.clearAllButtonText = this.config.clearAllButtonText ?? this.clearAllButtonText;
     this.searchPlaceholder = this.config.searchPlaceholder ?? this.searchPlaceholder;

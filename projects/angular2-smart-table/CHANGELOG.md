@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 4.0.1
 
 * Fix accidental removal of `sr-only` CSS class in the pager component
+* Fix wrong default for the multiselect filter's `clearButtonText`
 
 ## Version 4.0.0
 
