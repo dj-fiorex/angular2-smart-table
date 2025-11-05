@@ -31,6 +31,11 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   maxDisplayedSelections = 2; // Default max items to show before count format
   allSelectedText = 'All'; // Text when all options are selected
   selectedCountText = 'Selected: %n'; // With %n as placeholder - format for "Selected: 3"
+  
+  // Store references for repositioning
+  private triggerElement: HTMLElement | null = null;
+  private dropdownElement: HTMLElement | null = null;
+  private resizeObserver: ResizeObserver | null = null;
 
   ngOnInit() {
     this.config = (this.column.filter as FilterSettings).config as MultiSelectFilterSettings;
@@ -38,20 +43,18 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
 
     // Set separator (default to comma if not specified)
     this.separator = this.config.separator ?? this.separator;
-
     // Set max displayed selections (default to 2 if not specified)
     this.maxDisplayedSelections = this.config.maxDisplayedSelections ?? this.maxDisplayedSelections;
-
     // Set custom button labels if provided
     this.applyButtonText = this.config.applyButtonText ?? this.applyButtonText;
     this.clearButtonText = this.config.clearButtonText ?? this.clearButtonText;
     this.selectAllButtonText = this.config.selectAllButtonText ?? this.selectAllButtonText;
     this.clearAllButtonText = this.config.clearAllButtonText ?? this.clearAllButtonText;
     this.searchPlaceholder = this.config.searchPlaceholder ?? this.searchPlaceholder;
-
     // Set selection display text
     this.allSelectedText = this.config.allSelectedText ?? this.allSelectedText;
     this.selectedCountText = this.config.selectedCountText ?? this.selectedCountText;
+    this.selectText = this.config.selectText ?? this.selectText;
 
     // Initialize selected values from query using configurable separator
     this.selectValuesBasedOnQuery();
@@ -72,7 +75,6 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     };
 
     super.ngOnInit();
-
     // Close dropdown when clicking outside
     document.addEventListener('click', this.closeDropdown);
   }
@@ -88,6 +90,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
 
   ngOnDestroy() {
     document.removeEventListener('click', this.closeDropdown);
+    this.removeViewportListeners();
     super.ngOnDestroy();
   }
 
@@ -95,6 +98,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     // when we do not apply the filter, reset the selection
     this.selectValuesBasedOnQuery();
     this.dropdownOpen = false;
+    this.removeViewportListeners();
   };
 
   selectValuesBasedOnQuery() {
@@ -102,7 +106,6 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
       const values = this.query.split(this.separator).map((v: string) => v.trim());
       this.selectedValues = new Set(values);
     } else {
-      // Query is empty - clear selections
       this.selectedValues.clear();
     }
   }
@@ -110,31 +113,80 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   toggleDropdown(event: Event) {
     event.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
+    
     if (this.dropdownOpen) {
       this.searchText = '';
       this.filteredOptions = [...this.config.list];
 
-      // Calculate position for fixed positioning
+      // Calculate initial position
       setTimeout(() => {
-        const trigger = (event.target as HTMLElement).closest('.multi-select-trigger') as HTMLElement;
-        const dropdown = trigger?.nextElementSibling as HTMLElement;
-        if (trigger && dropdown) {
-          const rect = trigger.getBoundingClientRect();
-          const minWidth = Math.max(280, rect.width);
-          dropdown.style.top = `${rect.bottom + 2}px`;
-          dropdown.style.minWidth = `${minWidth}px`;
-          let left = rect.left;
-          // shift the horizontal position to the left when there is not enough space on the right
-          // we know this does only happen when the dropdown opens and does not change when the window is resized
-          const overflow = document.documentElement.clientWidth - (left + dropdown.scrollWidth + 2);
-          if (overflow < 0) {
-            left += overflow;
-          }
-          dropdown.style.left = `${left}px`;
+        this.triggerElement = (event.target as HTMLElement).closest('.multi-select-trigger') as HTMLElement;
+        this.dropdownElement = this.triggerElement?.nextElementSibling as HTMLElement;
+        
+        if (this.triggerElement && this.dropdownElement) {
+          this.updateDropdownPosition();
+          this.addViewportListeners();
         }
       });
+    } else {
+      this.removeViewportListeners();
     }
   }
+
+  // Update dropdown position
+  private updateDropdownPosition() {
+    if (!this.triggerElement || !this.dropdownElement) return;
+
+    const rect = this.triggerElement.getBoundingClientRect();
+    const minWidth = Math.max(280, rect.width);
+    
+    this.dropdownElement.style.top = `${rect.bottom + 2}px`;
+    this.dropdownElement.style.minWidth = `${minWidth}px`;
+    
+    let left = rect.left;
+    // shift the horizontal position to the left when there is not enough space on the right
+    // we know this does only happen when the dropdown opens and does not change when the window is resized
+    const overflow = document.documentElement.clientWidth - (left + this.dropdownElement.scrollWidth + 2);
+    
+    // Shift left if there's not enough space on the right
+    if (overflow < 0) {
+      left += overflow;
+    }
+    
+    this.dropdownElement.style.left = `${left}px`;
+  }
+
+  // Add viewport change listeners
+  private addViewportListeners() {
+    window.addEventListener('resize', this.onViewportChange);
+    window.addEventListener('scroll', this.onViewportChange, true);
+    
+    if (this.triggerElement && typeof ResizeObserver !== 'undefined') {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateDropdownPosition();
+      });
+      this.resizeObserver.observe(this.triggerElement);
+    }
+  }
+
+  // Remove viewport change listeners
+  private removeViewportListeners() {
+    window.removeEventListener('resize', this.onViewportChange);
+    window.removeEventListener('scroll', this.onViewportChange, true);
+    
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
+    }
+    
+    this.triggerElement = null;
+    this.dropdownElement = null;
+  }
+
+  // Handle viewport changes
+  private onViewportChange = () => {
+    this.updateDropdownPosition();
+  };
 
   getSelectedText(): string {
     if (this.selectedValues.size === 0) {
@@ -144,6 +196,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     if (this.selectedValues.size === this.config.list.length) {
       return this.allSelectedText;
     }
+    
     const selectedTitles = this.config.list
       .filter(opt => this.selectedValues.has(opt.value))
       .map(opt => opt.title);
@@ -207,6 +260,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     }
     this.setFilter();
     this.dropdownOpen = false;
+    this.removeViewportListeners();
   }
 
   clearFilter(event: Event) {
@@ -215,10 +269,10 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.query = '';
     this.setFilter();
     this.dropdownOpen = false;
+    this.removeViewportListeners();
   }
 
   get isApplyDisabled(): boolean {
     return this.selectedValues.size === 0;
   }
-
 }
