@@ -120,9 +120,17 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
         const dropdown = trigger?.nextElementSibling as HTMLElement;
         if (trigger && dropdown) {
           const rect = trigger.getBoundingClientRect();
+          const minWidth = Math.max(280, rect.width);
           dropdown.style.top = `${rect.bottom + 2}px`;
-          dropdown.style.left = `${rect.left}px`;
-          dropdown.style.minWidth = `${Math.max(280, rect.width)}px`;
+          dropdown.style.minWidth = `${minWidth}px`;
+          let left = rect.left;
+          // shift the horizontal position to the left when there is not enough space on the right
+          // we know this does only happen when the dropdown opens and does not change when the window is resized
+          const overflow = document.documentElement.clientWidth - (left + dropdown.scrollWidth + 2);
+          if (overflow < 0) {
+            left += overflow;
+          }
+          dropdown.style.left = `${left}px`;
         }
       });
     }

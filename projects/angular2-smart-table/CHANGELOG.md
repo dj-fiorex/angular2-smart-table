@@ -6,6 +6,7 @@ This document lists the changes introduced by this fork.
 
 * Fix accidental removal of `sr-only` CSS class in the pager component
 * Fix wrong default for the multiselect filter's `clearButtonText`
+* Fix that the new multiselect filter dropdown overflows the viewport width when opened for a column that is close to the right edge of the viewport
 
 ## Version 4.0.0
 
