@@ -7,6 +7,7 @@ This document lists the changes introduced by this fork.
 * Fix that the new multiselect filter component always disregards a custom filter function
 * Fix that the `selectText` config was ineffective for the multiselect filter
 * Fix that the dropdown of the multiselect filter was not repositioned when the visual viewport changes
+* Fix that the font weight in the multiselect filter button was inconsistent to the font weights of other filter components
 
 ## Version 4.0.1
 
