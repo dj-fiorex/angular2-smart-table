@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {DefaultFilter} from './default-filter';
-import {FilterSettings, MultiSelectFilterSettings} from "../../../lib/settings";
+import {MultiSelectFilterSettings} from "../../../lib/settings";
 
 interface SelectOption {
   value: string;
@@ -33,7 +33,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   selectedCountText = 'Selected: %n'; // With %n as placeholder - format for "Selected: 3"
 
   ngOnInit() {
-    this.config = (this.column.filter as FilterSettings).config as MultiSelectFilterSettings;
+    this.config = this.column.filter.config as MultiSelectFilterSettings;
     this.filteredOptions = [...this.config.list];
 
     // Set separator (default to comma if not specified)
@@ -57,19 +57,21 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.selectValuesBasedOnQuery();
 
     // Setup filter function for multi-select
-    this.column.filterFunction = (cellValue, filterValue) => {
-      if (!filterValue) return true;
-      // Use the same separator when parsing filter values
-      const selectedVals = filterValue.split(this.separator).map((v: string) => v.trim());
-      return selectedVals.some((val: string) => {
-        const strict = this.config.strict === undefined || this.config.strict;
-        if (strict) {
-          return cellValue?.toString() === val;
-        } else {
-          return cellValue?.toString().toLowerCase().includes(val.toLowerCase());
-        }
-      });
-    };
+    if (this.column.filterFunction === undefined) {
+      this.column.filterFunction = (cellValue, filterValue) => {
+        if (!filterValue) return true;
+        // Use the same separator when parsing filter values
+        const selectedVals = filterValue.split(this.separator).map((v: string) => v.trim());
+        return selectedVals.some((val: string) => {
+          const strict = this.config.strict === undefined || this.config.strict;
+          if (strict) {
+            return cellValue?.toString() === val;
+          } else {
+            return cellValue?.toString().toLowerCase().includes(val.toLowerCase());
+          }
+        });
+      };
+    }
 
     super.ngOnInit();
 
