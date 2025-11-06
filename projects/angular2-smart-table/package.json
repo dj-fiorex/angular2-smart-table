@@ -1,6 +1,6 @@
 {
   "name": "angular2-smart-table",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Angular 2 Smart Table",
   "repository": {
     "type": "git",
@@ -18,6 +18,6 @@
     "lodash-es": "^4.17.21"
   },
   "dependencies": {
-    "tslib": "^2.7.0"
+    "tslib": "^2.8.0"
   }
 }
