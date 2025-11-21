@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'demo',
@@ -8,14 +8,126 @@ import { Component } from '@angular/core';
 export class DemoComponent {
 
   snippets = {
-    install: require('raw-loader!./snippets/install.md').default,
-    require: require('raw-loader!./snippets/require.md').default,
-    directive: require('raw-loader!./snippets/directive.md').default,
-    settings: require('raw-loader!./snippets/settings.md').default,
-    template: require('raw-loader!./snippets/template.md').default,
-    array: require('raw-loader!./snippets/array.md').default,
-    dataTemplate: require('raw-loader!./snippets/data-template.md').default,
-    basicFull: require('raw-loader!./snippets/basic-full.md').default,
+    install: 'npm install --save angular2-smart-table',
+    require: `import { Angular2SmartTableModule } from 'angular2-smart-table';`,
+    directive: `// ...
+@NgModule({
+  imports: [
+    // ...
+    Angular2SmartTableModule,
+    // ...
+  ],
+  declarations: [ ... ]
+})
+// ...
+`,
+    settings: `
+settings: Settings = {
+  columns: {
+    id: {
+      title: 'ID'
+    },
+    name: {
+      title: 'Full Name'
+    },
+    username: {
+      title: 'User Name'
+    },
+    email: {
+      title: 'Email'
+    }
+  }
+};
+`,
+    template: `
+// ...
+@Component({
+  template: \`
+    <angular2-smart-table [settings]="settings"></angular2-smart-table>
+  \`
+})
+// ...
+`,
+    array: `
+data = [
+  {
+    id: 1,
+    name: "Leanne Graham",
+    username: "Bret",
+    email: "Sincere@april.biz"
+  },
+  {
+    id: 2,
+    name: "Ervin Howell",
+    username: "Antonette",
+    email: "Shanna@melissa.tv"
+  },
+
+  // ... list of items
+
+  {
+    id: 11,
+    name: "Nicholas DuBuque",
+    username: "Nicholas.Stanton",
+    email: "Rey.Padberg@rosamond.biz"
+  }
+];
+`,
+    dataTemplate: `
+// ...
+@Component({
+  template: \`
+    <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
+  \`
+})
+// ...
+`,
+    basicFull: `
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'basic-example-data',
+  styles: [],
+  template: \`
+    <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
+  \`
+})
+export class BasicExampleDataComponent {
+
+  settings: Settings = {
+    columns: {
+      id: {
+        title: 'ID'
+      },
+      name: {
+        title: 'Full Name'
+      },
+      username: {
+        title: 'User Name'
+      },
+      email: {
+        title: 'Email'
+      }
+    }
+  };
+
+  data = [
+    {
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz"
+    },
+    // ... other rows here
+    {
+      id: 11,
+      name: "Nicholas DuBuque",
+      username: "Nicholas.Stanton",
+      email: "Rey.Padberg@rosamond.biz"
+    }
+  ];
+}
+`,
   };
 
 }

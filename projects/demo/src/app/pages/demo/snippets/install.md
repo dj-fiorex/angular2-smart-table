@@ -1,1 +1,0 @@
-npm install --save angular2-smart-table

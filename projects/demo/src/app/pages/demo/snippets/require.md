@@ -1,1 +1,0 @@
-import { NgxSmartTableModule } from 'angular2-smart-table';

@@ -37,7 +37,6 @@
     "@types/node": "^22.19.1",
     "angular-cli-ghpages": "~2.0.3",
     "ng-packagr": "^21.0.0",
-    "raw-loader": "~4.0.2",
     "typescript": "~5.9.3"
   }
 }
