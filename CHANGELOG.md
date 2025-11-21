@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 4.1.0
 
 * Add Angular 21 support
+* Fix that a multi-select dropdown stays open when another multi-select drop-down is opened
 
 ## Version 4.0.2
 

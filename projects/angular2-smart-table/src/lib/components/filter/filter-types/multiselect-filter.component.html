@@ -1,57 +1,58 @@
 <div class="filter-wrapper">
-  <div class="multi-select-container">
-    <button type="button"
+  <div class="multi-select-container" #multiSelectContainer>
+    <button type="button" #multiSelectTrigger
             class="multi-select-trigger"
             [ngClass]="inputClass"
-            (click)="toggleDropdown($event)">
+            (click)="toggleDropdown()">
       {{ getSelectedText() }}
       <span class="dropdown-arrow">▼</span>
     </button>
 
-    @if (dropdownOpen) {
-      <div class="multi-select-dropdown" (scroll)="$event.stopPropagation()" (wheel)="onDropdownWheel($event)">
-       <div class="dropdown-header">
-        <input type="text"
-              id="search-input"
-              class="search-input"
-              [placeholder]="searchPlaceholder"
-              [value]="searchText"
-              (input)="onSearchChange($event)"
-              (click)="$event.stopPropagation()"
-              aria-label="Search">
-          <div class="action-buttons">
-            <button type="button" (click)="selectAll($event)">{{ selectAllButtonText }}</button>
-            <button type="button" (click)="clearAll($event)">{{ clearAllButtonText }}</button>
-          </div>
-        </div>
-
-        <div class="options-list" (scroll)="$event.stopPropagation()">
-          @for (option of filteredOptions; track option.value) {
-            <label class="option-item"
-                   (click)="$event.stopPropagation()">
-              <input type="checkbox"
-                     [checked]="isSelected(option.value)"
-                     (change)="toggleOption(option.value)">
-              <span>{{ option.title }}</span>
-            </label>
-          }
-        </div>
-
-        <div class="dropdown-footer">
-          <button type="button"
-                class="apply-btn"
-                [disabled]="isApplyDisabled"
-                (click)="applyFilter($event)">
-          {{ applyButtonText }}
-        </button>
-
-          <button type="button"
-                  class="clear-btn"
-                  (click)="clearFilter($event)">
-            {{ clearButtonText }}
-          </button>
+    <div #multiSelectDropdown
+         class="multi-select-dropdown"
+         [ngStyle]="{ 'display': dropdownOpen ? 'flex' : 'none' }"
+         (scroll)="$event.stopPropagation()"
+         (wheel)="onDropdownWheel($event)">
+     <div class="dropdown-header">
+      <input type="text"
+            id="search-input"
+            class="search-input"
+            [placeholder]="searchPlaceholder"
+            [value]="searchText"
+            (input)="onSearchChange($event)"
+            (click)="$event.stopPropagation()"
+            aria-label="Search">
+        <div class="action-buttons">
+          <button type="button" (click)="selectAll()">{{ selectAllButtonText }}</button>
+          <button type="button" (click)="clearAll()">{{ clearAllButtonText }}</button>
         </div>
       </div>
-    }
+
+      <div class="options-list" (scroll)="$event.stopPropagation()">
+        @for (option of filteredOptions; track option.value) {
+          <label class="option-item">
+            <input type="checkbox"
+                   [checked]="isSelected(option.value)"
+                   (change)="toggleOption(option.value)">
+            <span>{{ option.title }}</span>
+          </label>
+        }
+      </div>
+
+      <div class="dropdown-footer">
+        <button type="button"
+              class="apply-btn"
+              [disabled]="isApplyDisabled"
+              (click)="applyFilter()">
+        {{ applyButtonText }}
+      </button>
+
+        <button type="button"
+                class="clear-btn"
+                (click)="clearFilter()">
+          {{ clearButtonText }}
+        </button>
+      </div>
+    </div>
   </div>
 </div>
