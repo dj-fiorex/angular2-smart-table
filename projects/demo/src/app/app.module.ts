@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Angular2SmartTableModule } from 'angular2-smart-table';
+import {NgModule, provideZoneChangeDetection} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Angular2SmartTableModule} from 'angular2-smart-table';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     Angular2SmartTableModule
   ],
-  providers: [],
+  providers: [provideZoneChangeDetection()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
