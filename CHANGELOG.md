@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 4.1.0
+
+* Add Angular 21 support
+
 ## Version 4.0.2
 
 * Fix that the new multiselect filter component always disregards a custom filter function
