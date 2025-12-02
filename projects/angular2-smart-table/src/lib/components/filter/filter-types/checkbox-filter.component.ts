@@ -33,7 +33,8 @@ export class CheckboxFilterComponent extends DefaultFilter implements OnInit {
   onChecked(checked: boolean) {
     this.filterActive = true;
     this.checked = checked;
-    this.onValueChanged(checked ? this.trueVal : this.falseVal);
+    this.query = checked ? this.trueVal : this.falseVal;
+    this.setFilter();
   }
 
   resetFilter(event: any) {

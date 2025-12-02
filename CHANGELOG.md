@@ -5,6 +5,7 @@ This document lists the changes introduced by this fork.
 ## Version 4.1.1
 
 * Fix that the demo page was broken by the Angular 21 upgrade
+* Fix that the checkbox filter stops working when cleared after checking the checkbox
 
 ## Version 4.1.0
 
