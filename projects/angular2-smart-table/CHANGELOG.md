@@ -2,6 +2,10 @@
 
 This document lists the changes introduced by this fork.
 
+## Version 4.1.1
+
+* Fix that the demo page was broken by the Angular 21 upgrade
+
 ## Version 4.1.0
 
 * Add Angular 21 support
