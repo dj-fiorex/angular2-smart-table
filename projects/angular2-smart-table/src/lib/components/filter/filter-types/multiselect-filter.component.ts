@@ -159,11 +159,37 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     const dropdown = this.multiSelectDropdown?.nativeElement;
     if (trigger == undefined || dropdown == undefined) return;
 
-    const rect = trigger.getBoundingClientRect();
-    const minWidth = Math.max(280, rect.width);
+    const margin = 2;
+    const minHeight = 120;
+    const viewportHeight = document.documentElement.clientHeight;
 
-    dropdown.style.top = `${rect.bottom + 2}px`;
-    dropdown.style.minWidth = `${minWidth}px`;
+    // Measure the unconstrained height first. 'none' is required to also defeat the stylesheet's
+    // fallback max-height - clearing the inline value alone would cap the measurement at that value.
+    // This must be reset on every run, otherwise each call would measure the height left over by
+    // the previous one (this runs on scroll/resize too).
+    dropdown.style.maxHeight = 'none';
+
+    const rect = trigger.getBoundingClientRect();
+    dropdown.style.minWidth = `${Math.max(280, rect.width)}px`;
+
+    const naturalHeight = dropdown.offsetHeight;
+    const spaceBelow = viewportHeight - rect.bottom - margin;
+    const spaceAbove = rect.top - margin;
+
+    // Open downwards by default, and flip above the trigger only when that leaves more room.
+    const openAbove = naturalHeight > spaceBelow && spaceAbove > spaceBelow;
+    const available = openAbove ? spaceAbove : spaceBelow;
+
+    // Grow to fit the options when there is room, and only scroll once the viewport runs out.
+    // The last clamp matters when neither side can satisfy minHeight, e.g. under heavy zoom.
+    const height = Math.min(naturalHeight, Math.max(available, minHeight), viewportHeight - 2 * margin);
+
+    dropdown.style.maxHeight = `${height}px`;
+
+    // Keep the dropdown fully inside the viewport even when neither side has enough room
+    // (e.g. under heavy browser zoom); overlapping the trigger is preferable to being cut off.
+    const top = openAbove ? rect.top - height - margin : rect.bottom + margin;
+    dropdown.style.top = `${Math.max(margin, Math.min(top, viewportHeight - height - margin))}px`;
 
     let left = rect.left;
     // shift the horizontal position to the left when there is not enough space on the right

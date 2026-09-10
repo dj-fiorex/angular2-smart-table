@@ -2,6 +2,15 @@
 
 This document lists the changes introduced by this fork.
 
+## Unreleased
+
+* Fix that the multiselect filter dropdown overflows the viewport height when there is not enough space
+  below the filter (for example when the browser is zoomed in), which cut off the options and put the
+  apply/clear buttons out of reach. The dropdown now flips above the filter when that leaves more room,
+  is limited to the space that is actually available, and is kept inside the viewport in any case.
+* The multiselect filter dropdown now grows to fit its options instead of always being limited to
+  400 pixels, as long as the viewport has room for it
+
 ## Version 4.1.1
 
 * Fix that the demo page was broken by the Angular 21 upgrade

@@ -38,7 +38,9 @@
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    // Fallback only - the component replaces this with the height that actually fits the viewport.
     max-height: 400px;
+    overflow: hidden;
     flex-direction: column;
     background: white;
   }
@@ -78,7 +80,9 @@
   .options-list {
     overflow-y: auto;
     flex: 1 1 auto;
-    min-height: 100px;
+    // Must be able to shrink below its content height, otherwise it pushes the footer
+    // out of the dropdown when the available viewport space is small.
+    min-height: 0;
     padding: 0.25em 0;
   }
 
