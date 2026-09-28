@@ -6,10 +6,11 @@ This document lists the changes introduced by this fork.
 
 * Fix that the multiselect filter dropdown overflows the viewport height when there is not enough space
   below the filter (for example when the browser is zoomed in), which cut off the options and put the
-  apply/clear buttons out of reach. The dropdown now flips above the filter when that leaves more room,
-  is limited to the space that is actually available, and is kept inside the viewport in any case.
+  apply/clear buttons out of reach. The dropdown is now limited to the space that is actually available,
+  is kept inside the viewport in any case, and opens above the filter when it does not fit below at all.
 * The multiselect filter dropdown now grows to fit its options instead of always being limited to
-  400 pixels, as long as the viewport has room for it
+  400 pixels. It does not grow past the area that the table occupies, and it always keeps the
+  400 pixels it used before, so that it stays usable for short tables
 
 ## Version 4.1.1
 

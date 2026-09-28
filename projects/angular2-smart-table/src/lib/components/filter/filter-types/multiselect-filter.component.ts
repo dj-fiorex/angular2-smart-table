@@ -39,6 +39,9 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   // Observe resize events for dropdown positioning
   private resizeObserver: ResizeObserver | null = null;
 
+  // Height of the dropdown without any height constraint, measured lazily. Zero means "unknown".
+  private naturalHeight = 0;
+
   ngOnInit() {
     this.config = this.column.filter.config as MultiSelectFilterSettings;
     this.filteredOptions = [...this.config.list];
@@ -145,6 +148,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     this.dropdownOpen = true;
     this.searchText = '';
     this.filteredOptions = [...this.config.list];
+    this.naturalHeight = 0;
 
     // Calculate initial position
     setTimeout(() => {
@@ -160,29 +164,51 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
     if (trigger == undefined || dropdown == undefined) return;
 
     const margin = 2;
-    const minHeight = 120;
+    // The dropdown prefers to stay within the area the table occupies, so that it does not cover
+    // unrelated page content below the table. defaultHeight is the size it may always use even
+    // when the table is shorter than that - it is the fixed height this component used before,
+    // so short tables keep their previous look - and it also caps growth upwards.
+    const defaultHeight = 400;
+    // Below this the dropdown is too cramped to be worth showing, so opening upwards is preferred.
+    const minUsableHeight = 160;
     const viewportHeight = document.documentElement.clientHeight;
 
     // Measure the unconstrained height first. 'none' is required to also defeat the stylesheet's
     // fallback max-height - clearing the inline value alone would cap the measurement at that value.
-    // This must be reset on every run, otherwise each call would measure the height left over by
-    // the previous one (this runs on scroll/resize too).
-    dropdown.style.maxHeight = 'none';
-
     const rect = trigger.getBoundingClientRect();
     dropdown.style.minWidth = `${Math.max(280, rect.width)}px`;
 
-    const naturalHeight = dropdown.offsetHeight;
-    const spaceBelow = viewportHeight - rect.bottom - margin;
-    const spaceAbove = rect.top - margin;
+    // Measuring drops the height constraint for a moment, which makes the option list lose its
+    // scroll position, so the result is cached: this method also runs on every scroll event.
+    if (this.naturalHeight === 0) {
+      dropdown.style.maxHeight = 'none';
+      this.naturalHeight = dropdown.offsetHeight;
+    }
+    const naturalHeight = this.naturalHeight;
 
-    // Open downwards by default, and flip above the trigger only when that leaves more room.
-    const openAbove = naturalHeight > spaceBelow && spaceAbove > spaceBelow;
-    const available = openAbove ? spaceAbove : spaceBelow;
+    // Fall back to the viewport when the filter is used outside of a table.
+    const table = trigger.closest('angular2-smart-table');
+    const roomInTable = table === null
+      ? Number.POSITIVE_INFINITY
+      : table.getBoundingClientRect().bottom - rect.bottom - margin;
 
-    // Grow to fit the options when there is room, and only scroll once the viewport runs out.
-    // The last clamp matters when neither side can satisfy minHeight, e.g. under heavy zoom.
-    const height = Math.min(naturalHeight, Math.max(available, minHeight), viewportHeight - 2 * margin);
+    const viewportBelow = viewportHeight - rect.bottom - margin;
+    const viewportAbove = rect.top - margin;
+
+    // Opening upwards covers whatever is placed above the table, so it is a last resort rather
+    // than a preference: flip only when a dropdown that is still usable does not fit below.
+    const neededBelow = Math.min(naturalHeight, minUsableHeight);
+    const openAbove = viewportBelow < neededBelow && viewportAbove > viewportBelow;
+
+    // Downwards the dropdown prefers to end where the table ends, but may always use defaultHeight
+    // so that it stays usable when the table itself is short or empty.
+    const available = openAbove
+      ? Math.min(defaultHeight, viewportAbove)
+      : Math.min(Math.max(roomInTable, defaultHeight), viewportBelow);
+
+    // Grow to fit the options when there is room, and only scroll once that room runs out.
+    // The last clamp matters when neither side can satisfy minUsableHeight, e.g. under heavy zoom.
+    const height = Math.min(naturalHeight, Math.max(available, minUsableHeight), viewportHeight - 2 * margin);
 
     dropdown.style.maxHeight = `${height}px`;
 
@@ -205,12 +231,12 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   // Add viewport change listeners
   private addEventListeners() {
     document.addEventListener('click', this.cancelDropdown);
-    window.addEventListener('resize', this.onViewportChange);
+    window.addEventListener('resize', this.onViewportResize);
     window.addEventListener('scroll', this.onViewportChange, true);
 
     if (this.multiSelectTrigger !== undefined && typeof ResizeObserver !== 'undefined') {
       this.resizeObserver = new ResizeObserver(() => {
-        this.updateDropdownPosition();
+        this.onViewportResize();
       });
       this.resizeObserver.observe(this.multiSelectTrigger.nativeElement);
     }
@@ -219,7 +245,7 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
   // Remove viewport change listeners
   private removeEventListeners() {
     document.removeEventListener('click', this.cancelDropdown);
-    window.removeEventListener('resize', this.onViewportChange);
+    window.removeEventListener('resize', this.onViewportResize);
     window.removeEventListener('scroll', this.onViewportChange, true);
 
     if (this.resizeObserver) {
@@ -230,6 +256,12 @@ export class MultiSelectFilterComponent extends DefaultFilter implements OnInit,
 
   // Handle viewport changes
   private onViewportChange = () => {
+    this.updateDropdownPosition();
+  };
+
+  // A resize can rewrap the options, so the cached height has to be measured again
+  private onViewportResize = () => {
+    this.naturalHeight = 0;
     this.updateDropdownPosition();
   };
 
