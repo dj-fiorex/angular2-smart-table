@@ -6,23 +6,31 @@ import {Subscription} from 'rxjs';
     selector: 'angular2-smart-table-filter',
     styleUrls: ['./filter.component.scss'],
     template: `
-      <div class="angular2-smart-filter" *ngIf="column.isFilterable" [ngSwitch]="column.filter.type">
-        <custom-table-filter *ngSwitchCase="'custom'"
-                             [query]="query"
-                             [column]="column"
-                             [source]="source"
-                             [inputClass]="inputClass"
-                             [debounceTime]="debounceTime"
-        ></custom-table-filter>
-        <default-table-filter *ngSwitchDefault
-                              [query]="query"
-                              [column]="column"
-                              [source]="source"
-                              [inputClass]="inputClass"
-                              [debounceTime]="debounceTime"
-        ></default-table-filter>
-      </div>
-    `,
+      @if (column.isFilterable) {
+        <div class="angular2-smart-filter">
+          @switch (column.filter.type) {
+            @case ('custom') {
+              <custom-table-filter
+                [query]="query"
+                [column]="column"
+                [source]="source"
+                [inputClass]="inputClass"
+                [debounceTime]="debounceTime"
+              ></custom-table-filter>
+            }
+            @default {
+              <default-table-filter
+                [query]="query"
+                [column]="column"
+                [source]="source"
+                [inputClass]="inputClass"
+                [debounceTime]="debounceTime"
+              ></default-table-filter>
+            }
+          }
+        </div>
+      }
+      `,
     standalone: false
 })
 export class FilterComponent extends FilterDefault implements OnChanges {

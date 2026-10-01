@@ -7,14 +7,16 @@ import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
     selector: 'select-filter',
     template: `
     <select [ngClass]="inputClass"
-            [value]="query"
-            (change)="onValueChanged($any($event.target).value)">
-        <option value="">{{ config.selectText ?? 'Select...' }}</option>
-        <option *ngFor="let option of config.list" [value]="option.value">
+      [value]="query"
+      (change)="onValueChanged($any($event.target).value)">
+      <option value="">{{ config.selectText ?? 'Select...' }}</option>
+      @for (option of config.list; track option) {
+        <option [value]="option.value">
           {{ option.title }}
         </option>
+      }
     </select>
-  `,
+    `,
     standalone: false
 })
 export class SelectFilterComponent extends DefaultFilter implements OnInit, OnDestroy {

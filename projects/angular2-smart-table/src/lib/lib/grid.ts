@@ -109,6 +109,10 @@ export class Grid {
     return this.dataSet.getRows();
   }
 
+  isEmpty(): boolean {
+    return this.dataSet.isEmpty();
+  }
+
   selectRow(row: Row) {
     this.dataSet.selectRow(row);
     this.source.toggleItem(row.getData(), row.isSelected);
@@ -206,11 +210,11 @@ export class Grid {
     if (this.shouldProcessChange(changes)) {
       this.dataSet.setData(changes.elements, this.getSelectedItems());
       if (this.settings.selectMode === 'single') {
-        if (this.dataSet.getRows().length > 0) {
+        if (this.dataSet.isEmpty()) {
+          this.onSelectRowSource.next(null);
+        } else {
           const row = this.determineRowToSelect(changes);
           this.onSelectRowSource.next(row);
-        } else {
-          this.onSelectRowSource.next(null);
         }
       }
     }

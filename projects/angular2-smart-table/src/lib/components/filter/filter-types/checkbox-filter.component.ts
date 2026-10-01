@@ -7,8 +7,10 @@ import {CheckboxFilterSettings} from "../../../lib/settings";
     selector: 'checkbox-filter',
     template: `
     <input type="checkbox" (change)="onChecked($any($event.target).checked)" [checked]="checked" [ngClass]="inputClass">
-    <a href="#" *ngIf="filterActive" (click)="resetFilter($event)">{{resetText}}</a>
-  `,
+    @if (filterActive) {
+      <a href="#" (click)="resetFilter($event)">{{resetText}}</a>
+    }
+    `,
     standalone: false
 })
 export class CheckboxFilterComponent extends DefaultFilter implements OnInit {

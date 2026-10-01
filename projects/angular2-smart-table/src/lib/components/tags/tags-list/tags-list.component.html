@@ -1,7 +1,5 @@
 <div>
-  <angular2-smart-table-tag
-    *ngFor="let tag of tags"
-    [item]="tag"
-    (close)="closedTag($event)"
-  ></angular2-smart-table-tag>
+  @for (tag of tags; track tag) {
+    <angular2-smart-table-tag [item]="tag" (close)="closedTag($event)"></angular2-smart-table-tag>
+  }
 </div>

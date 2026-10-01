@@ -8,25 +8,33 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
 @Component({
     selector: '[angular2-st-thead-form-row]',
     template: `
-    <td *ngIf="isMultiSelectVisible"></td>
-    <td *ngIf="showActionColumnLeft" class="angular2-smart-actions">
-      <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
-    </td>
-    <td *ngFor="let cell of getVisibleCells(row.getCells())">
-      <angular2-smart-table-cell
-        [cell]="cell"
-        [grid]="grid"
-        [isNew]="true"
-        [createConfirm]="createConfirm"
-        [createCancel]="createCancel"
-        [inputClass]="addInputClass"
-        [isInEditing]="true"
-      ></angular2-smart-table-cell>
-    </td>
-    <td *ngIf="showActionColumnRight" class="angular2-smart-actions">
-      <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
-    </td>
-  `,
+    @if (isMultiSelectVisible) {
+      <td></td>
+    }
+    @if (showActionColumnLeft) {
+      <td class="angular2-smart-actions">
+        <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
+      </td>
+    }
+    @for (cell of getVisibleCells(row.getCells()); track cell) {
+      <td>
+        <angular2-smart-table-cell
+          [cell]="cell"
+          [grid]="grid"
+          [isNew]="true"
+          [createConfirm]="createConfirm"
+          [createCancel]="createCancel"
+          [inputClass]="addInputClass"
+          [isInEditing]="true"
+        ></angular2-smart-table-cell>
+      </td>
+    }
+    @if (showActionColumnRight) {
+      <td class="angular2-smart-actions">
+        <angular2-st-thead-create-cancel [grid]="grid" [createConfirm]="createConfirm" [createCancel]="createCancel"></angular2-st-thead-create-cancel>
+      </td>
+    }
+    `,
     standalone: false
 })
 export class TheadFormRowComponent implements OnChanges {

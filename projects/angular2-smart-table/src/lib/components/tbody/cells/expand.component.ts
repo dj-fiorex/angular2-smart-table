@@ -7,10 +7,11 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
     selector: 'angular2-st-tbody-expand',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-      <a *ngIf="visible" href="#" class="angular2-smart-action angular2-smart-action-expand-expand"
-         [ngClass]="{'not-allowed': disabled}"
-         [innerHTML]="buttonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onExpand($event)"></a>
-    `,
+      @if (visible) {
+        <a href="#" class="angular2-smart-action angular2-smart-action-expand-expand" [ngClass]="{'not-allowed': disabled}"
+           [innerHTML]="buttonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onExpand($event)"></a>
+      }
+      `,
     standalone: false
 })
   export class TbodyExpandRowComponent implements OnChanges {

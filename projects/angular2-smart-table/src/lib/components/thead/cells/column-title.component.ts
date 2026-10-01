@@ -25,17 +25,22 @@ import {Subscription} from "rxjs";
     }
   `,
   template: `
-    <a href="#" *ngIf="column.isSortable"
-       (click)="_sort($event)"
-       class="angular2-smart-sort-link sort"
-       [ngClass]="currentDirection??''">
-      {{ column.title }}
-    </a>
-    <span class="angular2-smart-sort" *ngIf="!column.isSortable">{{ column.title }}</span>
-    <button style="position: absolute; top:0; right:0; border:none" *ngIf="isHideable"
-            (click)="_hideColumnClicked($event)">🗙
-    </button>
-  `,
+    @if (column.isSortable) {
+      <a href="#"
+        (click)="_sort($event)"
+        class="angular2-smart-sort-link sort"
+        [ngClass]="currentDirection??''">
+        {{ column.title }}
+      </a>
+    } @else {
+      <span class="angular2-smart-sort">{{ column.title }}</span>
+    }
+    @if (isHideable) {
+      <button style="position: absolute; top:0; right:0; border:none"
+        (click)="_hideColumnClicked($event)">🗙
+      </button>
+    }
+    `,
   standalone: false
 })
 export class ColumnTitleComponent implements OnChanges, OnDestroy {

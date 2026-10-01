@@ -7,33 +7,40 @@ import {Column} from "../../../lib/data-set/column";
 @Component({
     selector: '[angular2-st-thead-titles-row]',
     template: `
-    <th *ngIf="isMultiSelectVisible"
-        [style.width]="multiSelectWidth"
-        scope="col"
-    >
-      <input type="checkbox" [checked]="isAllSelected" (click)="selectAllRows.emit()">
-    </th>
-    <th angular2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid" scope="col"></th>
-    <th *ngFor="let column of visibleColumns; index as i; last as isLast"
+    @if (isMultiSelectVisible) {
+      <th [style.width]="multiSelectWidth" scope="col" >
+        <input type="checkbox" [checked]="isAllSelected" (click)="selectAllRows.emit()">
+      </th>
+    }
+    @if (showActionColumnLeft) {
+      <th angular2-st-actions-title [grid]="grid" scope="col"></th>
+    }
+    @for (column of visibleColumns; track column; let i = $index; let isLast = $last) {
+      <th
         class="angular2-smart-th {{ column.id }}"
         [ngClass]="column.classHeader"
         [style.width]="column.width"
         scope="col"
-    >
-      <angular2-st-column-title
-        [source]="source"
-        [column]="column"
-        [isHideable]="isHideable"
-        [multiSort]="grid.isMultiSortEnabled()"
-        (hide)="hide.emit($event)"
-      ></angular2-st-column-title>
-      <div *ngIf="isResizable && (showActionColumnRight || !isLast)"
-           [angular2SmartTableResizer]="{column: column, siblingColumn: isLast ? undefined : visibleColumns[i+1]}"
-           class="angular2-resizer-block"
-      ></div>
-    </th>
-    <th angular2-st-actions-title *ngIf="showActionColumnRight" [grid]="grid" scope="col"></th>
-  `,
+        >
+        <angular2-st-column-title
+          [source]="source"
+          [column]="column"
+          [isHideable]="isHideable"
+          [multiSort]="grid.isMultiSortEnabled()"
+          (hide)="hide.emit($event)"
+        ></angular2-st-column-title>
+        @if (isResizable && (showActionColumnRight || !isLast)) {
+          <div
+            [angular2SmartTableResizer]="{column: column, siblingColumn: isLast ? undefined : visibleColumns[i+1]}"
+            class="angular2-resizer-block"
+          ></div>
+        }
+      </th>
+    }
+    @if (showActionColumnRight) {
+      <th angular2-st-actions-title [grid]="grid" scope="col"></th>
+    }
+    `,
     standalone: false
 })
 export class TheadTitlesRowComponent implements OnChanges {

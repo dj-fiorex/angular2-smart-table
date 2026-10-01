@@ -5,21 +5,27 @@ import {Cell} from '../../../lib/data-set/cell';
 @Component({
     selector: 'table-cell-edit-mode',
     template: `
-      <div [ngSwitch]="getEditorType()">
-        <table-cell-custom-editor *ngSwitchCase="'custom'"
-                                  [cell]="cell"
-                                  [inputClass]="inputClass"
-                                  (edited)="edited.emit()"
-                                  (stopEditing)="stopEditing.emit()"
-        ></table-cell-custom-editor>
-        <table-cell-default-editor *ngSwitchDefault
-                                   [cell]="cell"
-                                   [inputClass]="inputClass"
-                                   (edited)="edited.emit()"
-                                   (stopEditing)="stopEditing.emit()"
-        ></table-cell-default-editor>
+      <div>
+        @switch (getEditorType()) {
+          @case ('custom') {
+            <table-cell-custom-editor
+              [cell]="cell"
+              [inputClass]="inputClass"
+              (edited)="edited.emit()"
+              (stopEditing)="stopEditing.emit()"
+            ></table-cell-custom-editor>
+          }
+          @default {
+            <table-cell-default-editor
+              [cell]="cell"
+              [inputClass]="inputClass"
+              (edited)="edited.emit()"
+              (stopEditing)="stopEditing.emit()"
+            ></table-cell-default-editor>
+          }
+        }
       </div>
-    `,
+      `,
     standalone: false
 })
 export class EditCellComponent implements OnInit {

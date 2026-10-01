@@ -1,31 +1,38 @@
-<div [ngSwitch]="getEditorType()">
-    <select-editor *ngSwitchCase="'list'"
-                   [cell]="cell"
-                   [inputClass]="inputClass"
-                   (onClick)="onClick($event)"
-                   (onEdited)="onEdited()"
-                   (onStopEditing)="onStopEditing()">
-    </select-editor>
-
-    <textarea-editor *ngSwitchCase="'textarea'"
-                     [cell]="cell"
-                     [inputClass]="inputClass"
-                     (onClick)="onClick($event)"
-                     (onEdited)="onEdited()"
-                     (onStopEditing)="onStopEditing()">
-    </textarea-editor>
-
-    <checkbox-editor *ngSwitchCase="'checkbox'"
-                     [cell]="cell"
-                     [inputClass]="inputClass"
-                     (onClick)="onClick($event)">
-    </checkbox-editor>
-
-    <input-editor *ngSwitchDefault
-                  [cell]="cell"
-                  [inputClass]="inputClass"
-                  (onClick)="onClick($event)"
-                  (onEdited)="onEdited()"
-                  (onStopEditing)="onStopEditing()">
-    </input-editor>
+<div>
+  @switch (getEditorType()) {
+    @case ('list') {
+      <select-editor
+        [cell]="cell"
+        [inputClass]="inputClass"
+        (onClick)="onClick($event)"
+        (onEdited)="onEdited()"
+        (onStopEditing)="onStopEditing()">
+      </select-editor>
+    }
+    @case ('textarea') {
+      <textarea-editor
+        [cell]="cell"
+        [inputClass]="inputClass"
+        (onClick)="onClick($event)"
+        (onEdited)="onEdited()"
+        (onStopEditing)="onStopEditing()">
+      </textarea-editor>
+    }
+    @case ('checkbox') {
+      <checkbox-editor
+        [cell]="cell"
+        [inputClass]="inputClass"
+        (onClick)="onClick($event)">
+      </checkbox-editor>
+    }
+    @default {
+      <input-editor
+        [cell]="cell"
+        [inputClass]="inputClass"
+        (onClick)="onClick($event)"
+        (onEdited)="onEdited()"
+        (onStopEditing)="onStopEditing()">
+      </input-editor>
+    }
+  }
 </div>

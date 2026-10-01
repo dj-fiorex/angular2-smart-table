@@ -5,37 +5,45 @@ import {FilterDefault} from "./filter-default";
 @Component({
     selector: 'default-table-filter',
     template: `
-    <ng-container [ngSwitch]="column.filter.type">
-      <select-filter *ngSwitchCase="'list'"
-                     [query]="query"
-                     [inputClass]="inputClass"
-                     [debounceTime]="debounceTime"
-                     [column]="column"
-                     (filter)="onFilter($event)">
-      </select-filter>
-      <multiselect-filter *ngSwitchCase="'multiselect'"
-                          [query]="query"
-                          [inputClass]="inputClass"
-                          [debounceTime]="debounceTime"
-                          [column]="column"
-                          (filter)="onFilter($event)">
-      </multiselect-filter>
-      <checkbox-filter *ngSwitchCase="'checkbox'"
-                       [query]="query"
-                       [inputClass]="inputClass"
-                       [debounceTime]="debounceTime"
-                       [column]="column"
-                       (filter)="onFilter($event)">
-      </checkbox-filter>
-      <input-filter *ngSwitchDefault
-                    [query]="query"
-                    [inputClass]="inputClass"
-                    [debounceTime]="debounceTime"
-                    [column]="column"
-                    (filter)="onFilter($event)">
-      </input-filter>
-    </ng-container>
-  `,
+@switch (column.filter.type) {
+  @case ('list') {
+    <select-filter
+      [query]="query"
+      [inputClass]="inputClass"
+      [debounceTime]="debounceTime"
+      [column]="column"
+      (filter)="onFilter($event)">
+    </select-filter>
+  }
+  @case ('multiselect') {
+    <multiselect-filter
+      [query]="query"
+      [inputClass]="inputClass"
+      [debounceTime]="debounceTime"
+      [column]="column"
+      (filter)="onFilter($event)">
+    </multiselect-filter>
+  }
+  @case ('checkbox') {
+    <checkbox-filter
+      [query]="query"
+      [inputClass]="inputClass"
+      [debounceTime]="debounceTime"
+      [column]="column"
+      (filter)="onFilter($event)">
+    </checkbox-filter>
+  }
+  @default {
+    <input-filter
+      [query]="query"
+      [inputClass]="inputClass"
+      [debounceTime]="debounceTime"
+      [column]="column"
+      (filter)="onFilter($event)">
+    </input-filter>
+  }
+}
+`,
     standalone: false
 })
 export class DefaultFilterComponent extends FilterDefault {

@@ -7,58 +7,68 @@ import {DataSource} from '../../lib/data-source/data-source';
     selector: 'angular2-smart-table-pager',
     styleUrls: ['./pager.component.scss'],
     template: `
-    <nav *ngIf="shouldShow()" class="angular2-smart-pagination-nav">
-      <ul class="angular2-smart-pagination pagination">
-        <li class="angular2-smart-page-item page-item" [ngClass]="{disabled: getPage() == 1}">
-          <a class="angular2-smart-page-link page-link" href="#"
-          (click)="getPage() == 1 ? false : paginate(1)" aria-label="First">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">First</span>
-          </a>
-        </li>
-        <li class="angular2-smart-page-item page-item" [ngClass]="{disabled: getPage() == 1}">
-          <a class="angular2-smart-page-link page-link page-link-prev" href="#"
-             (click)="getPage() == 1 ? false : prev()" aria-label="Prev">
-            <span aria-hidden="true">&lt;</span>
-            <span class="sr-only">Prev</span>
-          </a>
-        </li>
-        <li class="angular2-smart-page-item page-item"
-        [ngClass]="{active: getPage() == page}" *ngFor="let page of getPages()">
-          <span class="angular2-smart-page-link page-link"
-          *ngIf="getPage() == page">{{ page }} <span class="sr-only">(current)</span></span>
-          <a class="angular2-smart-page-link page-link" href="#"
-          (click)="paginate(page)" *ngIf="getPage() != page">{{ page }}</a>
-        </li>
+    @if (shouldShow()) {
+      <nav class="angular2-smart-pagination-nav">
+        <ul class="angular2-smart-pagination pagination">
+          <li class="angular2-smart-page-item page-item" [ngClass]="{disabled: getPage() == 1}">
+            <a class="angular2-smart-page-link page-link" href="#"
+              (click)="getPage() == 1 ? false : paginate(1)" aria-label="First">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">First</span>
+            </a>
+          </li>
+          <li class="angular2-smart-page-item page-item" [ngClass]="{disabled: getPage() == 1}">
+            <a class="angular2-smart-page-link page-link page-link-prev" href="#"
+              (click)="getPage() == 1 ? false : prev()" aria-label="Prev">
+              <span aria-hidden="true">&lt;</span>
+              <span class="sr-only">Prev</span>
+            </a>
+          </li>
+          @for (page of getPages(); track page) {
+            <li class="angular2-smart-page-item page-item"
+              [ngClass]="{active: getPage() == page}">
+              @if (getPage() == page) {
+                <span class="angular2-smart-page-link page-link">{{ page }} <span class="sr-only">(current)</span></span>
+              } @else {
+                <a class="angular2-smart-page-link page-link" href="#" (click)="paginate(page)">{{ page }}</a>
+              }
+              </li>
+            }
+            <li class="angular2-smart-page-item page-item"
+              [ngClass]="{disabled: getPage() == getLast()}">
+              <a class="angular2-smart-page-link page-link page-link-next" href="#"
+                 (click)="getPage() == getLast() ? false : next()" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+            <li class="angular2-smart-page-item page-item"
+              [ngClass]="{disabled: getPage() == getLast()}">
+              <a class="angular2-smart-page-link page-link" href="#"
+                 (click)="getPage() == getLast() ? false : paginate(getLast())" aria-label="Last">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Last</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      } @else {
+        <div><!-- placeholder to consume the space of the page selection --></div>
+      }
 
-        <li class="angular2-smart-page-item page-item"
-            [ngClass]="{disabled: getPage() == getLast()}">
-          <a class="angular2-smart-page-link page-link page-link-next" href="#"
-             (click)="getPage() == getLast() ? false : next()" aria-label="Next">
-            <span aria-hidden="true">&gt;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-
-        <li class="angular2-smart-page-item page-item"
-        [ngClass]="{disabled: getPage() == getLast()}">
-          <a class="angular2-smart-page-link page-link" href="#"
-          (click)="getPage() == getLast() ? false : paginate(getLast())" aria-label="Last">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Last</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div *ngIf="!shouldShow()"><!-- placeholder to consume the space of the page selection --></div>
-
-    <nav *ngIf="perPageSelect && perPageSelect.length > 0" class="angular2-smart-pagination-per-page">
-      <label for="per-page" *ngIf="perPageSelectLabel">{{perPageSelectLabel}}</label>
-      <select (change)="onChangePerPage($any($event.target).value)" [value]="perPage" id="per-page">
-        <option *ngFor="let item of perPageSelect" [value]="item">{{ item }}</option>
-      </select>
-    </nav>
-  `,
+      @if (perPageSelect && perPageSelect.length > 0) {
+        <nav class="angular2-smart-pagination-per-page">
+          @if (perPageSelectLabel) {
+            <label for="per-page">{{perPageSelectLabel}}</label>
+          }
+          <select (change)="onChangePerPage($any($event.target).value)" [value]="perPage" id="per-page">
+            @for (item of perPageSelect; track item) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </nav>
+      }
+    `,
     standalone: false
 })
 export class PagerComponent implements OnChanges, OnDestroy {

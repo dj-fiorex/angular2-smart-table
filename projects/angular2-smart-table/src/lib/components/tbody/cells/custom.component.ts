@@ -10,26 +10,29 @@ import {SecurityTrustType} from "../../../pipes/bypass-security-trust.pipe";
     selector: 'angular2-st-tbody-custom',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-      <ng-container *ngFor="let action of customActions">
-          <a href="#" class="angular2-smart-action angular2-smart-action-custom-custom"
-             *ngIf="!action.renderComponent && showAction(action)"
-             [ngClass]="{'not-allowed': disableAction(action)}"
-             [innerHTML]="buttonContent(action) | bypassSecurityTrust: bypassSecurityTrustFor(action)"
-             (click)="onCustom(action, $event)"
-          ></a>
-          <a href="#" class="angular2-smart-action angular2-smart-action-custom-custom"
-             *ngIf="action.renderComponent && showAction(action)"
-             [ngClass]="{'not-allowed': disableAction(action)}"
-             (click)="onCustom(action, $event)"
-          >
+      @for (action of customActions; track action) {
+        @if (showAction(action)) {
+          @if (action.renderComponent) {
+            <a href="#" class="angular2-smart-action angular2-smart-action-custom-custom"
+              [ngClass]="{'not-allowed': disableAction(action)}"
+              (click)="onCustom(action, $event)"
+              >
               <angular2-st-tbody-custom-item
-                      class="angular2-smart-action angular2-smart-action-custom-custom"
-                      [action]="action"
-                      [row]="row"
+                class="angular2-smart-action angular2-smart-action-custom-custom"
+                [action]="action"
+                [row]="row"
               ></angular2-st-tbody-custom-item>
-          </a>
-      </ng-container>
-  `,
+            </a>
+          } @else {
+            <a href="#" class="angular2-smart-action angular2-smart-action-custom-custom"
+               [ngClass]="{'not-allowed': disableAction(action)}"
+               [innerHTML]="buttonContent(action) | bypassSecurityTrust: bypassSecurityTrustFor(action)"
+               (click)="onCustom(action, $event)"
+            ></a>
+          }
+        }
+      }
+      `,
     standalone: false
 })
 export class TbodyCustomComponent {

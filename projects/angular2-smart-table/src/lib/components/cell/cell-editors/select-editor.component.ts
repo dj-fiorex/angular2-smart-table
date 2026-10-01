@@ -8,17 +8,19 @@ import {ListEditorSettings} from "../../../lib/settings";
     styleUrls: ['./editor.component.scss'],
     template: `
     <select [ngClass]="inputClass"
-            (change)="onSelectionChanged($any($event.target).value)"
-            [name]="cell.getId()"
-            [disabled]="!cell.isEditable()"
-            (click)="onClick.emit($event)"
-            (keydown.enter)="disableEnterKeySave || onEdited.emit()"
-            (keydown.esc)="onStopEditing.emit()"
-    >
-        <option value="">{{ editorConfig.selectText ?? 'Select...' }}</option>
-        <option *ngFor="let option of editorConfig.list" [value]="option.value"
-                [selected]="option.value === cell.getRawValue()">{{ option.title }}
+      (change)="onSelectionChanged($any($event.target).value)"
+      [name]="cell.getId()"
+      [disabled]="!cell.isEditable()"
+      (click)="onClick.emit($event)"
+      (keydown.enter)="disableEnterKeySave || onEdited.emit()"
+      (keydown.esc)="onStopEditing.emit()"
+      >
+      <option value="">{{ editorConfig.selectText ?? 'Select...' }}</option>
+      @for (option of editorConfig.list; track option) {
+        <option [value]="option.value"
+          [selected]="option.value === cell.getRawValue()">{{ option.title }}
         </option>
+      }
     </select>
     `,
     standalone: false

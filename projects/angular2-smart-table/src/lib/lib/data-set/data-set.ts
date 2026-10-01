@@ -52,6 +52,10 @@ export class DataSet {
     return this.rows[this.rows.length - 1];
   }
 
+  isEmpty(): boolean {
+    return this.getRows().length === 0;
+  }
+
   findRowByData(data: any): Row {
     const row = this.rows.find((row: Row) => row.getData() === data);
     if (!row) {
@@ -141,7 +145,7 @@ export class DataSet {
   }
 
   select(index: number): Row | null {
-    if (index >= 0 && this.getRows().length === 0) {
+    if (index >= 0 && this.isEmpty()) {
       return null;
     }
     const willSelect = this.willSelect;

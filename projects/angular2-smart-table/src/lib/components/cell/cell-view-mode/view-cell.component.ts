@@ -7,10 +7,18 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
     selector: 'table-cell-view-mode',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-    <div [ngSwitch]="cell.getColumn().type">
-        <custom-view-component *ngSwitchCase="'custom'" [cell]="cell"></custom-view-component>
-        <div *ngSwitchCase="'html'" [innerHTML]="cell.getValue() | bypassSecurityTrust: bypassSecurityTrust" [ngClass]="cssClass"></div>
-        <div *ngSwitchDefault [ngClass]="cssClass">{{ cell.getValue() }}</div>
+    <div>
+      @switch (cell.getColumn().type) {
+        @case ('custom') {
+          <custom-view-component [cell]="cell"></custom-view-component>
+        }
+        @case ('html') {
+          <div [innerHTML]="cell.getValue() | bypassSecurityTrust: bypassSecurityTrust" [ngClass]="cssClass"></div>
+        }
+        @default {
+          <div [ngClass]="cssClass">{{ cell.getValue() }}</div>
+        }
+      }
     </div>
     `,
     standalone: false

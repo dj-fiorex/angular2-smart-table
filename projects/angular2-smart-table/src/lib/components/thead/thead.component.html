@@ -1,22 +1,28 @@
-<tr angular2-st-thead-titles-row *ngIf="!isHideHeader"
+@if (!isHideHeader) {
+  <tr angular2-st-thead-titles-row
     class="angular2-smart-titles"
     [grid]="grid"
     [isAllSelected]="isAllSelected"
     [source]="source"
     (hide)="hide.emit($event)"
     (selectAllRows)="selectAllRows.emit()"
-></tr>
+  ></tr>
+}
 
-<tr angular2-st-thead-filters-row *ngIf="!isHideSubHeader"
+@if (!isHideSubHeader) {
+  <tr angular2-st-thead-filters-row
     class="angular2-smart-filters"
     [grid]="grid"
     [source]="source"
     (create)="create.emit($event)"
-></tr>
+  ></tr>
+}
 
-<tr angular2-st-thead-form-row *ngIf="grid.createFormShown"
+@if (grid.createFormShown) {
+  <tr angular2-st-thead-form-row
     [grid]="grid"
     [row]="grid.createFormRow"
     [createConfirm]="createConfirm"
     [createCancel]="createCancel"
-></tr>
+  ></tr>
+}

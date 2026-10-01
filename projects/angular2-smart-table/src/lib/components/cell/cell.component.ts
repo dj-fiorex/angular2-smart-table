@@ -8,13 +8,16 @@ import {CreateCancelEvent, CreateConfirmEvent, EditCancelEvent, EditConfirmEvent
 @Component({
     selector: 'angular2-smart-table-cell',
     template: `
-    <table-cell-view-mode *ngIf="!isInEditing" [cell]="cell"></table-cell-view-mode>
-    <table-cell-edit-mode *ngIf="isInEditing" [cell]="cell"
-                          [inputClass]="inputClass"
-                          (edited)="onEdited()"
-                          (stopEditing)="onStopEditing()"
-    ></table-cell-edit-mode>
-  `,
+    @if (isInEditing) {
+      <table-cell-edit-mode [cell]="cell"
+        [inputClass]="inputClass"
+        (edited)="onEdited()"
+        (stopEditing)="onStopEditing()"
+      ></table-cell-edit-mode>
+    } @else {
+      <table-cell-view-mode [cell]="cell"></table-cell-view-mode>
+    }
+    `,
     standalone: false
 })
 export class CellComponent {

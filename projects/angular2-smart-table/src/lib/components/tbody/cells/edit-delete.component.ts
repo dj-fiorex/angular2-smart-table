@@ -10,14 +10,18 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
     selector: 'angular2-st-tbody-edit-delete',
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
-    <a href="#" *ngIf="editVisible" class="angular2-smart-action angular2-smart-action-edit-edit"
-       [ngClass]="{'not-allowed': editDisabled}"
-       [innerHTML]="editRowButtonContent | bypassSecurityTrust: editButtonBypassSecurityTrust"
-       (click)="onEdit($event)"></a>
-    <a href="#" *ngIf="deleteVisible" class="angular2-smart-action angular2-smart-action-delete-delete"
-       [ngClass]="{'not-allowed': deleteDisabled}"
-       [innerHTML]="deleteRowButtonContent | bypassSecurityTrust: deleteButtonBypassSecurityTrust" (click)="onDelete($event)"></a>
-  `,
+    @if (editVisible) {
+      <a href="#" class="angular2-smart-action angular2-smart-action-edit-edit"
+        [ngClass]="{'not-allowed': editDisabled}"
+        [innerHTML]="editRowButtonContent | bypassSecurityTrust: editButtonBypassSecurityTrust"
+      (click)="onEdit($event)"></a>
+    }
+    @if (deleteVisible) {
+      <a href="#" class="angular2-smart-action angular2-smart-action-delete-delete"
+        [ngClass]="{'not-allowed': deleteDisabled}"
+      [innerHTML]="deleteRowButtonContent | bypassSecurityTrust: deleteButtonBypassSecurityTrust" (click)="onDelete($event)"></a>
+    }
+    `,
     standalone: false
 })
 export class TbodyEditDeleteComponent implements OnChanges {
