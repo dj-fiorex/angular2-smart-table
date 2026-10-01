@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultEditor} from './default-editor';
 
@@ -16,6 +16,7 @@ import {DefaultEditor} from './default-editor';
            (keydown.enter)="disableEnterKeySave || onEdited.emit()"
            (keydown.esc)="onStopEditing.emit()">
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InputEditorComponent extends DefaultEditor {

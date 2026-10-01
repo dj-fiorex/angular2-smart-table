@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef, ChangeDetectionStrategy} from '@angular/core';
 import {Row} from '../../../lib/data-set/row';
 import {CustomAction} from '../../../lib/settings';
 
@@ -7,6 +7,7 @@ import {CustomAction} from '../../../lib/settings';
     template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TbodyCustomItemComponent implements OnInit, OnDestroy {

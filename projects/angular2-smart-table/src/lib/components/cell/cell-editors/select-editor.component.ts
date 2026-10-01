@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultEditor} from './default-editor';
 import {ListEditorSettings} from "../../../lib/settings";
@@ -23,6 +23,7 @@ import {ListEditorSettings} from "../../../lib/settings";
       }
     </select>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectEditorComponent extends DefaultEditor {

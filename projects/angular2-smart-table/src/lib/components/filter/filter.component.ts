@@ -1,4 +1,4 @@
-import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnChanges, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 import {FilterDefault} from './filter-default';
 import {Subscription} from 'rxjs';
 
@@ -31,6 +31,7 @@ import {Subscription} from 'rxjs';
         </div>
       }
       `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FilterComponent extends FilterDefault implements OnChanges {

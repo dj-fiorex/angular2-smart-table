@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultEditor} from './default-editor';
 
@@ -17,6 +17,7 @@ import {DefaultEditor} from './default-editor';
               (keydown.esc)="onStopEditing.emit()">
     </textarea>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TextareaEditorComponent extends DefaultEditor {

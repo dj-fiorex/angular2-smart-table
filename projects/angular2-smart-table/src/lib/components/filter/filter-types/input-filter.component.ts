@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultFilter} from './default-filter';
 
@@ -13,6 +13,7 @@ import {DefaultFilter} from './default-filter';
       (keyup)="onValueChanged($any($event.target).value)"
       placeholder="{{ column.placeholder || column.title }}"/>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InputFilterComponent extends DefaultFilter {

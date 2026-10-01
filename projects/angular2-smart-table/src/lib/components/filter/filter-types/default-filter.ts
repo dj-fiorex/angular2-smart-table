@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Subject, Subscription} from 'rxjs';
 
 import {Column} from '../../../lib/data-set/column';
@@ -6,6 +6,7 @@ import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
     template: '',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DefaultFilter implements Filter, OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {Settings} from "angular2-smart-table";
 
 @Component({
@@ -14,6 +14,7 @@ import {Settings} from "angular2-smart-table";
     </style>
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedExamplesTypesComponent {

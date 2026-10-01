@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, ChangeDetectionStrategy} from '@angular/core';
 
 import {Grid} from '../../../lib/grid';
 import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
@@ -12,6 +12,7 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
     <a href="#" class="angular2-smart-action angular2-smart-action-add-cancel"
         [innerHTML]="cancelButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onCancelCreate($event)"></a>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TheadCreateCancelComponent implements OnChanges {

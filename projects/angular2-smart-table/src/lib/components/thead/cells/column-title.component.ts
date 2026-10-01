@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 
 import {Column} from '../../../lib/data-set/column';
 import {DataSource, ISortConfig} from '../../../lib/data-source/data-source';
@@ -41,6 +41,7 @@ import {Subscription} from "rxjs";
       </button>
     }
     `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class ColumnTitleComponent implements OnChanges, OnDestroy {

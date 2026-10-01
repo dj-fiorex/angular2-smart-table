@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultFilter} from './default-filter';
 import {CheckboxFilterSettings} from "../../../lib/settings";
@@ -11,6 +11,7 @@ import {CheckboxFilterSettings} from "../../../lib/settings";
       <a href="#" (click)="resetFilter($event)">{{resetText}}</a>
     }
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxFilterComponent extends DefaultFilter implements OnInit {

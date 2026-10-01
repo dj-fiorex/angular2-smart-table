@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input} from '@angular/core';
+import {Component, EventEmitter, Input, ChangeDetectionStrategy} from '@angular/core';
 
 import {Grid} from '../../lib/grid';
 import {Cell} from '../../lib/data-set/cell';
@@ -18,6 +18,7 @@ import {CreateCancelEvent, CreateConfirmEvent, EditCancelEvent, EditConfirmEvent
       <table-cell-view-mode [cell]="cell"></table-cell-view-mode>
     }
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CellComponent {

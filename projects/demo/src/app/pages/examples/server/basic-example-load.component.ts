@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {LocalDataSource, Settings} from 'angular2-smart-table';
 import {BasicExampleLoadService} from './basic-example-load.service';
@@ -9,6 +9,7 @@ import {BasicExampleLoadService} from './basic-example-load.service';
     template: `
     <angular2-smart-table [settings]="settings" [source]="source"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleLoadComponent {

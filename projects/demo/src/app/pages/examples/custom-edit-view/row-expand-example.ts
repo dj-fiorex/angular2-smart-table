@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {Settings} from "angular2-smart-table";
 
 @Component({
@@ -28,6 +28,7 @@ import {Settings} from "angular2-smart-table";
       </table>
     </div>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DivViewComponent {
@@ -45,6 +46,7 @@ export class DivViewComponent {
     template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RowExpandComponent implements OnInit {

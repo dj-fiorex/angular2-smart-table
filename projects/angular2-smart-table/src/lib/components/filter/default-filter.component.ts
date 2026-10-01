@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {FilterDefault} from "./filter-default";
 
@@ -44,6 +44,7 @@ import {FilterDefault} from "./filter-default";
   }
 }
 `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DefaultFilterComponent extends FilterDefault {

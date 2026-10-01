@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChange} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChange, ChangeDetectionStrategy} from '@angular/core';
 import {Subject, Subscription} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {DataSet} from './lib/data-set/data-set';
@@ -27,6 +27,7 @@ import {TagsListEntry} from "./components/tags/tag/tag.component";
   selector: 'angular2-smart-table',
   styleUrls: ['./angular2-smart-table.component.scss'],
   templateUrl: './angular2-smart-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class Angular2SmartTableComponent implements OnChanges, OnDestroy {

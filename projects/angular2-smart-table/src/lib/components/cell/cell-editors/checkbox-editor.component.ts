@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultEditor} from './default-editor';
 import {CheckboxEditorSettings} from "../../../lib/settings";
@@ -15,6 +15,7 @@ import {CheckboxEditorSettings} from "../../../lib/settings";
            (click)="onClick.emit($event)"
            (change)="onChange($any($event.target).checked)">
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CheckboxEditorComponent extends DefaultEditor implements OnInit {

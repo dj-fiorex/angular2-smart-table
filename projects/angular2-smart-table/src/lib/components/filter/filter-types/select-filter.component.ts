@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultFilter} from './default-filter';
 import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
@@ -17,6 +17,7 @@ import {FilterSettings, ListFilterSettings} from "../../../lib/settings";
       }
     </select>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SelectFilterComponent extends DefaultFilter implements OnInit, OnDestroy {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ServerDataSource, Settings} from 'angular2-smart-table';
 
@@ -7,6 +7,7 @@ import {ServerDataSource, Settings} from 'angular2-smart-table';
     template: `
     <angular2-smart-table [settings]="settings" [source]="source"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedExampleServerComponent {

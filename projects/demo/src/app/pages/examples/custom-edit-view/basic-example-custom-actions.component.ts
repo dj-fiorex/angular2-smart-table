@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {BasicExampleCustomActionsItemComponent} from './basic-example-custom-actions-item.component';
 import {Settings} from "angular2-smart-table";
 
@@ -7,6 +7,7 @@ import {Settings} from "angular2-smart-table";
     template: `
     <angular2-smart-table [settings]="settings" [source]="data" (custom)="onCustom($event)"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleCustomActionsComponent {

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef,} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef, ChangeDetectionStrategy} from '@angular/core';
 
 import {Cell} from '../../../lib/data-set/cell';
 
@@ -7,6 +7,7 @@ import {Cell} from '../../../lib/data-set/cell';
     template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomViewComponent implements OnInit, OnDestroy {

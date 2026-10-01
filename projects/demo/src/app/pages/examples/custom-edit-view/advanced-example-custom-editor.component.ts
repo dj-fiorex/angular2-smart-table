@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {CustomEditorComponent} from './custom-editor.component';
 import {CustomRenderComponent} from './custom-render.component';
@@ -10,6 +10,7 @@ import {Settings} from "angular2-smart-table";
     template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedExamplesCustomEditorComponent {

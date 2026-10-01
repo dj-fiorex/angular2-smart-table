@@ -1,10 +1,11 @@
-import {Component, OnChanges, OnDestroy, SimpleChanges, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnChanges, OnDestroy, SimpleChanges, ViewChild, ViewContainerRef, ChangeDetectionStrategy} from '@angular/core';
 
 import {FilterDefault} from './filter-default';
 
 @Component({
     selector: 'custom-table-filter',
     template: `<ng-template #dynamicTarget></ng-template>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomFilterComponent extends FilterDefault implements OnChanges, OnDestroy {

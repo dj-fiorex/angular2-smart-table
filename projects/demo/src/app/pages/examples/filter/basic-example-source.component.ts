@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {LocalDataSource, Settings} from 'angular2-smart-table';
 
@@ -8,6 +8,7 @@ import {LocalDataSource, Settings} from 'angular2-smart-table';
     <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
     <angular2-smart-table [settings]="settings" [source]="source"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleSourceComponent {

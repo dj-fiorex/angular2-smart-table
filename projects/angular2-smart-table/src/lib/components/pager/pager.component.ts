@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 import {DataSource} from '../../lib/data-source/data-source';
@@ -69,6 +69,7 @@ import {DataSource} from '../../lib/data-source/data-source';
         </nav>
       }
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PagerComponent implements OnChanges, OnDestroy {

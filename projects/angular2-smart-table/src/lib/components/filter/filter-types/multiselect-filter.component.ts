@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild, ChangeDetectionStrategy} from '@angular/core';
 import {DefaultFilter} from './default-filter';
 import {MultiSelectFilterSettings} from "../../../lib/settings";
 
@@ -11,6 +11,7 @@ interface SelectOption {
   selector: 'multiselect-filter',
   templateUrl: './multiselect-filter.component.html',
   styleUrls: ['./multiselect-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false
 })
 export class MultiSelectFilterComponent extends DefaultFilter implements OnInit, OnChanges, OnDestroy {

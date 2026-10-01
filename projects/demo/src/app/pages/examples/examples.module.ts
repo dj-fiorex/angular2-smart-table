@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClient, withXhr} from "@angular/common/http";
 import {Angular2SmartTableModule} from 'angular2-smart-table';
 
 import {SharedModule} from '../../shared/shared.module';
@@ -73,6 +73,6 @@ const EXAMPLES_COMPONENTS = [
     ExamplesComponent,
     ...EXAMPLES_COMPONENTS,
   ],
-  providers: [provideHttpClient()]
+  providers: [provideHttpClient(withXhr())]
 })
 export class ExamplesModule { }

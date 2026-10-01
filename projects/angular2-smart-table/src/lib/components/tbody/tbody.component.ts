@@ -8,7 +8,8 @@ import {
   Output,
   QueryList,
   ViewChildren,
-  ViewContainerRef
+  ViewContainerRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {Grid} from '../../lib/grid';
@@ -30,6 +31,7 @@ import {RowClassFunction} from "../../lib/settings";
     selector: '[angular2-st-tbody]',
     styleUrls: ['./tbody.component.scss'],
     templateUrl: './tbody.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NgxSmartTableTbodyComponent implements AfterViewInit, OnChanges, OnDestroy {

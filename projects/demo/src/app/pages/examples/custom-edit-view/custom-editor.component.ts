@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, ChangeDetectionStrategy} from '@angular/core';
 import {DefaultEditor} from 'angular2-smart-table';
 
 @Component({
@@ -20,6 +20,7 @@ import {DefaultEditor} from 'angular2-smart-table';
             (keydown.enter)="onEdited.emit()"
             (keydown.esc)="onStopEditing.emit()">
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomEditorComponent extends DefaultEditor implements AfterViewInit {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 import {Cell, Settings} from 'angular2-smart-table';
 
 @Component({
@@ -6,6 +6,7 @@ import {Cell, Settings} from 'angular2-smart-table';
     template: `
     <button (click)="onClick()">{{ renderValue }}</button>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ButtonViewComponent {
@@ -34,6 +35,7 @@ export class ButtonViewComponent {
     template: `
     <angular2-smart-table [settings]="settings" [source]="data"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleButtonViewComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {Cell} from 'angular2-smart-table';
 
@@ -6,6 +6,7 @@ import {Cell} from 'angular2-smart-table';
     template: `
     {{renderValue}}
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomRenderComponent {

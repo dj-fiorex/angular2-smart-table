@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {DataSet, Settings} from 'angular2-smart-table';
 
 @Component({
@@ -6,6 +6,7 @@ import {DataSet, Settings} from 'angular2-smart-table';
     template: `
     <angular2-smart-table [settings]="settings" [source]="data" (afterGridInit)="onGridInit($event)"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleRowSelectionComponent {

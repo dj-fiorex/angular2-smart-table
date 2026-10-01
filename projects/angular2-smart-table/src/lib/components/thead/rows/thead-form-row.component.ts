@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, ChangeDetectionStrategy} from '@angular/core';
 
 import {Grid} from '../../../lib/grid';
 import {Row} from '../../../lib/data-set/row';
@@ -35,6 +35,7 @@ import {CreateCancelEvent, CreateConfirmEvent} from '../../../lib/events';
       </td>
     }
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TheadFormRowComponent implements OnChanges {

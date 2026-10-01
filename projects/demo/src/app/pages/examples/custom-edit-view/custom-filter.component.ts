@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {DefaultFilter} from 'angular2-smart-table';
 
@@ -14,6 +14,7 @@ import {DefaultFilter} from 'angular2-smart-table';
       (keyup)="onValueChanged(textfield.value)"
     >
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomFilterComponent extends DefaultFilter {

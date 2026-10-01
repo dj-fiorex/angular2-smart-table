@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 
 import {LocalDataSource, Settings} from 'angular2-smart-table';
 
@@ -12,6 +12,7 @@ import {LocalDataSource, Settings} from 'angular2-smart-table';
       (editConfirm)="onSaveConfirm($event)"
       (createConfirm)="onCreateConfirm($event)"></angular2-smart-table>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedExampleConfirmComponent {

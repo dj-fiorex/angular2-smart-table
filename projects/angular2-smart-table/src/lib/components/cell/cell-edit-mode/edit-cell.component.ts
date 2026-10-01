@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
 
 import {Cell} from '../../../lib/data-set/cell';
 
@@ -26,6 +26,7 @@ import {Cell} from '../../../lib/data-set/cell';
         }
       </div>
       `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditCellComponent implements OnInit {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, ChangeDetectionStrategy} from '@angular/core';
 
 import {Grid} from '../../../lib/grid';
 import {Row} from '../../../lib/data-set/row';
@@ -13,6 +13,7 @@ import {SecurityTrustType} from '../../../pipes/bypass-security-trust.pipe';
     <a href="#" class="angular2-smart-action angular2-smart-action-edit-cancel"
         [innerHTML]="cancelButtonContent | bypassSecurityTrust: bypassSecurityTrust" (click)="onCancelEdit($event)"></a>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TbodySaveCancelComponent implements OnChanges {

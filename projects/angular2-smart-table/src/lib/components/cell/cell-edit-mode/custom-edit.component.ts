@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnDestroy, SimpleChanges, ViewChild, ViewContainerRef,} from '@angular/core';
+import {Component, OnChanges, OnDestroy, SimpleChanges, ViewChild, ViewContainerRef, ChangeDetectionStrategy} from '@angular/core';
 
 import {EditCellDefault} from './edit-cell-default';
 
@@ -7,6 +7,7 @@ import {EditCellDefault} from './edit-cell-default';
     template: `
     <ng-template #dynamicTarget></ng-template>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class CustomEditComponent extends EditCellDefault implements OnChanges, OnDestroy {

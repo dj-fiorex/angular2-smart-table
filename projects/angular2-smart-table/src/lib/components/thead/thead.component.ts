@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, Output, ChangeDetectionStrategy} from '@angular/core';
 
 import {Grid} from '../../lib/grid';
 import {DataSource} from '../../lib/data-source/data-source';
@@ -9,6 +9,7 @@ import {CreateCancelEvent, CreateConfirmEvent, CreateEvent} from '../../lib/even
     selector: '[angular2-st-thead]',
     styleUrls: ['./thead.component.scss'],
     templateUrl: './thead.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NgxSmartTableTheadComponent implements OnChanges {

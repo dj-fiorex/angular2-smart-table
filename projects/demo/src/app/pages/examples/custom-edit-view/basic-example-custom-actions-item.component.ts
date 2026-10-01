@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {CustomAction} from 'angular2-smart-table';
 
 @Component({
@@ -6,6 +6,7 @@ import {CustomAction} from 'angular2-smart-table';
     template: `
     <a href="#">{{action.title}} {{renderValue}} </a>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicExampleCustomActionsItemComponent implements OnInit {
