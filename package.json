@@ -33,7 +33,7 @@
     "@angular/compiler-cli": "^21.2.24",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.20.4",
-    "angular-cli-ghpages": "~2.0.3",
+    "angular-cli-ghpages": "~3.1.0",
     "ng-packagr": "^21.2.7",
     "typescript": "~5.9.3"
   }
